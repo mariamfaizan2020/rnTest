@@ -19,6 +19,7 @@ const registerScreen = ({navigation}) => {
         if(type===null){return Alert.alert('Please Select Your Type')}
         else {
             onSignUp()
+           
         }
 
     }
@@ -36,6 +37,7 @@ const registerScreen = ({navigation}) => {
             })
             .then((result)=>{
                 console.log('resuilt',result)
+                navigation.navigate('login')
             })
             .catch((err)=>{
                 console.log('err',err)
@@ -110,7 +112,7 @@ const registerScreen = ({navigation}) => {
           
            <TouchableOpacity 
            style={{padding:10 ,paddingLeft:20,paddingRight:20,borderWidth:2,margin:30,justifyContent:'center',alignSelf:'center'}}
-           onPress={()=> {Validation();navigation.navigate('login')}}            
+           onPress={()=> {Validation()}}            
            >
                <Text>NEXT</Text>
            </TouchableOpacity>

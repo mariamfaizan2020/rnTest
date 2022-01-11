@@ -12,6 +12,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
+import mainScreen from './ios/rnTest/screens/main'
 
   
 
@@ -19,11 +20,12 @@ const AppNavigator = createStackNavigator({
   
     register: registerScreen,
     login:loginScreen,
+    main:mainScreen
 
   
 },
 {
-  initialRouteName:'register'
+  initialRouteName:'login'
 });
 
 export default createAppContainer(AppNavigator);

@@ -2,9 +2,10 @@
 import React ,{useState}from 'react'
 import auth from '@react-native-firebase/auth';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
+import { NavigationContext } from 'react-navigation';
 
 
-const login = () => {
+const login = ({navigation}) => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
 
@@ -12,6 +13,7 @@ const login = () => {
         auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
             console.log('USER IS LOGGED IN')
+            navigation.navigate('main')
         })
     }
     
@@ -40,6 +42,9 @@ const login = () => {
            onPress={()=>onSignIn()}
           >
                    <Text>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('register')}>
+              <Text>if not registered CLICK HERE!</Text>
           </TouchableOpacity>
 
         </View>
