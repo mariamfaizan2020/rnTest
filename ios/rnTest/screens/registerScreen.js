@@ -26,14 +26,15 @@ const registerScreen = ({navigation}) => {
 
     const onSignUp=()=>{
         auth().createUserWithEmailAndPassword(email,password)
-        .then((result)=>{
+        .then(()=>{
             firestore().collection('users')
             .doc(auth().currentUser.uid)
             .set({
                 userName,
                 email,
                 password,
-                type
+                type,
+                uid:auth().currentUser?.uid
             })
             .then((result)=>{
                 console.log('resuilt',result)

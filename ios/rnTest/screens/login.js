@@ -6,8 +6,8 @@ import { NavigationContext } from 'react-navigation';
 
 
 const login = ({navigation}) => {
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
+    const [email,setEmail]=useState('test2@gmail.com')
+    const [password,setPassword]=useState('111111')
 
     const onSignIn=()=>{
         auth().signInWithEmailAndPassword(email,password)
