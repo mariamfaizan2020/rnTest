@@ -13,6 +13,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
 import mainScreen from './ios/rnTest/screens/main'
+import createEventsScreen from './ios/rnTest/screens/createEvents';
 
   
 
@@ -20,7 +21,8 @@ const AppNavigator = createStackNavigator({
   
     register: registerScreen,
     login:loginScreen,
-    main:mainScreen
+    main:mainScreen,
+    createEvents:createEventsScreen
 
   
 },

@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/AntDesign'
+
 
 const events= (props) => {
     // const [event,setEvent]=useState(false)
@@ -13,7 +15,15 @@ const events= (props) => {
                <Text>events</Text>
              
                </TouchableOpacity>
-               {props.event===true?<Text>this is event Screen</Text>:null}
+               {props.event===true?<TouchableOpacity 
+               onPress={()=>props?.navigation()}
+                // {props?.navigation.navigate('createEvents')}}
+               >
+                   <View style={{flexDirection:'row'}}>
+                   <Text>Create New Event </Text>
+                   <Icon name="pluscircleo" size={20} color="black" />
+                   </View>
+               </TouchableOpacity>:null}
         </View>
        
     )

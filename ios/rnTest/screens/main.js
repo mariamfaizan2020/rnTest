@@ -5,7 +5,8 @@ import firestore from '@react-native-firebase/firestore';
 import Events from '../components/events'
 import Services from '../components/services';
 import Venue from '../components/venue';
-const main = ({ currentUser }) => {
+
+const main = ({ navigation}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
@@ -51,13 +52,17 @@ const main = ({ currentUser }) => {
         setVenue(!venue)
         setServices(false)
     }
+    const nav=()=>{
+        navigation.navigate('createEvents')
+    }
     return (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
 
 
             <Events 
             event={event}
             setEventFunction={()=>setEventF()}
+            navigation={()=>nav()}
             // abc={setEvent(false)}
             />
                 
