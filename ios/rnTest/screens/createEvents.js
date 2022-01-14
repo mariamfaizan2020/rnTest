@@ -1,33 +1,58 @@
 import React,{useState} from 'react'
 import { StyleSheet, Text, View ,TouchableOpacity, TextInput,Button} from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment'
 
 const createEvents = () => {
     const [name,setName]=useState()
-    const [date, setDate] = useState(new Date(1598051730000));
+    const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [starttime,setStartTime]= useState(new Date())
+    const [sTime,setSTime]=useState(false)
+    const [endtime,setEndTime]= useState(new Date())
+    const [eTime,setETime]=useState(false)
+
    
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+    const onChange = (event, selectedValue) => {
+        
         setShow(Platform.OS === 'ios');
-        setDate(currentDate);
+        if (mode == 'date') {
+          const currentDate = selectedValue 
+          setDate(currentDate);
+          // setMode('time');
+          // setShow(Platform.OS !== 'ios'); // to show time
+        }if (mode=='time'){
+          const selectedTime = selectedValue ;
+        {  sTime=='true'? setStartTime(selectedTime):setEndTime(selectedTime)}
+          }
+           
+       
+  
       };
       const showMode = (currentMode) => {
         setShow(true);
-        setMode(currentMode);
+        setMode(currentMode)
+       ;
       };
     
       const showDatepicker = () => {
           
         showMode('date');
+       
+    
+       
+       
       };
     
       const showTimepicker = () => {
-        showMode('time');
+        showMode('time')
+        
+       
       };
       
+     
 
     return (
         <View>
@@ -37,10 +62,12 @@ const createEvents = () => {
             </TouchableOpacity >
             <TouchableOpacity style={styles.Button}>
             <Text>public</Text>
-            <TextInput
-            value={date}
-            onChangeText={(date)=>{setDate(date)}}></TextInput>
+            
             </TouchableOpacity>
+            {/* <TextInput
+            // value={date}
+            // onChangeText={(date)=>{setDate(date)}}
+            ></TextInput> */}
         </View>
         <View>
             
@@ -49,34 +76,71 @@ const createEvents = () => {
             value={name}
             onChangeText={(text)=>setName(text)}>
            </TextInput>
-           <TouchableOpacity onPress={()=>showDatepicker()}>
-               <Text>Date</Text>
-           </TouchableOpacity>
+           {/* <View>
+             <Text>{date.toUTCString()}</Text>
+           </View> */}
+      <View >
+      <TouchableOpacity 
+      style={styles.InputField}
+      onPress={()=>{showDatepicker()}}>
+        <View style={{flexDirection:'row'}}>
+            <Text>Date:</Text>
+             {!show?<Text>{moment(date).format("YYYY/MM/DD")}</Text>: null
+          }
+          </View>
+             
+         </TouchableOpacity>
+         
+        
+           
+      </View>
+            
+
+          
+            {show && (
+              <View>
+         <DateTimePicker
+          testID="dateTimePicker"
+          // minimumDate={Date.parse(new Date())}
+          value={mode =='date' ? date  : sTime=='true'? starttime:endtime} 
+          mode={mode}
+          is24Hour={true}
+          display="spinner"
+          onChange={onChange}
+          // neutralButtonLabel="clear"
+        />
+        <TouchableOpacity   style={styles.Button} onPress={()=>{setShow(false);setSTime(false)}}>
+          <Text>OK</Text>
+        </TouchableOpacity>
+        
+              </View>
+       
+        
+      )
+      // &&(<TouchableOpacity opPress={()=>setShow(false)}>
+      //   <Text>OK</Text>
+      // </TouchableOpacity>)
+      }
+      
+      
+      
+           
 
            <View>
       {/* <View>
         <Button onPress={showDatepicker} title="Show date picker!" />
       </View> */}
       <View style={{flexDirection:'row',justifyContent:"center",alignSelf:'center'}}>
-          <TouchableOpacity style={{borderWidth:2,padding:10,marginHorizontal:30,marginVertical:10}} onPress={()=>showTimepicker()}>
-               <Text>StartTime</Text>
+          <TouchableOpacity style={{borderWidth:2,padding:10,marginHorizontal:30,marginVertical:10}} onPress={()=>{showTimepicker();setSTime(true)}}>
+               <Text>{moment(starttime).format("hh:mm A")}</Text>
            </TouchableOpacity>
-           <TouchableOpacity  style={{borderWidth:2,padding:10,marginHorizontal:30,marginVertical:10}} onPress={()=>showTimepicker()}>
-               <Text>EndTime</Text>
+           <TouchableOpacity  style={{borderWidth:2,padding:10,marginHorizontal:30,marginVertical:10}} onPress={()=>{showTimepicker();setETime(true)}}>
+               <Text>{moment(starttime).format("hh:mm A")}</Text>
            </TouchableOpacity>
 
        
       </View>
-      {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={mode}
-          is24Hour={true}
-          display=""
-          onChange={onChange}
-        />
-      )}
+     
     </View>
 
         </View>

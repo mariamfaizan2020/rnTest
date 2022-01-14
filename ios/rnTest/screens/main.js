@@ -35,7 +35,6 @@ const main = ({ navigation}) => {
 
     console.log("123", userType)
    
-// {event===true?setServices(false)&& setVenue(false) :services===true?setEvent(false):venue===true?setEvent(false):null}
 
     const setEventF=()=>{
         setEvent(true)
@@ -85,6 +84,7 @@ const main = ({ navigation}) => {
 
 
 }
+
 
 
 export default main
