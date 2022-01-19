@@ -7,7 +7,8 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 
-const createEvents = () => {
+
+const createEvents = ({navigation}) => {
     const [name,setName]=useState()
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
@@ -18,7 +19,7 @@ const createEvents = () => {
     const [eTime,setETime]=useState(false)
     const [type,setType]=useState()
     const [ispublic,setIsPublic]=useState(true)
-    const [fetchedEvents,setFetchedEvents]=useState()
+    // const [fetchedEvents,setFetchedEvents]=useState()
     const arr=[
       {Type:'Type1'},
       {Type:'Type2'},
@@ -34,28 +35,29 @@ const createEvents = () => {
       {Type:'Type12'}
 
   ]
-  useEffect(()=>{
-    FetchEvent()
-  },[])
-  const FetchEvent=()=>{
-     let arr=[]
-    firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
-  .onSnapshot((snapshot)=>{
-     const data=snapshot.docs.map(doc=>{
-       const event=doc.data()
-        console.log('data',event)
+  // useEffect(()=>{
+  //   FetchEvent()
+  // },[])
+  // const FetchEvent=()=>{
+  //    let arr=[]
+  //   firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
+  // .onSnapshot((snapshot)=>{
+  //    const data=snapshot.docs.map(doc=>{
+  //      const event=doc.data()
+  //       console.log('data',event)
        
-         arr.push(event)
+  //        arr.push(event)
         
-       })
-       setFetchedEvents(arr)
-    })
-  }
-    console.log('fetchedEvents',fetchedEvents)
+  //      })
+  //      setFetchedEvents(arr)
+  //   })
+  // }
+  //   console.log('fetchedEvents',fetchedEvents)
 
   const Validation=()=>{
     if (name==null){return Alert.alert('Please enter the event name')}
     if (type==null){return Alert.alert('Please select your event type')}
+    // if (endtime<=starttime){return Alert.alert('Please select correct time')}
     eventDetails()
   }
  const setTypeF=(type)=>{
@@ -73,7 +75,14 @@ const createEvents = () => {
      uid:auth().currentUser?.uid
 
 
+   }).then((res)=>{
+         console.log('res',res)
+         firestore().collection('Events').doc(res.id)
+         .update({
+           EventId:res.id
+         })
    })
+  
   }
  const onChange = (event, selectedValue) => {
         
@@ -95,8 +104,13 @@ const createEvents = () => {
           
       }if (mode=='time' && eTime==true){
            const selectedTime = selectedValue ;
-           
+           if (selectedTime>=new Date(starttime)){
             setEndTime(selectedTime)
+           }
+           else{
+            return Alert.alert('Please select correct time')
+           }
+         
          
          
     }};
@@ -129,10 +143,10 @@ const createEvents = () => {
     return (
         <View>
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-            <TouchableOpacity style={[styles.Button,{borderColor:!ispublic ? 'red' : 'black'}]} onPress={()=>setIsPublic(false)}>
+            <TouchableOpacity style={[styles.Button,{borderColor:!ispublic ? '#a16281' : 'black'}]} onPress={()=>setIsPublic(false)}>
             <Text>Private</Text>
             </TouchableOpacity >
-            <TouchableOpacity style={[styles.Button,{borderColor:ispublic ? 'red' : 'black'}]} onPress={()=>setIsPublic(true)}>
+            <TouchableOpacity style={[styles.Button,{borderColor:ispublic ? '#a16281' : 'black'}]} onPress={()=>setIsPublic(true)}>
             <Text>public</Text>
           </TouchableOpacity>
            
@@ -203,7 +217,9 @@ const createEvents = () => {
             <Text style={{alignSelf:'center',fontSize:18}}>Create Event</Text>
           </TouchableOpacity>
         </View> 
-        <FlatList style={{alignSelf:'center',padding:10,margin:10}}
+       
+        {/* <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',padding:10,marginTop:10}}>Events</Text>
+        <FlatList style={{alignSelf:'center',}}
        
         horizontal={false}
         data={fetchedEvents}
@@ -213,17 +229,27 @@ const createEvents = () => {
           return(
            
               <View>
-                <TouchableOpacity style={styles.Input}>
-                <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281'}}>
-                     {item.nameOfEvent}
-                  </Text>
+                
+                <TouchableOpacity style={styles.Input} onPress={()=>navigation.navigate('editEvents',{
+                   nameOfEvent:item.nameOfEvent,
+                   DateOFEvent:item.DateOFEvent,
+                   StartingTImeOFEvent:item.StartingTImeOFEvent,
+                   EndTimeOFEvent:item.EndTimeOFEvent,
+                   TypeOFEvent:item.TypeOFEvent,
+                   IsPublic:item.IsPublic,
+                   uid:item.uid,
+                   EventId:item.EventId
+              
+                })}>
+                <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
+                {moment(item.DateOFEvent).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>
                 </TouchableOpacity>
               </View>
            
           )
         
         }}
-        />
+        /> */}
       
         </View>
        
@@ -255,7 +281,13 @@ const styles = StyleSheet.create({
      
       padding:5,
       margin:5,
-      alignSelf:'center'
+  
+      alignSelf:'center',
+      borderBottomWidth:2,
+      borderBottomColor:'#a16281',
+      width:'100%',
+      
+      
     
 
   },

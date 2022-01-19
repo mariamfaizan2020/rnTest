@@ -19,7 +19,7 @@ renderItem={({item})=>{
     return(
         <View>
            <TouchableOpacity 
-           style={[styles.Input,{borderColor:props.Type==item.Type ?'red':'black',borderWidth:2}]} 
+           style={[styles.Input,{borderColor:props.Type==item.Type ?'#a16281':'black',borderWidth:2}]} 
            onPress={()=>props.setTypeFunction(item.Type)}>
               <Text style={{alignSelf:'center'}}>{item.Type}</Text>
            </TouchableOpacity>

@@ -14,6 +14,7 @@ import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
 import mainScreen from './ios/rnTest/screens/main'
 import createEventsScreen from './ios/rnTest/screens/createEvents';
+import editEvents from './ios/rnTest/screens/editEvents';
 
   
 
@@ -22,7 +23,8 @@ const AppNavigator = createStackNavigator({
     register: registerScreen,
     login:loginScreen,
     main:mainScreen,
-    createEvents:createEventsScreen
+    createEvents:createEventsScreen,
+    editEvents:editEvents
 
   
 },
