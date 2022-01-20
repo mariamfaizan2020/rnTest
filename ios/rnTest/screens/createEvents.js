@@ -8,18 +8,22 @@ import auth from '@react-native-firebase/auth';
 
 
 
-const createEvents = ({navigation}) => {
-    const [name,setName]=useState()
-    const [date, setDate] = useState(new Date());
+const createEvents = (props,{navigation}) => {
+    const [name,setName]=useState(props.navigation.getParam('name') ? props.navigation.getParam('name')  :'')
+    const [date, setDate] = useState(props.navigation.getParam('date')?props.navigation.getParam('date').toDate():new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [starttime,setStartTime]= useState(new Date())
+    const [starttime,setStartTime]= useState(props.navigation.getParam('starttime')?props.navigation.getParam('starttime').toDate():new Date())
     const [sTime,setSTime]=useState(false)
-    const [endtime,setEndTime]= useState(new Date())
+    const [endtime,setEndTime]= useState(props.navigation.getParam('endtime')?props.navigation.getParam('endtime').toDate():new Date())
     const [eTime,setETime]=useState(false)
-    const [type,setType]=useState()
-    const [ispublic,setIsPublic]=useState(true)
-    // const [fetchedEvents,setFetchedEvents]=useState()
+    const [type,setType]=useState(props.navigation.getParam('type')?props.navigation.getParam('type'):'')
+    const [ispublic,setIsPublic]=useState(props.navigation.getParam('ispublic')?props.navigation.getParam('ispublic'):true)
+//  console.log("props122",props.navigation.getParam('date').toDate())
+    // const event= props.navigation.state.params.screenProps
+   
+  
+ 
     const arr=[
       {Type:'Type1'},
       {Type:'Type2'},
@@ -35,29 +39,31 @@ const createEvents = ({navigation}) => {
       {Type:'Type12'}
 
   ]
-  // useEffect(()=>{
-  //   FetchEvent()
-  // },[])
-  // const FetchEvent=()=>{
-  //    let arr=[]
-  //   firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
-  // .onSnapshot((snapshot)=>{
-  //    const data=snapshot.docs.map(doc=>{
-  //      const event=doc.data()
-  //       console.log('data',event)
+ 
+
+  const editEvent=()=>{
+      firestore().collection('Events').doc(props.navigation.getParam('EventId'))
+      
+      .update({
+        nameOfEvent:name,
+        DateOFEvent:date,
+        StartingTImeOFEvent:starttime,
+        EndTimeOFEvent:endtime,
+        TypeOFEvent:type,
+        IsPublic:ispublic,
        
-  //        arr.push(event)
-        
-  //      })
-  //      setFetchedEvents(arr)
-  //   })
-  // }
-  //   console.log('fetchedEvents',fetchedEvents)
+
+       
+      }).then(
+        console.log('userUpdated')
+      )
+  }
+  
 
   const Validation=()=>{
     if (name==null){return Alert.alert('Please enter the event name')}
     if (type==null){return Alert.alert('Please select your event type')}
-    // if (endtime<=starttime){return Alert.alert('Please select correct time')}
+   
     eventDetails()
   }
  const setTypeF=(type)=>{
@@ -210,47 +216,21 @@ const createEvents = ({navigation}) => {
             setTypeFunction={(type)=>setTypeF(type)}  />
        
         </View>
-        <View>
+       
+       
+        {props?.navigation.getParam('EventId')?
+        <TouchableOpacity 
+        onPress={()=>editEvent()}
+        style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,alignSelf:'center',width:'60%'}}>
+          <Text style={{alignSelf:'center',fontSize:18}}>Save Cahnges</Text>
+
+        </TouchableOpacity>: <View>
           <TouchableOpacity 
           style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,alignSelf:'center',width:'60%'}}
           onPress={()=>Validation()}>
             <Text style={{alignSelf:'center',fontSize:18}}>Create Event</Text>
           </TouchableOpacity>
-        </View> 
-       
-        {/* <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',padding:10,marginTop:10}}>Events</Text>
-        <FlatList style={{alignSelf:'center',}}
-       
-        horizontal={false}
-        data={fetchedEvents}
-        keyExtractor={(item,index)=>index.toString()}
-
-        renderItem={({item})=>{
-          return(
-           
-              <View>
-                
-                <TouchableOpacity style={styles.Input} onPress={()=>navigation.navigate('editEvents',{
-                   nameOfEvent:item.nameOfEvent,
-                   DateOFEvent:item.DateOFEvent,
-                   StartingTImeOFEvent:item.StartingTImeOFEvent,
-                   EndTimeOFEvent:item.EndTimeOFEvent,
-                   TypeOFEvent:item.TypeOFEvent,
-                   IsPublic:item.IsPublic,
-                   uid:item.uid,
-                   EventId:item.EventId
-              
-                })}>
-                <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
-                {moment(item.DateOFEvent).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>
-                </TouchableOpacity>
-              </View>
-           
-          )
-        
-        }}
-        /> */}
-      
+        </View> }
         </View>
        
     )

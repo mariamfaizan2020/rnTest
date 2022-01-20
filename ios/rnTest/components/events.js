@@ -7,12 +7,13 @@ import moment from 'moment'
 
 
 
+
 const events= (props) => {
     const [fetchedEvents,setFetchedEvents]=useState()
     useEffect(()=>{
-        FetchEvent()
+        FetchEvents()
       },[])
-      const FetchEvent=()=>{
+      const FetchEvents=()=>{
          let arr=[]
         firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
       .onSnapshot((snapshot)=>{
@@ -31,19 +32,15 @@ const events= (props) => {
   
     return (
         <View>
-
-           <TouchableOpacity 
-           onPress={()=>{props.setEventFunction()}}
-           style={{font:14,borderWidth:2,borderRadius:2,padding:10,margin:10}}
-           >
-               <Text>events</Text>
-             
-               </TouchableOpacity>
+          <View style={{}}>
+           
+          </View>
+          
                {props.event===true?
-               <View>
+               <View style={{}}>
                     <TouchableOpacity 
-               onPress={()=>props?.navigation()}
-                // {props?.navigation.navigate('createEvents')}}
+               onPress={()=>props?.navigation.navigate('createEvents')}
+                
                >
                    <View style={{flexDirection:'row'}}>
                    <Text>Create New Event </Text>
@@ -62,7 +59,7 @@ const events= (props) => {
                    
                       <View>
                         
-                        <TouchableOpacity style={styles.Input} onPress={()=>navigation.navigate('editEvents',{
+                        <TouchableOpacity style={styles.Input} onPress={()=>props?.navigation.navigate('editEvents',{
                            nameOfEvent:item.nameOfEvent,
                            DateOFEvent:item.DateOFEvent,
                            StartingTImeOFEvent:item.StartingTImeOFEvent,
@@ -71,7 +68,7 @@ const events= (props) => {
                            IsPublic:item.IsPublic,
                            uid:item.uid,
                            EventId:item.EventId
-                      
+
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
                         {moment(item.DateOFEvent).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>

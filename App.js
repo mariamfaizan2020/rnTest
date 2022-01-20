@@ -12,7 +12,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
-import mainScreen from './ios/rnTest/screens/main'
+import homeScreen from './ios/rnTest/screens/home'
 import createEventsScreen from './ios/rnTest/screens/createEvents';
 import editEvents from './ios/rnTest/screens/editEvents';
 
@@ -22,7 +22,7 @@ const AppNavigator = createStackNavigator({
   
     register: registerScreen,
     login:loginScreen,
-    main:mainScreen,
+    home:homeScreen,
     createEvents:createEventsScreen,
     editEvents:editEvents
 

@@ -6,17 +6,9 @@ const venue = (props) => {
     return (
         <View>
 
-           <TouchableOpacity 
-           style={{font:14,borderWidth:2,borderRadius:2,padding:10,margin:10}}
-        //    
-        // onPress={()=>{ }}
-        onPress={()=>{props?.setVenueFunction()}}
-           >
-               <Text>venue</Text>
-               </TouchableOpacity>
-
+          
             {
-                props.venue?
+                props.venue==true?
                 <View>
                     <Text>
                         this is venue screen

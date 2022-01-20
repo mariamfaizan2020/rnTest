@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Events from '../components/events'
@@ -54,32 +54,90 @@ const main = ({ navigation}) => {
     const nav=()=>{
         navigation.navigate('createEvents')
     }
+    const nav2=()=>{
+        navigation.navigate('editEvents')
+        // ,{
+        //     nameOfEvent:item.nameOfEvent,
+        //     DateOFEvent:item.DateOFEvent,
+        //     StartingTImeOFEvent:item.StartingTImeOFEvent,
+        //     EndTimeOFEvent:item.EndTimeOFEvent,
+        //     TypeOFEvent:item.TypeOFEvent,
+        //     IsPublic:item.IsPublic,
+        //     uid:item.uid,
+        //     EventId:item.EventId
+       
+        //  })
+    }
     return (
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{flex:1}}>
+               <View style={{
+                //    flexDirection:'row',
+                //    backgroundColor:"red"
+                   }}>
 
+                   <View style={{flexDirection:'row',justifyContent:'center'}}>
+                   <TouchableOpacity 
+               onPress={()=>{setEventF()}}
+               style={{fontSize:14,borderWidth:2,
+                borderRadius:2,padding:10,margin:10,
+                height:40,width:80
+            }}
+             >
+               <Text>events</Text>
+               </TouchableOpacity>
+               {userType == 'artists' ?
+           
 
-            <Events 
-            event={event}
-            setEventFunction={()=>setEventF()}
-            navigation={()=>nav()}
-            // abc={setEvent(false)}
-            />
-                
+               <TouchableOpacity 
+        //    style={{font:14,borderWidth:2,borderRadius:2,padding:10,margin:10}}
+        style={{fontSize:14,borderWidth:2,
+            borderRadius:2,padding:10,margin:10,
+           height:40,width:80
+        }}
+           onPress={()=>setServicesF()}
+        // onPress={()=>console.log('props',services)}
+        >
+               <Text>services</Text>
+               </TouchableOpacity>
+                :null
+                }
+                </View>
+            {/* {event==true? */}
+              <Events 
+              event={event}
+              setEventFunction={()=>setEventF()}
+            //   navigation={()=>nav()}
+            navigation={navigation}
+              navigate={()=>nav2()}
+             // abc={setEvent(false)}
+               />
+               {/* :null
+            } */}
+                 
+                   {/* </View> */}
+              
+    
+  
+<         View style={{
+    // backgroundColor:'pink'
+}}>
+       
+         <Services 
+       services={services}
+          setServicesFunction={()=>setServicesF()}/>
+          </View>
           
-            {userType == 'artists' ?
 
-                <Services 
-                services={services}
-                setServicesFunction={()=>setServicesF()}/>
-                : null
-            }
-            {userType == 'buisness' ?
+  
+{userType == 'buisness' ?
 
-                <Venue 
-                venue={venue}
-                setVenueFunction={()=>setVenueF()}/>
-                : null}
+    <Venue 
+    venue={venue}
+    setVenueFunction={()=>setVenueF()}/>
+    : null}
+</View>
         </View>
+       
     )
 
 
