@@ -2,7 +2,7 @@
 import React ,{useState}from 'react'
 import auth from '@react-native-firebase/auth';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
-import { NavigationContext } from 'react-navigation';
+
 
 
 const login = ({navigation}) => {
@@ -13,7 +13,7 @@ const login = ({navigation}) => {
         auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
             console.log('USER IS LOGGED IN')
-            navigation.navigate('main')
+            navigation.navigate('tabs')
         })
     }
     

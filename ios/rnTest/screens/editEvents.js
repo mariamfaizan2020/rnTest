@@ -45,7 +45,7 @@ const editEvents = (props) => {
          </Text>
 
         </View>
-        <View style={{margin:10,pading:10}}> 
+        <View style={{margin:10,padding:10}}> 
         <Text style={{fontSize:16,color:'#a16281',fontWeight:'bold'}}>
             Type:  {type}
         </Text>

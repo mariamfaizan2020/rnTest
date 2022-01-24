@@ -12,27 +12,46 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
-import homeScreen from './ios/rnTest/screens/home'
+import tabsScreen from './ios/rnTest/screens/tab'
 import createEventsScreen from './ios/rnTest/screens/createEvents';
 import editEvents from './ios/rnTest/screens/editEvents';
-
+import mainScreen from './ios/rnTest/tabNavigator/main'
+import profileScreen from './ios/rnTest/tabNavigator/profile'
+import { Provider } from 'react-redux';
+import {createStore, applyMiddleware } from 'redux';
+import rootReducer  from './ios/rnTest/redux/reducer';
+import thunk from 'redux-thunk';
+const store = createStore(rootReducer, applyMiddleware(thunk))
   
 
-const AppNavigator = createStackNavigator({
-  
+let AppNavigator = createStackNavigator({
+ 
     register: registerScreen,
     login:loginScreen,
-    home:homeScreen,
+    // main:mainScreen,
+    tabs:tabsScreen,
+    // profile:profileScreen,
+
     createEvents:createEventsScreen,
     editEvents:editEvents
 
   
 },
+
 {
   initialRouteName:'login'
-});
+})
+let Navigation=createAppContainer(AppNavigator);
 
-export default createAppContainer(AppNavigator);
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    );
+  }
+}
 
 
 // const App=()=>{
