@@ -2,18 +2,21 @@
 import React ,{useState}from 'react'
 import auth from '@react-native-firebase/auth';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
-
-
+import {fetchUser} from "../redux/actions/index"
+import { useDispatch } from "react-redux";
+import {connect} from 'react-redux';
 
 const login = ({navigation}) => {
-    const [email,setEmail]=useState('test2@gmail.com')
+    const dispatch=useDispatch()
+    const [email,setEmail]=useState('test3@gmail.com')
     const [password,setPassword]=useState('111111')
 
     const onSignIn=()=>{
         auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
             console.log('USER IS LOGGED IN')
-            navigation.navigate('tabs')
+            dispatch(fetchUser(navigation))
+        //   navigation.navigate('tabs')
         })
     }
     
@@ -51,6 +54,6 @@ const login = ({navigation}) => {
     )
 }
 
-export default login
+export default connect(null,{fetchUser})(login);
 
 const styles = StyleSheet.create({})

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import moment from 'moment';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import firestore from '@react-native-firebase/firestore';
 
 const editEvents = (props) => {
@@ -9,9 +9,9 @@ const editEvents = (props) => {
  
     const screenProps=props.navigation.state.params
     const name=screenProps.nameOfEvent
-    const date=screenProps.DateOFEvent
-    const starttime=screenProps.StartingTImeOFEvent
-    const endtime=screenProps.EndTimeOFEvent
+    const date=screenProps.DateOFEvent.toDate()
+    const starttime=screenProps.StartingTImeOFEvent.toDate()
+    const endtime=screenProps.EndTimeOFEvent.toDate()
     const type=screenProps.TypeOFEvent
     const ispublic=screenProps.IsPublic
     const  uid=screenProps.uid
@@ -28,13 +28,13 @@ const editEvents = (props) => {
   
   return (
     <View style={{flex:1,alignItems:'center'}} >
-        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,pading:10,marginTop:15}}>
+        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,marginTop:15}}>
             Name: {name}
         </Text>
-        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',margin:10,pading:10}}>
-        Date:  {moment(date).format("YYYY-MM-DD")}
+        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',margin:10,}}>
+        Date: {moment(date).format("YYYY-MM-DD")}
         </Text>
-        <View style={{margin:10,pading:10}}>
+        <View style={{margin:10,padding:10}}>
         <Text style={{fontSize:16,color:'#a16281',fontWeight:'bold'}} >
          startTime:  {moment(starttime).format("hh:mm A")}
          </Text> 

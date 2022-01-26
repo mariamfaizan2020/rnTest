@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const TabNavigator = createBottomTabNavigator({
    
     main:mainScreen,
-    profile: profileScreen,
+    profile:profileScreen,
    
  
   },

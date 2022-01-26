@@ -15,25 +15,32 @@ import loginScreen from './ios/rnTest/screens/login'
 import tabsScreen from './ios/rnTest/screens/tab'
 import createEventsScreen from './ios/rnTest/screens/createEvents';
 import editEvents from './ios/rnTest/screens/editEvents';
-import mainScreen from './ios/rnTest/tabNavigator/main'
-import profileScreen from './ios/rnTest/tabNavigator/profile'
 import { Provider } from 'react-redux';
+import {persistStore,persistReducer} from 'redux-persist';
 import {createStore, applyMiddleware } from 'redux';
 import rootReducer  from './ios/rnTest/redux/reducer';
 import thunk from 'redux-thunk';
-const store = createStore(rootReducer, applyMiddleware(thunk))
-  
+import AsyncStorageLib from '@react-native-async-storage/async-storage';
+import { PersistGate } from 'redux-persist/integration/react'
+import createServices from './ios/rnTest/screens/createServices';
+
+const persistConfig={
+  key:'root',
+  storage:AsyncStorageLib,
+  timeout:null
+};
+const persistedReducer=persistReducer(persistConfig,rootReducer);
+const store=createStore(persistedReducer,applyMiddleware(thunk));
+const persistor=persistStore(store)
 
 let AppNavigator = createStackNavigator({
  
     register: registerScreen,
     login:loginScreen,
-    // main:mainScreen,
     tabs:tabsScreen,
-    // profile:profileScreen,
-
     createEvents:createEventsScreen,
-    editEvents:editEvents
+    editEvents:editEvents,
+    createServices:createServices
 
   
 },
@@ -47,7 +54,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
         <Navigation />
+        </PersistGate>
       </Provider>
     );
   }

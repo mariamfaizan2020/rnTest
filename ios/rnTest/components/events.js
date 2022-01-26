@@ -8,15 +8,16 @@ import moment from 'moment'
 
 
 
-const events= (props) => {
+const events= (props,{currentUser}) => {
     const [fetchedEvents,setFetchedEvents]=useState()
     useEffect(()=>{
         FetchEvents()
       },[])
       const FetchEvents=()=>{
-         let arr=[]
+    
         firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
       .onSnapshot((snapshot)=>{
+        let arr=[]
          const data=snapshot.docs.map(doc=>{
            const event=doc.data()
             console.log('data',event)
@@ -27,8 +28,9 @@ const events= (props) => {
            setFetchedEvents(arr)
         })
       }
+     
         console.log('fetchedEvents',fetchedEvents)
-    
+  
   
     return (
         <View>
@@ -42,7 +44,7 @@ const events= (props) => {
                onPress={()=>props?.navigation.navigate('createEvents')}
                 
                >
-                   <View style={{flexDirection:'row'}}>
+                   <View style={{flexDirection:'row',justifyContent:'center'}}>
                    <Text>Create New Event </Text>
                    <Icon name="pluscircleo" size={20} color="black" />
                    </View>
@@ -55,6 +57,7 @@ const events= (props) => {
                 keyExtractor={(item,index)=>index.toString()}
         
                 renderItem={({item})=>{
+                  console.log('fetchedEvents',item.DateOFEvent.toDate())
                   return(
                    
                       <View>
@@ -71,7 +74,7 @@ const events= (props) => {
 
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
-                        {moment(item.DateOFEvent).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>
+                        {moment(item.DateOFEvent.toDate()).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>
                         </TouchableOpacity>
                       </View>
                    

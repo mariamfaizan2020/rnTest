@@ -9,7 +9,7 @@ import auth from '@react-native-firebase/auth';
 
 
 const createEvents = (props,{navigation}) => {
-    const [name,setName]=useState(props.navigation.getParam('name') ? props.navigation.getParam('name')  :'')
+    const [name,setName]=useState(props.navigation.getParam('name') ? props.navigation.getParam('name')  :null)
     const [date, setDate] = useState(props.navigation.getParam('date')?props.navigation.getParam('date').toDate():new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
@@ -17,7 +17,7 @@ const createEvents = (props,{navigation}) => {
     const [sTime,setSTime]=useState(false)
     const [endtime,setEndTime]= useState(props.navigation.getParam('endtime')?props.navigation.getParam('endtime').toDate():new Date())
     const [eTime,setETime]=useState(false)
-    const [type,setType]=useState(props.navigation.getParam('type')?props.navigation.getParam('type'):'')
+    const [type,setType]=useState(props.navigation.getParam('type')?props.navigation.getParam('type'):null)
     const [ispublic,setIsPublic]=useState(props.navigation.getParam('ispublic')?props.navigation.getParam('ispublic'):true)
 //  console.log("props122",props.navigation.getParam('date').toDate())
     // const event= props.navigation.state.params.screenProps
@@ -61,8 +61,8 @@ const createEvents = (props,{navigation}) => {
   
 
   const Validation=()=>{
-    if (name==null){return Alert.alert('Please enter the event name')}
-    if (type==null){return Alert.alert('Please select your event type')}
+    if (name===null){return Alert.alert('Please enter the event name')}
+    if (type===null){return Alert.alert('Please select your event type')}
    
     eventDetails()
   }

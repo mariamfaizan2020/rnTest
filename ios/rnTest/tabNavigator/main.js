@@ -7,18 +7,15 @@ import Services from '../components/services';
 import Venue from '../components/venue';
 import {connect,useDispatch} from 'react-redux';
 import { fetchUser } from '../redux/actions/index';
-import { bindActionCreators } from 'redux';
+
 
 const main = ({currentUser, navigation}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
     const [venue, setVenue] = useState(false)
-    const dispatch=useDispatch()
-    useEffect(() => {
-       
-        //   dispatch(fetchUser())
-    }, [])
+
+  
    
 
     console.log("123", userType)
@@ -39,7 +36,7 @@ const main = ({currentUser, navigation}) => {
         setVenue(!venue)
         setServices(false)
     }
-   
+   console.log('abcd',currentUser)
     return (
         <View style={{flex:1}}>
          <View style={{flexDirection:'row',justifyContent:'center'}}>
@@ -82,10 +79,12 @@ const main = ({currentUser, navigation}) => {
               navigation={navigation}/>
              <Services 
               services={services}
-              setServicesFunction={()=>setServicesF()}/>
+              setServicesFunction={()=>setServicesF()}
+              navigation={navigation}/>
               <Venue 
               venue={venue}
-              setVenueFunction={()=>setVenueF()}/>
+              setVenueFunction={()=>setVenueF()}
+              navigation={navigation}/>
           
 
    
@@ -106,7 +105,7 @@ const mapStateToProps=(store)=>{
         currentUser:store.userState.currentUser
     }
 }
-const mapDispatchProps=(dispatch)=>bindActionCreators({fetchUser},dispatch)
-export default connect(mapStateToProps,mapDispatchProps)(main);
+// const mapDispatchProps=(dispatch)=>bindActionCreators({fetchUser},dispatch)
+export default connect(mapStateToProps,null)(main);
 
 
