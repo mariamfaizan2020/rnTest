@@ -1,32 +1,50 @@
-import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View ,TouchableOpacity,TextInput,FlatList} from 'react-native';
+import React,{useState} from 'react';
+
+
 
 
 const createServices = () => {
+
+    const [serviceType,setServiceType]=useState()
+    const [price,setPrice]=useState()
+
+    const arr=[
+        {Type:'DJ'},
+        {Type:'SINGER'},
+        {Type:'BAND'},
+        {Type:'RAPPER'},
+        {Type:'MUSICIAN'},
+    ]
+console.log('arrr',arr)
   return (
       <View style={{flex:1}}>
- <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-    <TouchableOpacity style={styles.Button}>
-        <Text>DJ</Text>
-    </TouchableOpacity>
+     <Text>hello</Text>
+          <FlatList
+        
+          horizontal={false}
+          data={arr}
+          keyExtractor={(item,index)=>index.toString()}
+          renderItem={({item})=>{
+              console.log('item',item)
+            return(
+                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:20}}>
+                   <TouchableOpacity style={styles.Button} onPress={()=>{setServiceType(item.Type)}}>
+                     <Text>{item.Type}</Text>
+                      </TouchableOpacity>
 
-    <TouchableOpacity style={styles.Button}>
-        <Text>SINGER</Text>
-    </TouchableOpacity>
-    
-    <TouchableOpacity style={styles.Button}>
-        <Text>MUSICIAN</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.Button}>
-        <Text>REPPER</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity style={styles.Button}>
-        <Text>ABCD</Text>
-    </TouchableOpacity>
+                    </View>
+            )
+        }}/>
+    <TextInput
+    placeholder='price:$'
+    value={price}
+    onChnageText={(text)=>setPrice(text)}
+    />
+      
+   
       </View>
-      </View>
+     
      
   
   );

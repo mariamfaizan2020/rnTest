@@ -1,16 +1,24 @@
 
-import React ,{useState}from 'react'
+import React ,{useEffect, useState}from 'react'
 import auth from '@react-native-firebase/auth';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
 import {fetchUser} from "../redux/actions/index"
 import { useDispatch } from "react-redux";
 import {connect} from 'react-redux';
 
-const login = ({navigation}) => {
+const login = ({navigation,currentUser}) => {
     const dispatch=useDispatch()
     const [email,setEmail]=useState('test3@gmail.com')
     const [password,setPassword]=useState('111111')
 
+
+
+    useEffect(()=>{
+        if(currentUser ){
+            navigation.navigate("tabs")
+        }
+
+    },[])
     const onSignIn=()=>{
         auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
@@ -53,7 +61,16 @@ const login = ({navigation}) => {
         </View>
     )
 }
+const mapStateToProps=({userState})=>{
+    
 
-export default connect(null,{fetchUser})(login);
+
+
+
+return {
+    currentUser:userState.currentUser
+}
+}
+export default connect(mapStateToProps,{fetchUser})(login);
 
 const styles = StyleSheet.create({})

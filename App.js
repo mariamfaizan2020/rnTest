@@ -23,14 +23,17 @@ import thunk from 'redux-thunk';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import { PersistGate } from 'redux-persist/integration/react'
 import createServices from './ios/rnTest/screens/createServices';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 const persistConfig={
   key:'root',
   storage:AsyncStorageLib,
   timeout:null
 };
 const persistedReducer=persistReducer(persistConfig,rootReducer);
-const store=createStore(persistedReducer,applyMiddleware(thunk));
+// const store=createStore(persistedReducer,applyMiddleware(thunk));
+const store = createStore(persistedReducer, {},composeWithDevTools(
+	applyMiddleware(thunk)
+  ));
 const persistor=persistStore(store)
 
 let AppNavigator = createStackNavigator({
