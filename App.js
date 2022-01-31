@@ -15,6 +15,7 @@ import loginScreen from './ios/rnTest/screens/login'
 import tabsScreen from './ios/rnTest/screens/tab'
 import createEventsScreen from './ios/rnTest/screens/createEvents';
 import editEvents from './ios/rnTest/screens/editEvents';
+import EditServicesScreen from './ios/rnTest/screens/EditServices';
 import { Provider } from 'react-redux';
 import {persistStore,persistReducer} from 'redux-persist';
 import {createStore, applyMiddleware } from 'redux';
@@ -43,7 +44,8 @@ let AppNavigator = createStackNavigator({
     tabs:tabsScreen,
     createEvents:createEventsScreen,
     editEvents:editEvents,
-    createServices:createServices
+    createServices:createServices,
+    EditServices:EditServicesScreen,
 
   
 },

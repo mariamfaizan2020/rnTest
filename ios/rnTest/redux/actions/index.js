@@ -29,3 +29,26 @@ import { USER_STATE_CHANGE,USER_LOGOUT } from '../constants';
               navigation.navigate('login')
             }
             )}
+            
+
+// export function fetchServices(navigation)
+// return((dispatch)=>{
+//     firestore().collection('services').where('uid','==',auth().currentUser.uid)
+//     .onSnapshot((snapshot)=>{
+//         let arr=[]
+//         console.log('snapService',snapshot)
+//              let data=snapshot.docs.map(doc=>{
+//                 let service=doc.data()
+//                 console.log('doc',service)
+//                 arr.push(service)
+//                 console.log('arr',arr)
+//                 setFetchedServices(arr)
+              
+//             }
+          
+//             )   
+          
+//     })
+
+// })
+    

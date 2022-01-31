@@ -49,7 +49,16 @@ const events= (props,{currentUser}) => {
                    <Icon name="pluscircleo" size={20} color="black" />
                    </View>
                </TouchableOpacity>
-                <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',padding:10,marginTop:10}}>Events</Text>
+                <Text 
+                style={
+                  {fontSize:16,
+                  fontWeight:'bold',
+                  color:'#a16281',
+                  justifyContent:'center',
+                  alignSelf:'center',
+                  padding:10,
+                  marginTop:10}}>
+                    Events</Text>
                 <FlatList style={{alignSelf:'center',}}
                
                 horizontal={false}
