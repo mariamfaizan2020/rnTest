@@ -1,31 +1,74 @@
 
-import { StyleSheet, Text, View ,TextInput} from 'react-native';
+import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native';
 import React,{useState} from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 const EditServices = (props) => {
-    const [price,setPrice]=useState(props.navigation.state.params.price)
+    const [price,setPrice]=useState(`$${props.navigation.state.params.price}` || '$')
     console.log('propas',props.navigation.state.params.serviceId)
     const item=props.navigation.state.params
+
+    const onEdit=()=>{
+          firestore().collection('services').doc(props.navigation.state.params.serviceId)
+          .update({
+            price:price
+          }).then(()=>{
+            console.log('userUpdated')
+            props?.navigation.navigate('tabs')
+          })
+          
+    }
+
+    const onDelete=()=>{
+      firestore().collection('services').doc(props.navigation.state.params.serviceId)
+      .delete()
+      .then(()=>{
+        console.log('Userdelete')
+        props?.navigation.navigate('tabs')
+      })
+    }
   return (
-    <View style={{margin:10,padding:10}}>
+    <View style={{margin:10,padding:10,  justifyContent:'center',
+    alignItems:'center'}}>
+      
       <TextInput  style={styles.Button} 
   
       value={item.service}
       editable={false}
       />
+      <View style={{flexDirection:'row'}}>
+     
       <TextInput
-      style={{fontSize:16,color:'white',fontWeight:'bold',borderWidth:3,borderRadius:2,borderColor:'#969590',backgroundColor:'#969590'}}
+      style={
+        {fontSize:16,
+          color:'white',
+          fontWeight:'bold',
+          borderWidth:3,
+          borderRadius:2,
+          borderColor:'#969590',
+          backgroundColor:'#969590',
+          width:'80%',
+          margin:10
+        }}
        value={price}
        onChangeText={(text)=>setPrice(text)}>
-          
+
            </TextInput>
-           <View style={{flexDirection:'row',margin:10,padding:10}}>
-           <TouchableOpacity  style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,padding:5,margin:10}}>
+          
+      </View>
+     
+           <View style={{flexDirection:'row',padding:10,}}>
+           <TouchableOpacity  
+           onPress={()=>onEdit()}
+           style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,padding:5,margin:10}}>
                <Text style={{alignSelf:'center',color:'white'}}>EDIT SERVICE</Text>
            </TouchableOpacity>
-           <TouchableOpacity  style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,padding:5,margin:10}}>
+           <TouchableOpacity 
+              onPress={()=>onDelete()}
+           style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,padding:5,margin:10}}>
                <Text style={{alignSelf:'center',color:'white'}}>DELETE SERVICE</Text>
            </TouchableOpacity>
            </View>

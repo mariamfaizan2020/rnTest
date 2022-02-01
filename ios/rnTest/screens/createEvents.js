@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 
 
 const createEvents = (props,{navigation}) => {
+  console.log('props12345',props.navigation.getParam('name'))
     const [name,setName]=useState(props.navigation.getParam('name') ? props.navigation.getParam('name')  :null)
     const [date, setDate] = useState(props.navigation.getParam('date')?props.navigation.getParam('date').toDate():new Date());
     const [mode, setMode] = useState('date');
@@ -65,6 +66,15 @@ const createEvents = (props,{navigation}) => {
     if (type===null){return Alert.alert('Please select your event type')}
    
     eventDetails()
+    props.navigation.navigate('editEvents',{
+        nameOfEvent:name,
+        DateOFEvent:date,
+        StartingTImeOFEvent:starttime,
+        EndTimeOFEvent:endtime,
+        TypeOFEvent:type,
+        IsPublic:ispublic.toString(),
+
+    })
   }
  const setTypeF=(type)=>{
    console.log("type",type)

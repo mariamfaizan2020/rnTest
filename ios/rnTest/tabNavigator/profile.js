@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View ,TextInput,TouchableOpacity,Image} from 'react-native';
-import auth from '@react-native-firebase/auth';
+
 import {connect, useDispatch} from 'react-redux'
 import { fetchUser, Logout } from '../redux/actions/index';
 // import { bindActionCreators } from 'redux'
@@ -8,6 +8,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Icon from '../icons/icon'
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 
@@ -30,7 +31,7 @@ const onEdit=()=>{
    firestore().collection('users').doc(auth().currentUser.uid).update({
      userName:userName,
      type:userType,
-     image
+    //  image
    })
 }
 

@@ -45,11 +45,11 @@ const services = (props) => {
                      
                    )}>
                        <View style={{flexDirection:'row',justifyContent:'center'}}>
-                       <Text style={{marginTop:3}}>Add New Services</Text>
+                       <Text style={{marginTop:5}}>Add New Services</Text>
                        <Icon.Entypo name='plus' size={20} color="black" />
                        </View>
                    </TouchableOpacity>
-                  <Text > Servies</Text>
+                  <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginTop:20}}> Servies</Text>
                   <FlatList
                   horizontal={false}
                   data={fetchedServices}
@@ -57,14 +57,15 @@ const services = (props) => {
                   renderItem={({item})=>{
                       return(
                           <View>
-                              <TouchableOpacity onPress={()=>props?.navigation.navigate('EditServices',{
+                              <TouchableOpacity  style={styles.Input} onPress={()=>props?.navigation.navigate('EditServices',{
                                   service:item.service,
                                   price:item.price,
                                   uid:item.uid,
                                   serviceId:item.ServiceId
 
                               })}>
-                                  <Text>{item.service}</Text>
+                                  <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}
+                                  >{item.service}</Text>
                               </TouchableOpacity>
                               </View>
                       )
@@ -81,4 +82,19 @@ const services = (props) => {
 
 export default services
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    Input:{
+         
+        padding:5,
+        margin:5,
+        alignSelf:'center',
+        borderBottomWidth:2,
+        borderBottomColor:'#a16281',
+        width:'50%'
+      
+        
+        
+      
+  
+    },
+})

@@ -67,23 +67,24 @@ const events= (props,{currentUser}) => {
         
                 renderItem={({item})=>{
                   console.log('fetchedEvents',item.DateOFEvent.toDate())
+                  const date=item.DateOFEvent.toDate()
                   return(
                    
                       <View>
                         
                         <TouchableOpacity style={styles.Input} onPress={()=>props?.navigation.navigate('editEvents',{
                            nameOfEvent:item.nameOfEvent,
-                           DateOFEvent:item.DateOFEvent,
-                           StartingTImeOFEvent:item.StartingTImeOFEvent,
-                           EndTimeOFEvent:item.EndTimeOFEvent,
+                           DateOFEvent:item.DateOFEvent.toDate(),
+                           StartingTImeOFEvent:item.StartingTImeOFEvent.toDate(),
+                           EndTimeOFEvent:item.EndTimeOFEvent.toDate(),
                            TypeOFEvent:item.TypeOFEvent,
-                           IsPublic:item.IsPublic,
+                           IsPublic:item.IsPublic.toString(),
                            uid:item.uid,
                            EventId:item.EventId
 
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
-                        {moment(item.DateOFEvent.toDate()).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}            </Text>
+                        {moment(date).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
                         </TouchableOpacity>
                       </View>
                    

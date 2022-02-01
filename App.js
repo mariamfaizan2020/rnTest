@@ -8,7 +8,8 @@
 
 import React from 'react';
 import {Text,View} from 'react-native'
-import { createAppContainer } from 'react-navigation';
+
+import { createAppContainer ,createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
 import loginScreen from './ios/rnTest/screens/login'
@@ -25,6 +26,7 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import { PersistGate } from 'redux-persist/integration/react'
 import createServices from './ios/rnTest/screens/createServices';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import BrowseScreen from './ios/rnTest/screens/Browse';
 const persistConfig={
   key:'root',
   storage:AsyncStorageLib,
@@ -37,22 +39,33 @@ const store = createStore(persistedReducer, {},composeWithDevTools(
   ));
 const persistor=persistStore(store)
 
-let AppNavigator = createStackNavigator({
+const AuthStack = createStackNavigator({
  
     register: registerScreen,
-    login:loginScreen,
+    login:loginScreen},
+    {
+      initialRouteName:'login'
+      }
+    )
+const AppStack=createStackNavigator({
     tabs:tabsScreen,
     createEvents:createEventsScreen,
     editEvents:editEvents,
     createServices:createServices,
     EditServices:EditServicesScreen,
-
-  
+    Browse:BrowseScreen
 },
-
 {
-  initialRouteName:'login'
+  initialRouteName:'tabs'
 })
+
+let AppNavigator=createAppContainer(
+  (createSwitchNavigator({
+     Auth:AuthStack,
+     App:AppStack
+})))
+  
+
 let Navigation=createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
