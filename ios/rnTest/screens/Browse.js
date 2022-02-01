@@ -52,14 +52,15 @@ console.log('SERVICES',services)
   return (
     <View style={{flexDirection:'row'}}>
         <View 
+        style={styles.Button }
         >
           <TouchableOpacity style={{padding:10}}>
-           <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281'}}>Venue</Text>
+           <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281',color:'white'}}>Venue</Text>
          </TouchableOpacity > 
          </View>
-         <View >
+         <View  style={styles.Button }>
         <TouchableOpacity style={{padding:10}}>
-           <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281'}}>Service</Text>
+           <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281',color:'white'}}>Service</Text>
          </TouchableOpacity> 
          
         </View>
@@ -71,12 +72,12 @@ console.log('SERVICES',services)
 export default Browse;
 
 const styles = StyleSheet.create({
-    Button:{flexDirection:'row',
-    borderBottomColor:'#a16281',
-    width:'100%',
-    borderBottomWidth:3,
-    padding:5,
-    margin:15,
+    Button:{
+    borderColor:'#a16281',
+    width:'50%',
+    borderWidth:3,
+    backgroundColor:'#a16281',
+
     justifyContent:'center',
     alignItems:'center'
    
