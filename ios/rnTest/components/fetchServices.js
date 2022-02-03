@@ -11,87 +11,46 @@ const fetchServices = (props)=>{
     const [uidU,setUidU]=useState()
     const [uidS,setUidS]=useState()
     useEffect(()=>{
-        // fetchUsers()
+        fetchUsers()
         fetchServices()
 
     },[])
-    // const fetchUsers=()=>{
-    //     firestore().collection('users')
-       
-    //     .onSnapshot((snapshot)=>{
-    //         let arr=[]
-    //         let array=[]
-    //         console.log('ALLUSRES',snapshot)
-    //          snapshot.docs.map(doc=>{
-    //            let data=doc.data()
-    //            console.log('data',data)
-            
-    //            arr.push(data)
-    //            console.log('arr',arr)
-              
-    //         })
-    //         setUsers(arr)
-    //            Object.values(arr).map(object=>{
-    //               console.log('obj',object.uid) 
-    //               let useruid=object.uid
-    //              array.push(useruid)
-    //             console.log('abcd',array)
-                
-    //            })
-              
-    //            setUidU(array) 
-    //     })   
-            
-       
-
-    // }
-    // console.log('UIDU',uidU)
-    
-    // console.log('users',users)
+   
 const fetchServices=()=>{
     firestore().collection('services')
     .onSnapshot((snapshot)=>{
-        // let arr=[]
-        let array=[]
-        console.log('ALLSRVICES',snapshot)
-       let service= snapshot.docs.map(doc=>{
-            let data=doc.data()
-            console.log('data',data.uid)
-            // arr.push(data)
-            // console.log('arr',arr)
-            Object.values(data.uid).map(object=>{
-              // console.log('obj',object.uid) 
-              let serviceuid=object.uid
-             array.push(serviceuid)
-            console.log('xyz',array)
-            
-           })
-          
-         })
-       
-        .
+      console.log('snapshot',snapshot)
+      if(!snapshot.empty){
+  
+        let services=snapshot.docs.map(doc=>{
+          let data=doc.data()
+          console.log('data',data.services)
         
-          firestore().collection('users').where('uid','==',array)
-          .onSnapshot((snapshot)=>{
-            console.log('USERSNAPSHOT',snapshot)
+          setUidU(data.userUid)
+          setServices(data.services)
+        })
+     
+      }
+    })
+  }  
+  console.log('serv',services)
+  console.log('uid',uidU)
           
-          
+  const fetchUsers=()=>{
+    firestore().collection('users').where('uid','==',uidU)
+    .get()
+    .then((snapshot)=>{
+      console.log('sss',snapshot)
+    })
+  }
 
          
-      })
-        //  setUidS(array)
-        setServices(arr)
-    })
-  
-}
-// console.log('UIDS',uidS)
-console.log('SERVICES',services)
-console.log('props',props)
+   
   return (
     <View > 
         {props.services===true? 
           <View>
-            {uidU==uidS}?<Text></Text>
+          <Text>hello</Text>
           </View>:null}
     </View>
   );

@@ -47,14 +47,13 @@ const services = (props) => {
                   data={fetchedServices}
                   keyExtractor={(item,index)=>index.toString()}
                   renderItem={({item})=>{
+                      console.log('itemhere',item)
                       return(
                           <View>
                               <TouchableOpacity  style={styles.Input} onPress={()=>props?.navigation.navigate('EditServices',{
-                                  service:item.service,
+                                  type:item.type,
                                   price:item.price,
-                                  uid:item.uid,
-                                  serviceId:item.ServiceId
-
+                                  
                               })}>
                                   <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}
                                   >{item.type}</Text>

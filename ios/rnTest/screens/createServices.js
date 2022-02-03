@@ -55,6 +55,7 @@ console.log('servicetype',serviceType)
   return (
       <View style={{marginTop:20}}>
   
+            
           <FlatList
         
           horizontal={true}
@@ -63,13 +64,11 @@ console.log('servicetype',serviceType)
           keyExtractor={(item,index)=>index.toString()}
           renderItem={({item})=>{
               console.log('item1111',item)
-            //   const found=ppp.find(x=>x.type==item.Type)
-            //   console.log("found",found)
-           
-
-              if(ppp.length>0){ 
-                const found=ppp.find(x=>x.type==item.Type)
-                console.log("found",found)
+            if(ppp.length>0){
+                  const found=ppp.find(x=>x.type==item.Type)
+              console.log("found",found)
+              if(found){ 
+               
                 return null
                 }else{
                     return(
@@ -88,6 +87,10 @@ console.log('servicetype',serviceType)
 
 
         }
+           }  
+            
+
+              
     }/>
    {type===true?      <View>
                       <TextInput   style={{borderRadius:2,borderColor:'#969590',borderWidth:5,backgroundColor:'#969590',}}             

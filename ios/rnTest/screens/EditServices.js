@@ -8,7 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 const EditServices = (props) => {
     const [price,setPrice]=useState(`$${props.navigation.state.params.price}` || '$')
-    console.log('propas',props.navigation.state.params.serviceId)
+    console.log('propas',props.navigation.state.params)
     const item=props.navigation.state.params
 
     const onEdit=()=>{
@@ -31,12 +31,15 @@ const EditServices = (props) => {
       })
     }
   return (
-    <View style={{margin:10,padding:10,  justifyContent:'center',
-    alignItems:'center'}}>
+    <View 
+    style={{margin:10,padding:10,  justifyContent:'center',
+    alignItems:'center'}}
+    >
       
-      <TextInput  style={styles.Button} 
+      <TextInput  
+      style={styles.Button} 
   
-      value={item.service}
+      value={item.type}
       editable={false}
       />
       <View style={{flexDirection:'row'}}>
