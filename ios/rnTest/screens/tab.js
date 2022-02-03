@@ -7,8 +7,8 @@ import mainScreen from '../tabNavigator/main'
 
 import Icon from 'react-native-vector-icons/AntDesign';
 
-
-
+       
+    
 
 
 

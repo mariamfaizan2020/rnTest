@@ -4,28 +4,20 @@ import { StyleSheet, Text, View ,TouchableOpacity,FlatList} from 'react-native'
 import Icon from '../icons/icon'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { FirebaseStorageTypes } from '@react-native-firebase/storage';
+
 const services = (props) => {
     const [fetchedServices,setFetchedServices]=useState()
     useEffect(()=>{
         fetchServices()
     },[])
  const fetchServices=()=>{
-    firestore().collection('services').where('uid','==',auth().currentUser.uid)
+    firestore().collection('services').doc(auth().currentUser.uid)
     .onSnapshot((snapshot)=>{
-        let arr=[]
-        console.log('snapService',snapshot)
-             let data=snapshot.docs.map(doc=>{
-                let service=doc.data()
-                console.log('doc',service)
-                arr.push(service)
-                console.log('arr',arr)
-                setFetchedServices(arr)
-              
-            }
-          
-            )   
-          
+        console.log("snap",snapshot)
+        if(snapshot.exists){
+            setFetchedServices(snapshot.data().services)
+        }
+        
     })
     
  }
@@ -65,7 +57,7 @@ const services = (props) => {
 
                               })}>
                                   <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}
-                                  >{item.service}</Text>
+                                  >{item.type}</Text>
                               </TouchableOpacity>
                               </View>
                       )

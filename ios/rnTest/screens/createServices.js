@@ -34,15 +34,18 @@ const ppp=props.navigation.state.params.service
       serviceDetails()
   } 
   const serviceDetails=()=>{
-     firestore().collection('services').add({
-         service:serviceType,
-         price:price,
-         uid:auth().currentUser.uid
-     }).then((res)=>{
-         console.log('res',res)
-         firestore().collection('services').doc(res.id).update({
-             ServiceId:res.id
-         })
+          let services=props.navigation?.state?.params?.service?.length>0?props?.navigation?.state?.params?.service:[]
+      let obj={
+          type:serviceType,
+          price:price
+      }
+      services.push(obj)
+     firestore().collection('services').doc(auth().currentUser.uid)
+     .set({
+        services,
+         userUid:auth().currentUser.uid
+     
+         
      })
   }
             
@@ -59,13 +62,15 @@ console.log('servicetype',serviceType)
           data={arr}
           keyExtractor={(item,index)=>index.toString()}
           renderItem={({item})=>{
-              console.log('item',item.Type)
-              const found=ppp.find(x=>x.service==item.Type)
-              console.log("found",found)
+              console.log('item1111',item)
+            //   const found=ppp.find(x=>x.type==item.Type)
+            //   console.log("found",found)
            
 
-              if(found){ 
-                  return null
+              if(ppp.length>0){ 
+                const found=ppp.find(x=>x.type==item.Type)
+                console.log("found",found)
+                return null
                 }else{
                     return(
                 
@@ -82,7 +87,8 @@ console.log('servicetype',serviceType)
                 }
 
 
-        }}/>
+        }
+    }/>
    {type===true?      <View>
                       <TextInput   style={{borderRadius:2,borderColor:'#969590',borderWidth:5,backgroundColor:'#969590',}}             
                         placeholder='price:$'
