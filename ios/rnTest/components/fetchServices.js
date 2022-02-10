@@ -2,6 +2,7 @@ import { StyleSheet, Text, View,FlatList ,TouchableOpacity,Image} from 'react-na
 import React ,{useEffect,useState}from 'react';
 
 import firestore from '@react-native-firebase/firestore';
+import { NavigationContext } from 'react-navigation';
 
 
 const fetchServices = (props)=>{
@@ -61,7 +62,8 @@ const fetchServices = (props)=>{
               console.log('item',item)
               return(
                 <View style={{flex:1,}} >
-               <TouchableOpacity style={{borderBottomWidth:2,padding:5,margin:5}}>
+               <TouchableOpacity onPress={()=>props?.navigation.navigate('bookservices')}
+               style={{borderBottomWidth:2,padding:5,margin:5}}>
                  
                  <View style={{flexDirection:'row'}}>
                  <Image source={{ uri:item.image}} style={styles.image}/> 

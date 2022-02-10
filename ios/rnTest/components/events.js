@@ -8,16 +8,20 @@ import moment from 'moment'
 
 
 
+
 const events= (props,{currentUser}) => {
+
     const [fetchedEvents,setFetchedEvents]=useState()
     useEffect(()=>{
-        FetchEvents()
+    FetchEvents()
       },[])
+ 
       const FetchEvents=()=>{
-    
+    console.log('user',auth().currentUser?.uid)
         firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
       .onSnapshot((snapshot)=>{
         let arr=[]
+        console.log('snapshot123',snapshot)
          const data=snapshot.docs.map(doc=>{
            const event=doc.data()
             console.log('data',event)
@@ -66,7 +70,9 @@ const events= (props,{currentUser}) => {
                 keyExtractor={(item,index)=>index.toString()}
         
                 renderItem={({item})=>{
-                  console.log('fetchedEvents',item.DateOFEvent.toDate())
+
+                  console.log('fetchedEvents',item)
+
                   const date=item.DateOFEvent.toDate()
                   return(
                    
@@ -84,7 +90,8 @@ const events= (props,{currentUser}) => {
 
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
-                        {moment(date).format("YYYY-MM-DD")}-{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
+                        {moment(date).format("YYYY-MM-DD")}
+                        -{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
                         </TouchableOpacity>
                       </View>
                    
@@ -107,7 +114,7 @@ const events= (props,{currentUser}) => {
    
 
 
-export default events
+    export default events;
 
 const styles = StyleSheet.create({
     Input:{

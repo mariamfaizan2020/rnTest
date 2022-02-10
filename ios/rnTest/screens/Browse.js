@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import FetchServices from '../components/fetchServices';
 
 
-const Browse = () => {
+const Browse = ({navigation}) => {
 
 const [Serv,setServ]=useState(false)
    
@@ -32,6 +32,7 @@ const [Serv,setServ]=useState(false)
         <View style={{flex:1}}>
         <FetchServices
        services={Serv}
+       navigation={navigation}
   
        />    
         </View>

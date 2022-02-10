@@ -1,11 +1,12 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { USER_STATE_CHANGE,USER_LOGOUT } from '../constants';
+
+import { USER_STATE_CHANGE,USER_LOGOUT, USER_EVENTS_DATA } from '../constants';
 
  export function fetchUser(navigation)  {
      return((dispatch)=>{
        
-            console.log('uid', auth().currentUser?.uid)
+            console.log('uid', auth().currentUser.uid)
             firestore().collection('users').doc(auth().currentUser?.uid)
            
             .onSnapshot((snapshot)=>{
@@ -22,6 +23,26 @@ import { USER_STATE_CHANGE,USER_LOGOUT } from '../constants';
      })
     
  }
+ export function fetchUserEvents(){
+    return(dispatch)=>{
+        console.log('uidddd',auth().currentUser.uid)
+      
+        firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
+        .onSnapshot((snapshot)=>{
+            console.log('1111',snapshot)
+            if(!snapshot.empty){
+                let data=snapshot.docs.map(doc=>{
+                    const events=doc.data()
+                    console.log('daata',events)
+                    return{...events}
+             
+                })
+                dispatch({type:USER_EVENTS_DATA,data})
+            }
+        })
+    
+    }
+}
  export function Logout(navigation){
     return((dispatch)=>{
         

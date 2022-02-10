@@ -27,6 +27,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import createServices from './ios/rnTest/screens/createServices';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import BrowseScreen from './ios/rnTest/screens/Browse';
+import bookservicesScreen from './ios/rnTest/screens/bookservices'
 const persistConfig={
   key:'root',
   storage:AsyncStorageLib,
@@ -53,7 +54,8 @@ const AppStack=createStackNavigator({
     editEvents:editEvents,
     createServices:createServices,
     EditServices:EditServicesScreen,
-    Browse:BrowseScreen
+    Browse:BrowseScreen,
+    bookservices:bookservicesScreen
 },
 {
   initialRouteName:'tabs'
