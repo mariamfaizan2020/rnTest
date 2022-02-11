@@ -183,7 +183,7 @@ const styles=StyleSheet.create({
   }
 })
 const mapStateToProps=(store)=>{
-  console.log("store",store)
+  console.log("store profile",store)
   return{
     currentUser:store.userState.currentUser
   }

@@ -1,22 +1,37 @@
 
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
-
+import auth from '@react-native-firebase/auth';
 import Events from '../components/events'
 import Services from '../components/services';
 import Venue from '../components/venue';
 import {connect,useDispatch} from 'react-redux';
-import { fetchUser } from '../redux/actions/index';
-
+import { fetchUser, fetchUserEvents } from '../redux/actions/index';
+import firestore from '@react-native-firebase/firestore';
 
 const main = ({currentUser, navigation}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
     const [venue, setVenue] = useState(false)
-
+    const dispatch=useDispatch()
   
-   
+   useEffect(()=>{
+    // firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
+    // .onSnapshot((snapshot)=>{
+    //     console.log('1111',snapshot)
+    //     if(!snapshot.empty){
+    //         let data=snapshot.docs.map(doc=>{
+    //             const events=doc.data()
+    //             console.log('daata',events)
+    //             return{...events}
+         
+    //         })
+    //         dispatch({type:'USER_EVENTS_DATA',events:data})
+    //     }
+    // })
+    //  dispatch(fetchUserEvents())
+   },[])
 
     console.log("123", userType)
    

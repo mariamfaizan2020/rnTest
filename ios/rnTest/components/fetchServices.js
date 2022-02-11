@@ -62,7 +62,12 @@ const fetchServices = (props)=>{
               console.log('item',item)
               return(
                 <View style={{flex:1,}} >
-               <TouchableOpacity onPress={()=>props?.navigation.navigate('bookservices')}
+               <TouchableOpacity onPress={()=>props?.navigation.navigate('bookservices',{
+                  serviceName:item.serviceType,
+                  userName:item.name,
+                  priceOfService:item.price,
+                  profileImage:item.image
+               })}
                style={{borderBottomWidth:2,padding:5,margin:5}}>
                  
                  <View style={{flexDirection:'row'}}>

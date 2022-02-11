@@ -6,6 +6,7 @@ import {events} from './events'
 
 const Reducers = combineReducers({
     userState:user,
+    eventState:events
   
 
 

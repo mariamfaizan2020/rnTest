@@ -5,7 +5,7 @@ import { StyleSheet, Text, View ,TextInput,TouchableOpacity} from 'react-native'
 import {fetchUser} from "../redux/actions/index"
 import { useDispatch } from "react-redux";
 import {connect} from 'react-redux';
-
+import firestore from '@react-native-firebase/firestore';
 const login = ({navigation,currentUser}) => {
     const dispatch=useDispatch()
     const [email,setEmail]=useState('test3@gmail.com')
@@ -21,9 +21,20 @@ const login = ({navigation,currentUser}) => {
     },[])
     const onSignIn=()=>{
         auth().signInWithEmailAndPassword(email,password)
-        .then(()=>{
+        .then((user)=>{
             console.log('USER IS LOGGED IN')
-            dispatch(fetchUser(navigation))
+              firestore().collection('users').doc(user.user.uid)
+            .get().then((snapshot)=>{
+             // .onSnapshot((snapshot)=>{
+                 if(snapshot.exists){
+                     console.log('snaps login',snapshot.data())
+                     dispatch({type:'USER_STATE_CHANGE',currentUser:snapshot.data()})
+                     navigation.navigate('tabs')
+                 }else{
+                     console.log('does not exist')
+                 }
+             })
+            // dispatch(fetchUser(navigation))
         //   navigation.navigate('tabs')
         })
     }

@@ -8,10 +8,10 @@ import { USER_STATE_CHANGE,USER_LOGOUT, USER_EVENTS_DATA } from '../constants';
        
             console.log('uid', auth().currentUser.uid)
             firestore().collection('users').doc(auth().currentUser?.uid)
-           
-            .onSnapshot((snapshot)=>{
+           .get().then((snapshot)=>{
+            // .onSnapshot((snapshot)=>{
                 if(snapshot.exists){
-                    console.log('snaps',snapshot.data())
+                    console.log('snaps login',snapshot.data())
                     dispatch({type:USER_STATE_CHANGE,currentUser:snapshot.data()})
                     navigation.navigate('tabs')
                 }else{
@@ -23,9 +23,9 @@ import { USER_STATE_CHANGE,USER_LOGOUT, USER_EVENTS_DATA } from '../constants';
      })
     
  }
- export function fetchUserEvents(){
-    return(dispatch)=>{
-        console.log('uidddd',auth().currentUser.uid)
+ export  function fetchUserEvents(){
+    // return(dispatch)=>{
+        console.log('uidddd12',auth().currentUser.uid)
       
         firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
         .onSnapshot((snapshot)=>{
@@ -37,11 +37,11 @@ import { USER_STATE_CHANGE,USER_LOGOUT, USER_EVENTS_DATA } from '../constants';
                     return{...events}
              
                 })
-                dispatch({type:USER_EVENTS_DATA,data})
+                dispatch({type:'USER_EVENTS_DATA',events:data})
             }
         })
     
-    }
+    // }
 }
  export function Logout(navigation){
     return((dispatch)=>{

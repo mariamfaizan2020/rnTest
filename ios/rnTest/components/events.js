@@ -4,13 +4,15 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import moment from 'moment'
+import { useDispatch } from 'react-redux';
 
 
 
 
 
 const events= (props,{currentUser}) => {
-
+  const dispatch=useDispatch()
+  
     const [fetchedEvents,setFetchedEvents]=useState()
     useEffect(()=>{
     FetchEvents()
@@ -30,10 +32,11 @@ const events= (props,{currentUser}) => {
             
            })
            setFetchedEvents(arr)
+           dispatch({type:'USER_EVENTS_DATA',events:arr})
         })
       }
      
-        console.log('fetchedEvents',fetchedEvents)
+        // console.log('fetchedEvents',fetchedEvents)
   
   
     return (
@@ -71,7 +74,7 @@ const events= (props,{currentUser}) => {
         
                 renderItem={({item})=>{
 
-                  console.log('fetchedEvents',item)
+                  // console.log('',item)
 
                   const date=item.DateOFEvent.toDate()
                   return(
