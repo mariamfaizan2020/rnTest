@@ -28,6 +28,7 @@ import createServices from './ios/rnTest/screens/createServices';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import BrowseScreen from './ios/rnTest/screens/Browse';
 import bookservicesScreen from './ios/rnTest/screens/bookservices'
+import testingScreen from './ios/rnTest/screens/testing';
 const persistConfig={
   key:'root',
   storage:AsyncStorageLib,
@@ -55,10 +56,11 @@ const AppStack=createStackNavigator({
     createServices:createServices,
     EditServices:EditServicesScreen,
     Browse:BrowseScreen,
-    bookservices:bookservicesScreen
+    bookservices:bookservicesScreen,
+    testing:testingScreen
 },
 {
-  initialRouteName:'tabs'
+  initialRouteName:'testing'
 })
 
 let AppNavigator=createAppContainer(

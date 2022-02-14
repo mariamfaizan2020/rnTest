@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import Icon from '../icons/icon'
 import moment from 'moment'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const bookservices = (props) => {
   const nameOfService=props.navigation.getParam('serviceName')
