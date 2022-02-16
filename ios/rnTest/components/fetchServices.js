@@ -2,12 +2,13 @@ import { StyleSheet, Text, View,FlatList ,TouchableOpacity,Image} from 'react-na
 import React ,{useEffect,useState}from 'react';
 
 import firestore from '@react-native-firebase/firestore';
-import { NavigationContext } from 'react-navigation';
+
 
 
 const fetchServices = (props)=>{
       console.log("helo",props)
  const [services,setServices]=useState()
+
    useEffect(()=>{
      fetchServices()
       },[])
@@ -22,11 +23,13 @@ const fetchServices = (props)=>{
               let data=doc.data()
               console.log('data',data.services)
               console.log('uid',data.userUid)
+            
               let combineServices=data.services.map(Allservices=>{
                 let obj={}
                 console.log('Allservices',Allservices.type)
                 obj.serviceType=Allservices.type,
                 obj.price=Allservices.price
+                obj.id=data.userUid
                 // console.log('obj',obj)
                 firestore().collection('users').doc(data.userUid)
                 .get()
@@ -46,6 +49,7 @@ const fetchServices = (props)=>{
         })
       }      
       console.log('services',services)
+  
    
    
 
@@ -59,14 +63,15 @@ const fetchServices = (props)=>{
             data={services}
             keyExtractor={(item,index)=>index.toString()}
             renderItem={({item})=>{
-              console.log('item',item)
+              console.log('item0000',item)
               return(
                 <View style={{flex:1,}} >
                <TouchableOpacity onPress={()=>props?.navigation.navigate('bookservices',{
                   serviceName:item.serviceType,
                   userName:item.name,
                   priceOfService:item.price,
-                  profileImage:item.image
+                  profileImage:item.image,
+                  serviceId:item.id
                })}
                style={{borderBottomWidth:2,padding:5,margin:5}}>
                  

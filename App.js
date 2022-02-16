@@ -60,7 +60,7 @@ const AppStack=createStackNavigator({
     testing:testingScreen
 },
 {
-  initialRouteName:'testing'
+  initialRouteName:'tabs'
 })
 
 let AppNavigator=createAppContainer(

@@ -1,12 +1,16 @@
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
+import { useDispatch } from 'react-redux';
 
 import firestore from '@react-native-firebase/firestore';
 
 const editEvents = (props) => {
+    const dispatch=useDispatch()
+ 
     console.log('props::',props)
+    const [bookEvents,setBookEvents]=useState()
  
     const screenProps=props.navigation.state.params
     const name=screenProps.nameOfEvent
@@ -17,16 +21,43 @@ const editEvents = (props) => {
     const ispublic=screenProps.IsPublic
     const  uid=screenProps.uid
     const EventId=screenProps.EventId
-    console.log('screenProps::',screenProps)
-
-    const deleteEvent=()=>{
+    const serviceID=screenProps.serviceID
+ console.log('screenProps::',screenProps)
+ 
+ useEffect(()=>{
+    fetchbookevents()
+},[])
+   
+const deleteEvent=()=>{
         firestore().collection('Events').doc(EventId)
         .delete()
         .then(()=>{
             console.log('deleted')
         })
       }
-  
+     
+      const fetchbookevents=()=>{
+       
+         firestore().collection('bookings').doc(EventId)
+         .collection('etts')
+        .onSnapshot((snapshot)=>{
+             console.log('snapshott',snapshot)
+            
+             if(!snapshot.empty){
+                 let arr=[]
+                 console.log('hellll')
+                 let x=snapshot.docs.map(doc=>{
+                 const data=doc.data()
+                   console.log('data',data.type)
+                   arr.push(data.type)
+                   
+                 })
+                 setBookEvents(arr)
+                 dispatch({type:'USER_BOOKED_EVENTS',bookedevents:arr})
+             }
+         })
+      }
+  console.log(bookEvents,'123334')
   return (
     <View style={{flex:1,alignItems:'center'}} >
        <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,}}>
@@ -55,6 +86,7 @@ const editEvents = (props) => {
            
             <View style={{flexDirection:'row',margin:10}}>
             <Text>Find Entertainment</Text>
+             <Text></Text>
             <Icon.AntDesign name='search1' size={20}/>
            
             </View>
