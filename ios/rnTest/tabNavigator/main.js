@@ -6,35 +6,19 @@ import Events from '../components/events'
 import Services from '../components/services';
 import Venue from '../components/venue';
 import {connect,useDispatch} from 'react-redux';
-import { fetchUser, fetchUserEvents } from '../redux/actions/index';
+
 import firestore from '@react-native-firebase/firestore';
 
-const main = ({currentUser, navigation}) => {
+const main = ({currentUser, navigation, events}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
     const [venue, setVenue] = useState(false)
     const dispatch=useDispatch()
-  
-   useEffect(()=>{
-    // firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
-    // .onSnapshot((snapshot)=>{
-    //     console.log('1111',snapshot)
-    //     if(!snapshot.empty){
-    //         let data=snapshot.docs.map(doc=>{
-    //             const events=doc.data()
-    //             console.log('daata',events)
-    //             return{...events}
-         
-    //         })
-    //         dispatch({type:'USER_EVENTS_DATA',events:data})
-    //     }
-    // })
-    //  dispatch(fetchUserEvents())
-   },[])
-
-    console.log("123", userType)
    
+  
+    
+ 
 
     const setEventF=()=>{
         setEvent(true)
@@ -112,12 +96,12 @@ const main = ({currentUser, navigation}) => {
 }
 const mapStateToProps=(store)=>{
     
-        console.log("store",store)
 
    
 
     return {
-        currentUser:store.userState.currentUser
+        currentUser:store.userState.currentUser,
+     
     }
 }
 // const mapDispatchProps=(dispatch)=>bindActionCreators({fetchUser},dispatch)

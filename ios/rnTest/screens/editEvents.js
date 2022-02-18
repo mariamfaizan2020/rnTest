@@ -2,31 +2,36 @@ import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
 import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
-import { useDispatch } from 'react-redux';
+import {connect} from 'react-redux'
 
 import firestore from '@react-native-firebase/firestore';
 
 const editEvents = (props) => {
-    const dispatch=useDispatch()
+
  
     console.log('props::',props)
-    const [bookEvents,setBookEvents]=useState()
+  
  
     const screenProps=props.navigation.state.params
     const name=screenProps.nameOfEvent
     const date=screenProps.DateOFEvent
     const starttime=screenProps.StartingTImeOFEvent
     const endtime=screenProps.EndTimeOFEvent
-    const type=screenProps.TypeOFEvent
-    const ispublic=screenProps.IsPublic
-    const  uid=screenProps.uid
+    const TypeOFEvent=screenProps.TypeOFEvent
+    // const ispublic=screenProps.IsPublic
+    // const  uid=screenProps.uid
     const EventId=screenProps.EventId
-    const serviceID=screenProps.serviceID
- console.log('screenProps::',screenProps)
- 
- useEffect(()=>{
-    fetchbookevents()
-},[])
+
+   console.log('type',props.bookings)
+   let abc=Object.values(props.bookings).map(x=>{
+    console.log('abc',abc)
+   })
+   
+   
+
+ console.log('screenProps::',screenProps.nameOfService)
+  
+
    
 const deleteEvent=()=>{
         firestore().collection('Events').doc(EventId)
@@ -36,33 +41,13 @@ const deleteEvent=()=>{
         })
       }
      
-      const fetchbookevents=()=>{
-       
-         firestore().collection('bookings').doc(EventId)
-         .collection('etts')
-        .onSnapshot((snapshot)=>{
-             console.log('snapshott',snapshot)
-            
-             if(!snapshot.empty){
-                 let arr=[]
-                 console.log('hellll')
-                 let x=snapshot.docs.map(doc=>{
-                 const data=doc.data()
-                   console.log('data',data.type)
-                   arr.push(data.type)
-                   
-                 })
-                 setBookEvents(arr)
-                 dispatch({type:'USER_BOOKED_EVENTS',bookedevents:arr})
-             }
-         })
-      }
-  console.log(bookEvents,'123334')
+  
+
   return (
     <View style={{flex:1,alignItems:'center'}} >
        <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,}}>
        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,marginTop:15}}>
-            {name} - {type}
+            {name} - {TypeOFEvent}
         </Text>
        </View>
        
@@ -85,13 +70,17 @@ const deleteEvent=()=>{
         > 
            
             <View style={{flexDirection:'row',margin:10}}>
+         
             <Text>Find Entertainment</Text>
-             <Text></Text>
+           
+        
+          
             <Icon.AntDesign name='search1' size={20}/>
            
             </View>
           
         </TouchableOpacity>
+        <Text>{}|requested</Text>
          </View>
     
         <View style={{flexDirection:'row',padding:10,margin:15}}>
@@ -124,7 +113,22 @@ const deleteEvent=()=>{
     </View>
   );
 };
+const mapStateToProps=(store)=>{
+ 
+  console.log("store",store.bookingState.bookings)
 
-export default editEvents;
+  return{
+    currentUser:store.userState.currentUser,
+    events:store.eventState.events,
+    bookings:store.bookingState.bookings
+ 
+  }
+}
+
+
+export default connect(mapStateToProps,null)(editEvents);
+
+
+// export default editEvents;
 
 const styles = StyleSheet.create({});

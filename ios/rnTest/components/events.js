@@ -14,29 +14,84 @@ const events= (props,{currentUser}) => {
   const dispatch=useDispatch()
   
     const [fetchedEvents,setFetchedEvents]=useState()
+    const [bookservices,setBookservices]=useState()
+
+
+  
     useEffect(()=>{
     FetchEvents()
+    // fetchbookedServices()
       },[])
  
-      const FetchEvents=()=>{
+      const FetchEvents=async()=>{
     console.log('user',auth().currentUser?.uid)
-        firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
-      .onSnapshot((snapshot)=>{
+       await firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
+      .onSnapshot(async(snapshot)=>{
+        let array=[]
         let arr=[]
         console.log('snapshot123',snapshot)
-         const data=snapshot.docs.map(doc=>{
+         const data=snapshot.docs.map(async(doc)=>{
            const event=doc.data()
-            console.log('data',event)
-           
-             arr.push(event)
+            console.log('data',event.EventId)
+        
+    
+             array.push(event)
+             dispatch({type:'USER_EVENTS_DATA',events:array})
+
+
+           await  firestore().collection('bookings').doc(event.EventId)
+             .collection('etts')
+             .get()
+             .then((snapshot)=>{
+              console.log('snapshott111',snapshot)
+              if(!snapshot.empty){
+              
+                let x=snapshot.docs.map(doc=>{
+                  const data=doc.data()
+                  console.log('data',data)
+                  arr.push(data)
+                })
+                console.log('arr',arr)
+              }
+              dispatch({type:'USER_BOOKINGS_DATA',bookings:arr})
+             })
             
            })
-           setFetchedEvents(arr)
-           dispatch({type:'USER_EVENTS_DATA',events:arr})
+           setBookservices(arr)
+           setFetchedEvents(array)
+         
         })
       }
-     
-        // console.log('fetchedEvents',fetchedEvents)
+  //         const fetchbookedServices=()=>{
+       
+  //        firestore().collection('bookings').doc(eventId)
+      
+  //        .collection('etts')
+  //       .onSnapshot((snapshot)=>{
+  //         console.log('snapshott111',snapshot)
+            
+  //            if(!snapshot.empty){
+  //                let arr=[]
+  //                console.log('hellll')
+  //                let x=snapshot.docs.map(doc=>{
+  //                const data=doc.data()
+  //                  console.log('data',data.type)
+  //                  setType(data.type)
+  //                  arr.push(data)
+                   
+  //                })
+                
+  //                setBookservices(arr)
+  //                dispatch({type:'USER_BOOKED_SERVICES',bookedServices:arr})
+                 
+   
+      //    }
+      // )          }
+      // }
+
+  console.log('bookings',bookservices)
+   console.log('evenst',fetchedEvents)  
+  
   
   
     return (

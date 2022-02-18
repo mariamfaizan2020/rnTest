@@ -4,9 +4,11 @@ import {connect} from 'react-redux'
 import Icon from '../icons/icon'
 import moment from 'moment'
 
-import {FetchEvents} from '../components/events'
+
+
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+
 const bookservices = (props) => {
   const nameOfService=props.navigation.getParam('serviceName')
   const price=props.navigation.getParam('priceOfService')
@@ -25,15 +27,18 @@ const bookservices = (props) => {
           docId:serviceID,
           name:userName,
           price:price,
-          type:nameOfService
+          type:nameOfService,
+          status:'requested'
          
         })
       })
       props.navigation.navigate('editEvents',{
-        serviceId:serviceID
+        serviceId:serviceID,
+        nameOfService:nameOfService
       })
  }
 
+ console.log('bookedService',props.bookedServices)
   return (
     <View>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center',margin:20}}>
@@ -91,15 +96,16 @@ const bookservices = (props) => {
 };
 const mapStateToProps=(store)=>{
  
-  console.log("store",store.eventState.events)
+  console.log("store",store.bookingState.bookings)
 
   return{
     currentUser:store.userState.currentUser,
-    events:store.eventState.events
+    events:store.eventState.events,
+    bookings:store.bookingState.bookings
+ 
   }
 }
-// const mapDispatchProps =(dispatch)=>bindActionCreators({FetchEvents()},dispatch)
-// export default connect( mapStateToProps, mapDispatchProps)(bookservices);
+
 
 export default connect(mapStateToProps,null)(bookservices);
 

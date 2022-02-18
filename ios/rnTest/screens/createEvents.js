@@ -20,10 +20,7 @@ const createEvents = (props,{navigation}) => {
     const [eTime,setETime]=useState(false)
     const [type,setType]=useState(props.navigation.getParam('type')?props.navigation.getParam('type'):null)
     const [ispublic,setIsPublic]=useState(props.navigation.getParam('ispublic')?props.navigation.getParam('ispublic'):true)
-//  console.log("props122",props.navigation.getParam('date').toDate())
-    // const event= props.navigation.state.params.screenProps
    
-  
  
     const arr=[
       {Type:'Type1'},
@@ -41,6 +38,8 @@ const createEvents = (props,{navigation}) => {
 
   ]
  
+  
+   
 
   const editEvent=()=>{
       firestore().collection('Events').doc(props.navigation.getParam('EventId'))

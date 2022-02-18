@@ -1,12 +1,20 @@
 import {combineReducers} from 'redux'
 import {user} from './user'
 import {events} from './events'
+import { bookings } from './bookings'
+
+
+
 
 
 
 const Reducers = combineReducers({
     userState:user,
-    eventState:events
+    eventState:events,
+    bookingState:bookings
+    
+  
+
   
 
 
