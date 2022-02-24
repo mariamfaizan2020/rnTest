@@ -20,7 +20,7 @@ const events= (props,{currentUser}) => {
   
     useEffect(()=>{
     FetchEvents()
-    // fetchbookedServices()
+  
       },[])
  
       const FetchEvents=async()=>{
@@ -29,6 +29,7 @@ const events= (props,{currentUser}) => {
       .onSnapshot(async(snapshot)=>{
         let array=[]
         let arr=[]
+       
         console.log('snapshot123',snapshot)
          const data=snapshot.docs.map(async(doc)=>{
            const event=doc.data()
@@ -41,53 +42,42 @@ const events= (props,{currentUser}) => {
 
            await  firestore().collection('bookings').doc(event.EventId)
              .collection('etts')
-             .get()
-             .then((snapshot)=>{
+           
+             .onSnapshot((snapshot)=>{
               console.log('snapshott111',snapshot)
               if(!snapshot.empty){
-              
+               
                 let x=snapshot.docs.map(doc=>{
                   const data=doc.data()
                   console.log('data',data)
-                  arr.push(data)
+                  // data.push(event.EventId)
+                  let obj={
+                    artistId:data.docId,
+                    eventId:event.EventId,
+                    service:data.type,
+                    price:data.price,
+                    status:data.status,
+                    Artistname:data.name
+
+                  }
+                  console.log('arr',obj)
+                  arr.push(obj)
+               
                 })
-                console.log('arr',arr)
+             
+                
               }
               dispatch({type:'USER_BOOKINGS_DATA',bookings:arr})
              })
             
            })
            setBookservices(arr)
+         
            setFetchedEvents(array)
          
         })
       }
-  //         const fetchbookedServices=()=>{
-       
-  //        firestore().collection('bookings').doc(eventId)
-      
-  //        .collection('etts')
-  //       .onSnapshot((snapshot)=>{
-  //         console.log('snapshott111',snapshot)
-            
-  //            if(!snapshot.empty){
-  //                let arr=[]
-  //                console.log('hellll')
-  //                let x=snapshot.docs.map(doc=>{
-  //                const data=doc.data()
-  //                  console.log('data',data.type)
-  //                  setType(data.type)
-  //                  arr.push(data)
-                   
-  //                })
-                
-  //                setBookservices(arr)
-  //                dispatch({type:'USER_BOOKED_SERVICES',bookedServices:arr})
-                 
-   
-      //    }
-      // )          }
-      // }
+ {}
 
   console.log('bookings',bookservices)
    console.log('evenst',fetchedEvents)  
@@ -131,7 +121,7 @@ const events= (props,{currentUser}) => {
 
                   // console.log('',item)
 
-                  const date=item.DateOFEvent.toDate()
+                  // const date=item.DateOFEvent.toDate()
                   return(
                    
                       <View>
@@ -148,7 +138,7 @@ const events= (props,{currentUser}) => {
 
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>
-                        {moment(date).format("YYYY-MM-DD")}
+                        {moment(item.DateOFEvent.toDate()).format("YYYY-MM-DD")}
                         -{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
                         </TouchableOpacity>
                       </View>

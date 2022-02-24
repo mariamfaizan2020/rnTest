@@ -21,8 +21,9 @@ const editEvents = (props) => {
     // const ispublic=screenProps.IsPublic
     // const  uid=screenProps.uid
     const EventId=screenProps.EventId
+    const item=screenProps.item
 
-   console.log('type',props.bookings)
+   console.log('item',item)
    let abc=Object.values(props.bookings).map(x=>{
     console.log('abc',abc)
    })
@@ -80,7 +81,9 @@ const deleteEvent=()=>{
             </View>
           
         </TouchableOpacity>
-        <Text>{}|requested</Text>
+        {/* <FlatList
+        data={ }/> */}
+       
          </View>
     
         <View style={{flexDirection:'row',padding:10,margin:15}}>
