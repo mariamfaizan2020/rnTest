@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,TouchableOpacity,FlatList} from 'react-native';
+import { StyleSheet, Text, View ,TouchableOpacity,FlatList,Modal} from 'react-native';
 import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
@@ -18,13 +18,10 @@ const editEvents = (props) => {
     const starttime=screenProps.StartingTImeOFEvent
     const endtime=screenProps.EndTimeOFEvent
     const TypeOFEvent=screenProps.TypeOFEvent
-    // const ispublic=screenProps.IsPublic
-    // const  uid=screenProps.uid
-    const EventId=screenProps.EventId
-    // const EventId=props.navigation.getParam('EventId')
+     const EventId=screenProps.EventId
     const serviceId=props.navigation.getParam('serviceId')
-    // const eventID=props.navigation.getParam('eventId')
     const [id,setId]=useState() 
+    const [modalVisible, setModalVisible] = useState(false);
 
    
   //  console.log('serviceIDD',props.navigation.getParam('serviceId'))
@@ -49,7 +46,24 @@ const editEvents = (props) => {
   })
  },[])
 console.log('id',id)
+const ModalView=(item)=>{
+  return(
+    <View>
+      <Modal
+       animationType="slide"
+       transparent={true}
+       visible={modalVisible}>
+   <View>
+    <TouchableOpacity onPress={()=>cancelService(item)}>
+      <Text>Delete</Text>
+    </TouchableOpacity>
+    </View>
+      </Modal>
+    </View>
+  )
+}
 const cancelService=(item)=>{
+  
       firestore().collection('bookings').doc(item.EventId).collection('etts')
       .doc(item.ArtistId)
       .delete()
@@ -120,8 +134,9 @@ const deleteEvent=()=>{
                {props.bookings.find(x=>x.eventId===item.EventId)? 
                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                 <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.EventName}|</Text>
-                <TouchableOpacity onPress={()=>cancelService(item)}>
-                <Text style={{color:'red',padding:1,margin:1}}>Requested</Text>
+                <TouchableOpacity onPress={()=>ModalView(item)}>
+
+                <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
                 </TouchableOpacity>
                 
                 </View> 
