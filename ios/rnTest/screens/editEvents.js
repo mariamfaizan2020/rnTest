@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View ,TouchableOpacity,FlatList} from 'react-native';
 import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
@@ -21,18 +21,43 @@ const editEvents = (props) => {
     // const ispublic=screenProps.IsPublic
     // const  uid=screenProps.uid
     const EventId=screenProps.EventId
-    const item=screenProps.item
+    // const EventId=props.navigation.getParam('EventId')
+    const serviceId=props.navigation.getParam('serviceId')
+    // const eventID=props.navigation.getParam('eventId')
+    const [id,setId]=useState() 
 
-   console.log('item',item)
-   let abc=Object.values(props.bookings).map(x=>{
-    console.log('abc',abc)
-   })
    
+  //  console.log('serviceIDD',props.navigation.getParam('serviceId'))
+   console.log('id111',EventId)
+
+ console.log('screenProps::',screenProps)
+ useEffect(()=>{
+   const array=[]
+   props.events.map(doc=>{
+     let obj={}
+     obj.EventId=doc.EventId,
+      obj.EventName=doc.nameOfEvent
+     
+     props.bookings.map(y=>{
+       obj.ArtistId=y.artistId,
+       obj.Status=y.status
+     })
+    
    
-
- console.log('screenProps::',screenProps.nameOfService)
-  
-
+    array.push(obj)
+    setId(array)
+  })
+ },[])
+console.log('id',id)
+const cancelService=(item)=>{
+      firestore().collection('bookings').doc(item.EventId).collection('etts')
+      .doc(item.ArtistId)
+      .delete()
+      .then(()=>{
+        firestore().collection('bookings').doc(item.EventId).delete()
+        console.log('deleted',item.EventId)
+      })
+}
    
 const deleteEvent=()=>{
         firestore().collection('Events').doc(EventId)
@@ -81,8 +106,35 @@ const deleteEvent=()=>{
             </View>
           
         </TouchableOpacity>
-        {/* <FlatList
-        data={ }/> */}
+        <FlatList
+        data={id}
+        keyExtractor={(item,index)=>index.toString()}
+        renderItem={({item})=>{
+          console.log('temp',item)
+          console.log('eventID',EventId)
+          console.log('events',props.events)
+         console.log('bookings',props.bookings.find(x=>x.eventId===item.EventId))
+          return(
+           
+            <View>
+               {props.bookings.find(x=>x.eventId===item.EventId)? 
+               <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.EventName}|</Text>
+                <TouchableOpacity onPress={()=>cancelService(item)}>
+                <Text style={{color:'red',padding:1,margin:1}}>Requested</Text>
+                </TouchableOpacity>
+                
+                </View> 
+                 :null
+              }
+            
+             
+            </View>
+          )
+                   
+
+        }}
+        />
        
          </View>
     

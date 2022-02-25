@@ -16,7 +16,9 @@ const bookservices = (props) => {
   const userName = props.navigation.getParam('userName')
   const image = props.navigation.getParam('profileImage')
   const serviceID = props.navigation.getParam('serviceId')
+  console.log('SERVICEID',serviceID)
   const [events, setEvents] = useState()
+
 
   useEffect(() => {
     const array = []
@@ -24,7 +26,7 @@ const bookservices = (props) => {
     props.events.map((x) => {
       let obj = {}
       obj = x
-      obj.status=null
+   
       props.bookings.map(y => {
        
         if (y.eventId === x.EventId) {
@@ -50,7 +52,8 @@ const bookservices = (props) => {
   const book = (item) => {
 
     firestore().collection('bookings').doc(item.EventId).set({
-      date: item.StartingTImeOFEvent,
+      date:item.DateOFEvent,
+      start: item.StartingTImeOFEvent,
       end: item.EndTimeOFEvent,
       owner: item.uid
     }).then(() => {
@@ -64,12 +67,16 @@ const bookservices = (props) => {
       })
 
     })
-    props.navigation.navigate('editEvents', {
-    item:item
-    })
+    props.navigation.navigate('editEvents',{
+      serviceId:serviceID,
+      EventId:item.EventId
+
+    }
+
+    )
   }
 
-  console.log('bookedService', props.bookedServices)
+  console.log('bookedService', props.bookings)
 
   return (
     <View>

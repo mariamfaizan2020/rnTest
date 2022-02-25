@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
 import React, { useEffect ,useState} from 'react';
 
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import FetchServices from '../components/fetchServices';
 
 
