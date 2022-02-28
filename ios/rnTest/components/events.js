@@ -43,8 +43,8 @@ const events= (props,{currentUser}) => {
            await  firestore().collection('bookings').doc(event.EventId)
              .collection('etts')
            
-             .onSnapshot((snapshot)=>{
-              console.log('snapshott111',snapshot)
+             .onSnapshot(async(snapshot)=>{
+              console.log('bookings fetching----->',snapshot)
               if(!snapshot.empty){
                
                 let x=snapshot.docs.map(doc=>{
@@ -60,11 +60,11 @@ const events= (props,{currentUser}) => {
                     Artistname:data.name
 
                   }
-                  console.log('arr',obj)
+                  console.log('arr booking fetch',obj)
                   arr.push(obj)
                
                 })
-             
+               
                 
               }
               dispatch({type:'USER_BOOKINGS_DATA',bookings:arr})
@@ -77,7 +77,7 @@ const events= (props,{currentUser}) => {
          
         })
       }
- {}
+
 
   console.log('bookings',bookservices)
    console.log('evenst',fetchedEvents)  

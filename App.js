@@ -29,6 +29,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import BrowseScreen from './ios/rnTest/screens/Browse';
 import bookservicesScreen from './ios/rnTest/screens/bookservices'
 import testingScreen from './ios/rnTest/screens/testing';
+import ModalScreen from './ios/rnTest/screens/Modal'
 const persistConfig={
   key:'root',
   storage:AsyncStorageLib,
@@ -57,7 +58,8 @@ const AppStack=createStackNavigator({
     EditServices:EditServicesScreen,
     Browse:BrowseScreen,
     bookservices:bookservicesScreen,
-    testing:testingScreen
+    testing:testingScreen,
+    Modal:ModalScreen
 },
 {
   initialRouteName:'tabs'

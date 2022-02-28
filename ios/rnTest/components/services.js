@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 
 const services = (props) => {
     const [fetchedServices,setFetchedServices]=useState()
+    const [serviceId,setServiceId]=useState()
     useEffect(()=>{
         fetchServices()
     },[])
@@ -16,11 +17,13 @@ const services = (props) => {
         console.log("snap",snapshot)
         if(snapshot.exists){
             setFetchedServices(snapshot.data().services)
+            setServiceId(snapshot.data().userUid)
         }
         
     })
     
  }
+ console.log('serviceId',serviceId)
  console.log('serv',fetchedServices)  
     return (
         <View>
@@ -53,6 +56,7 @@ const services = (props) => {
                               <TouchableOpacity  style={styles.Input} onPress={()=>props?.navigation.navigate('EditServices',{
                                   type:item.type,
                                   price:item.price,
+                                  serviceId:serviceId
                                   
                               })}>
                                   <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}

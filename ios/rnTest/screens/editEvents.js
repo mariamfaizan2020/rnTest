@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View ,TouchableOpacity,FlatList,Modal} from 'react-native';
+import { StyleSheet, Text, View ,TouchableOpacity,FlatList, Pressable,Modal} from 'react-native';
 import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
 import {connect} from 'react-redux'
+// import Modal from "react-native-modal";
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -22,7 +23,9 @@ const editEvents = (props) => {
     const serviceId=props.navigation.getParam('serviceId')
     const [id,setId]=useState() 
     const [modalVisible, setModalVisible] = useState(false);
+    const [selectedItem,setSelectedItem]=useState()
 
+  
    
   //  console.log('serviceIDD',props.navigation.getParam('serviceId'))
    console.log('id111',EventId)
@@ -30,15 +33,19 @@ const editEvents = (props) => {
  console.log('screenProps::',screenProps)
  useEffect(()=>{
    const array=[]
+
    props.events.map(doc=>{
      let obj={}
      obj.EventId=doc.EventId,
       obj.EventName=doc.nameOfEvent
-     
-     props.bookings.map(y=>{
-       obj.ArtistId=y.artistId,
-       obj.Status=y.status
-     })
+    console.log('AAA',obj.EventId) 
+    if(props.bookings.find(x=>x.eventId===obj.EventId)){
+      props.bookings.map(y=>{
+        obj.ArtistId=y.artistId,
+        obj.Status=y.status
+      })
+    }
+    
     
    
     array.push(obj)
@@ -46,31 +53,42 @@ const editEvents = (props) => {
   })
  },[])
 console.log('id',id)
-const ModalView=(item)=>{
-  return(
-    <View>
+
+const ModalView= (selectedItem) => {
+ 
+  return (
+    <View style={styles.centeredView}>
       <Modal
-       animationType="slide"
-       transparent={true}
-       visible={modalVisible}>
-   <View>
-    <TouchableOpacity onPress={()=>cancelService(item)}>
-      <Text>Delete</Text>
-    </TouchableOpacity>
-    </View>
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+       <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => cancelService(selectedItem)}
+            >
+              <Text style={styles.textStyle}>Delete</Text>
+            </Pressable>
+          </View>
+        </View>
       </Modal>
+   
     </View>
-  )
-}
-const cancelService=(item)=>{
-  
-      firestore().collection('bookings').doc(item.EventId).collection('etts')
-      .doc(item.ArtistId)
-      .delete()
-      .then(()=>{
-        firestore().collection('bookings').doc(item.EventId).delete()
-        console.log('deleted',item.EventId)
+  );
+};
+const cancelService=(selectedItem)=>{
+  console.log('ITEm',selectedItem)
+    firestore().collection('bookings').doc(selectedItem.EventId).delete()
+     .then(()=>{
+        firestore().collection('bookings').doc(selectedItem.EventId).collection('etts')
+        .doc(selectedItem.ArtistId)
+        .delete()
+       
       })
+      setModalVisible(!modalVisible)
 }
    
 const deleteEvent=()=>{
@@ -83,8 +101,11 @@ const deleteEvent=()=>{
      
   
 
+    
   return (
+
     <View style={{flex:1,alignItems:'center'}} >
+          {modalVisible?ModalView(selectedItem):null}
        <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,}}>
        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,marginTop:15}}>
             {name} - {TypeOFEvent}
@@ -121,22 +142,25 @@ const deleteEvent=()=>{
           
         </TouchableOpacity>
         <FlatList
+
         data={id}
         keyExtractor={(item,index)=>index.toString()}
         renderItem={({item})=>{
-          console.log('temp',item)
+          console.log('temp',item.Status)
           console.log('eventID',EventId)
           console.log('events',props.events)
          console.log('bookings',props.bookings.find(x=>x.eventId===item.EventId))
           return(
-           
+       
             <View>
-               {props.bookings.find(x=>x.eventId===item.EventId)? 
+             
+
+               {item.Status==='requested'? 
                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                 <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.EventName}|</Text>
-                <TouchableOpacity onPress={()=>ModalView(item)}>
+                 <TouchableOpacity onPress={()=>{setModalVisible(true);setSelectedItem(item)}}>
 
-                <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
+                <Text style={{color:'red',padding:1,margin:1}}>{item.Status}</Text>
                 </TouchableOpacity>
                 
                 </View> 
@@ -201,4 +225,47 @@ export default connect(mapStateToProps,null)(editEvents);
 
 // export default editEvents;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  centeredView: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 22
+},
+modalView: {
+  margin: 20,
+  backgroundColor: "white",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
+},
+button: {
+  borderRadius: 20,
+  padding: 10,
+  elevation: 2
+},
+buttonOpen: {
+  backgroundColor: "#F194FF",
+},
+buttonClose: {
+  backgroundColor: "#2196F3",
+},
+textStyle: {
+  color: "white",
+  fontWeight: "bold",
+  textAlign: "center"
+},
+modalText: {
+  marginBottom: 15,
+  textAlign: "center"
+}
+
+});

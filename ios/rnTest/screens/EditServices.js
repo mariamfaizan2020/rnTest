@@ -8,7 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 const EditServices = (props) => {
     const [price,setPrice]=useState(`$${props.navigation.state.params.price}` || '$')
-    console.log('propas',props.navigation.state.params)
+    console.log('propas',props.navigation.state.params.price)
     const item=props.navigation.state.params
 
     const onEdit=()=>{
@@ -23,6 +23,7 @@ const EditServices = (props) => {
     }
 
     const onDelete=()=>{
+      console.log('serviceIIDDD',props.navigation.state.params.serviceId)
       firestore().collection('services').doc(props.navigation.state.params.serviceId)
       .delete()
       .then(()=>{

@@ -12,8 +12,8 @@ const createServices = (props) => {
     const [serviceType,setServiceType]=useState()
     const [price,setPrice]=useState(null)
     const [type,setType]=useState(false)
-  console.log('ppp',props.navigation.state.params.service)
-const ppp=props.navigation.state.params.service
+  console.log('ppp',props.navigation.state.params)
+// const ppp=props.navigation.state.params.services
     const arr=[
         {Type:'DJ'},
         {Type:'SINGER'},
@@ -21,12 +21,7 @@ const ppp=props.navigation.state.params.service
         {Type:'RAPPER'},
         {Type:'MUSICIAN'},
     ]
-    // let obj = ppp.find(o => o.service === );
-
-    // console.log('obj',obj);
-   
-// const data=Object.values(ppp)
-//     console.log('data',data)
+ 
 
 
   const validation=()=>{
@@ -64,7 +59,7 @@ console.log('servicetype',serviceType)
           keyExtractor={(item,index)=>index.toString()}
           renderItem={({item})=>{
               console.log('item1111',item)
-            if(ppp.length>0){
+            if(ppp.length>=0){
                   const found=ppp.find(x=>x.type==item.Type)
               console.log("found",found)
               if(found){ 
@@ -92,7 +87,7 @@ console.log('servicetype',serviceType)
 
               
     }/>
-   {type===true?      <View>
+  {type===true?      <View>
                       <TextInput   style={{borderRadius:2,borderColor:'#969590',borderWidth:5,backgroundColor:'#969590',}}             
                         placeholder='price:$'
                         placeholderTextColor='white'
@@ -110,8 +105,8 @@ console.log('servicetype',serviceType)
                         </TouchableOpacity>
                         </View>
                         :null
-                         }
-   
+   }
+
       </View>
      
      
