@@ -14,7 +14,7 @@ const services = (props) => {
  const fetchServices=()=>{
     firestore().collection('services').doc(auth().currentUser.uid)
     .onSnapshot((snapshot)=>{
-        console.log("snap",snapshot)
+        console.log("snap11122",snapshot)
         if(snapshot.exists){
             setFetchedServices(snapshot.data().services)
             setServiceId(snapshot.data().userUid)
@@ -34,7 +34,8 @@ const services = (props) => {
                 <View>
                    <TouchableOpacity onPress={()=>props?.navigation.navigate('createServices',
                    {
-                       service:fetchedServices
+                       service:fetchedServices,
+                       userUid:serviceId
                    }
                   
                      
@@ -56,7 +57,9 @@ const services = (props) => {
                               <TouchableOpacity  style={styles.Input} onPress={()=>props?.navigation.navigate('EditServices',{
                                   type:item.type,
                                   price:item.price,
-                                  serviceId:serviceId
+                                  serviceId:serviceId,
+                                  fetchedServices:fetchedServices
+
                                   
                               })}>
                                   <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}

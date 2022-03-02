@@ -12,8 +12,8 @@ const createServices = (props) => {
     const [serviceType,setServiceType]=useState()
     const [price,setPrice]=useState(null)
     const [type,setType]=useState(false)
-  console.log('ppp',props.navigation.state.params)
-// const ppp=props.navigation.state.params.services
+  console.log('ppp',props)
+const ppp=props.navigation.state.params
     const arr=[
         {Type:'DJ'},
         {Type:'SINGER'},
@@ -59,30 +59,37 @@ console.log('servicetype',serviceType)
           keyExtractor={(item,index)=>index.toString()}
           renderItem={({item})=>{
               console.log('item1111',item)
-            if(ppp.length>=0){
-                  const found=ppp.find(x=>x.type==item.Type)
-              console.log("found",found)
-              if(found){ 
+              
+            // if(ppp.service.length>0){
+            //       const found=ppp.service.find(x=>x.type==item.Type)
+            //   console.log("found",found)
+            //   if(found){ 
                
-                return null
-                }else{
+            //     return null
+            //     }else{
                     return(
                 
                         <View style={{  }}>
-                         
+                         {ppp.service!==undefined?ppp.service.find(x=>x.type==item.Type)? null:
+                       
+            
+                           
                            <TouchableOpacity style={styles.Button} onPress={()=>{setServiceType(item.Type); setType(!type) }}>
                              <Text style={{}}>{item.Type}</Text>
                             
                               </TouchableOpacity>
-                     
-        
+               
+                     : <TouchableOpacity style={styles.Button} onPress={()=>{setServiceType(item.Type); setType(!type) }}>
+                     <Text style={{}}>{item.Type}</Text>
+                    
+                      </TouchableOpacity>}
                             </View>
                     )
-                }
+                // }
 
 
         }
-           }  
+          //  }  
             
 
               
@@ -109,7 +116,7 @@ console.log('servicetype',serviceType)
 
       </View>
      
-     
+ 
  
   );
 

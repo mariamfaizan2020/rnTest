@@ -3,9 +3,10 @@ import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
 import {connect} from 'react-redux'
-// import Modal from "react-native-modal";
+import auth from '@react-native-firebase/auth';
 
-import firestore from '@react-native-firebase/firestore';
+import firestore, { firebase } from '@react-native-firebase/firestore';
+import { createIconSetFromFontello } from 'react-native-vector-icons';
 
 const editEvents = (props) => {
 
@@ -25,35 +26,100 @@ const editEvents = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem,setSelectedItem]=useState()
 
-  
-   
-  //  console.log('serviceIDD',props.navigation.getParam('serviceId'))
-   console.log('id111',EventId)
+    const [fetchedEvents,setFetchedEvents]=useState()
+    const [bookservices,setBookservices]=useState()
 
- console.log('screenProps::',screenProps)
+   
+
+   
+
+
+
+ 
  useEffect(()=>{
-   const array=[]
+  FetchEvents();
+//    const array=[]
 
-   props.events.map(doc=>{
-     let obj={}
-     obj.EventId=doc.EventId,
-      obj.EventName=doc.nameOfEvent
-    console.log('AAA',obj.EventId) 
-    if(props.bookings.find(x=>x.eventId===obj.EventId)){
-      props.bookings.map(y=>{
-        obj.ArtistId=y.artistId,
-        obj.Status=y.status
-      })
-    }
-    
+//    props.events.map(doc=>{
+//      console.log('doc',doc)
+//      let obj={}
+//      obj.EventId=doc.EventId,
+//       obj.EventName=doc.nameOfEvent
+   
+//    let found=props.bookings.find(x=>x.eventId===obj.EventId)
+//     if(found){
+//       console.log('found',found)
+//       props.bookings.map(y=>{
+//         obj.ArtistId=y.artistId,
+//         obj.Status=y.status
+//       })
+//     }
+//     console.log('AAA',obj) 
     
    
-    array.push(obj)
-    setId(array)
-  })
+//     array.push(obj)
+//     setId(array)
+//   })
  },[])
-console.log('id',id)
 
+
+const FetchEvents=async()=>{
+  console.log('user',auth().currentUser?.uid)
+     firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
+    .onSnapshot((snapshot)=>{
+      let array=[]
+      let arr=[]
+     
+      console.log('snapshot123',snapshot)
+       const data=snapshot.docs.map(async(doc)=>{
+         const event=doc.data()
+          console.log('data',event.EventId)
+      
+  
+           array.push(event)
+          
+
+
+          firestore().collection('bookings').doc(event.EventId)
+           .collection('etts')
+         
+           .onSnapshot((snapshot)=>{
+            console.log('bookings fetching----->',snapshot)
+            if(!snapshot.empty){
+             
+              let x=snapshot.docs.map(doc=>{
+                const data=doc.data()
+                console.log('data',data)
+            
+                let obj={
+                  artistId:data.docId,
+                  eventId:event.EventId,
+                  service:data.type,
+                  price:data.price,
+                  status:data.status,
+                  Artistname:data.name
+
+                }
+                console.log('arr booking fetch',obj)
+                arr.push(obj)
+             
+              })
+             
+              
+            }
+           
+           })
+          
+         })
+         setBookservices(arr)
+       
+         setFetchedEvents(array)
+        
+      })
+     
+    }
+    console.log('mmmm',bookservices)
+    console.log('eeee',fetchedEvents)
 const ModalView= (selectedItem) => {
  
   return (
@@ -94,6 +160,7 @@ const cancelService=(selectedItem)=>{
 const deleteEvent=()=>{
         firestore().collection('Events').doc(EventId)
         .delete()
+        
         .then(()=>{
             console.log('deleted')
         })
@@ -143,18 +210,16 @@ const deleteEvent=()=>{
         </TouchableOpacity>
         <FlatList
 
-        data={id}
+        data={bookservices}
         keyExtractor={(item,index)=>index.toString()}
         renderItem={({item})=>{
-          console.log('temp',item.Status)
-          console.log('eventID',EventId)
-          console.log('events',props.events)
-         console.log('bookings',props.bookings.find(x=>x.eventId===item.EventId))
+          console.log('item',item)
+      
           return(
        
             <View>
              
-
+              
                {item.Status==='requested'? 
                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                 <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.EventName}|</Text>

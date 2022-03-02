@@ -4,33 +4,72 @@ import React,{useState} from 'react';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import services from '../components/services';
 
 
 const EditServices = (props) => {
-    const [price,setPrice]=useState(`$${props.navigation.state.params.price}` || '$')
-    console.log('propas',props.navigation.state.params.price)
+    const [price,setPrice]=useState(`${props.navigation.state.params.price}` || '')
+    // const [arr,setArr]=useState()
+    console.log('propas',props.navigation.state.params)
     const item=props.navigation.state.params
+    const type=props.navigation.state.params.type
+    const fetchedServices=props.navigation.state.params.fetchedServices
 
     const onEdit=()=>{
-          firestore().collection('services').doc(props.navigation.state.params.serviceId)
+      console.log("fetced")
+
+      const newArr = fetchedServices.map(obj => {
+        if (obj.type === type) {
+          return {...obj, price: price};
+        }
+      
+        return obj;
+      });
+
+      console.log("newww--------->",newArr)
+          firestore().collection('services').doc(auth().currentUser.uid)
           .update({
-            price:price
-          }).then(()=>{
-            console.log('userUpdated')
-            props?.navigation.navigate('tabs')
-          })
-          
+            services:newArr})
+        
+
+         
     }
 
     const onDelete=()=>{
-      console.log('serviceIIDDD',props.navigation.state.params.serviceId)
-      firestore().collection('services').doc(props.navigation.state.params.serviceId)
-      .delete()
-      .then(()=>{
-        console.log('Userdelete')
-        props?.navigation.navigate('tabs')
-      })
-    }
+
+      let obj=[...fetchedServices]
+      console.log('obj',obj)
+      
+      
+      let filter;
+    //  let found=obj.find(x=>x.type===type)
+    //  if(found){
+    //    console.log('found',found.type)
+    
+        filter=obj.filter(found=>found.type!==type)
+       console.log('filter',filter)
+      //  setArr(filter)
+       firestore().collection('services').doc(auth().currentUser.uid)
+       .update({
+         services:filter
+       })
+       .then(()=>{
+         console.log('Userdelete')
+         props?.navigation.navigate('tabs')
+       })
+       
+    //  }
+     }
+
+
+
+
+      
+      
+      
+       
+  
+    
   return (
     <View 
     style={{margin:10,padding:10,  justifyContent:'center',
@@ -44,23 +83,40 @@ const EditServices = (props) => {
       editable={false}
       />
       <View style={{flexDirection:'row'}}>
+     <View style={{flexDirection:'row', borderWidth:3,
+          borderRadius:2,
+          borderColor:'#969590',
+          backgroundColor:'#969590',
+          width:'80%',
+          margin:10}}>
+     <TextInput
+      style={
+        {fontSize:16,
+          color:'white',
+          fontWeight:'bold',
+         
+        }}
+      
+       value='$'
+       editable={false}
+       >
+         </TextInput>
      
       <TextInput
       style={
         {fontSize:16,
           color:'white',
           fontWeight:'bold',
-          borderWidth:3,
-          borderRadius:2,
-          borderColor:'#969590',
-          backgroundColor:'#969590',
-          width:'80%',
-          margin:10
+          
         }}
+        placeholder='$'
        value={price}
        onChangeText={(text)=>setPrice(text)}>
+      
 
            </TextInput>
+     </View>
+      
           
       </View>
      
