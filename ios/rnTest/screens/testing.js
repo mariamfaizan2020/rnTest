@@ -5,7 +5,7 @@ import Icon from '../icons/icon'
 
 
 const testing = () => {
- const [select,setSelect]=useState(false)
+
  const [arr,setArr]=useState([])
 
 

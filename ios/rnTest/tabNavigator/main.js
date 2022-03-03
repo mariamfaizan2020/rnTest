@@ -26,12 +26,12 @@ const main = ({currentUser, navigation, events}) => {
         setServices(false)
     }
     const setServicesF=()=>{
-        setEvent(false)
+        setEvent(!event)
         setVenue(false)
         setServices(!services)
     }
     const setVenueF=()=>{
-        setEvent(false)
+        setEvent(!event)
         setVenue(!venue)
         setServices(false)
     }

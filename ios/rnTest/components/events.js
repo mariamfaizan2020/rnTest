@@ -24,11 +24,13 @@ const events= (props,{currentUser}) => {
       },[])
  
       const FetchEvents=async()=>{
+        let array=[]
+      
+       
     console.log('user',auth().currentUser?.uid)
        await firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
       .onSnapshot(async(snapshot)=>{
-        let array=[]
-        let arr=[]
+       
        
         console.log('snapshot123',snapshot)
          const data=snapshot.docs.map(async(doc)=>{
@@ -39,7 +41,7 @@ const events= (props,{currentUser}) => {
              array.push(event)
              dispatch({type:'USER_EVENTS_DATA',events:array})
 
-
+             let arr=[]
            await  firestore().collection('bookings').doc(event.EventId)
              .collection('etts')
            
@@ -49,9 +51,10 @@ const events= (props,{currentUser}) => {
                
                 let x=snapshot.docs.map(doc=>{
                   const data=doc.data()
-                  console.log('data',data)
-                  // data.push(event.EventId)
+                  console.log('data----',data)
+              
                   let obj={
+                    EventName:event.nameOfEvent,
                     artistId:data.docId,
                     eventId:event.EventId,
                     service:data.type,
@@ -62,17 +65,20 @@ const events= (props,{currentUser}) => {
                   }
                   console.log('arr booking fetch',obj)
                   arr.push(obj)
-               
+                  console.log("ar------------------>",arr)
+                  dispatch({type:'USER_BOOKINGS_DATA',bookings:arr})
                 })
-               
+                console.log('abcdefgh',arr)
+                setBookservices(arr)
                 
               }
-              dispatch({type:'USER_BOOKINGS_DATA',bookings:arr})
+            
              })
             
            })
-           setBookservices(arr)
+       
          
+         console.log('xxxxx----->',array)
            setFetchedEvents(array)
          
         })
@@ -134,7 +140,8 @@ const events= (props,{currentUser}) => {
                            TypeOFEvent:item.TypeOFEvent,
                            IsPublic:item.IsPublic.toString(),
                            uid:item.uid,
-                           EventId:item.EventId
+                           EventId:item.EventId,
+                           
 
                         })}>
                         <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center'}}>

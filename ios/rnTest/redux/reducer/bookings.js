@@ -1,5 +1,6 @@
 const initialState={
-    bookings:[]
+    bookings:[],
+
  }
  export const bookings=(state=initialState,action)=>{
      console.log("actions from booking reducer",action)
@@ -10,6 +11,7 @@ const initialState={
         ...state,
          bookings:action.bookings
          } 
+       
          default :
          return state
      }}     

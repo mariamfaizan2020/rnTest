@@ -24,21 +24,27 @@ const bookservices = (props) => {
     const array = []
 
     props.events.map((x) => {
+      console.log('x---',x)
       let obj = {}
       obj = x
    
       props.bookings.map(y => {
-       
+       console.log('y===',y)
+       console.log('hello')
+      
         if (y.eventId === x.EventId) {
-        console.log("booking found",y.status)
-          obj=x
-          obj.status = y.status
-
-         
-        }
+          console.log("booking found",y.status)
+            obj=x
+            obj.status = y.status
+  
+           
+        
+       }
+       
       
 
       })
+      console.log('arr->',array)
       array.push(obj)
 
 
@@ -48,7 +54,7 @@ const bookservices = (props) => {
 
 
   }, [])
-  console.log('array', events)
+  console.log('array->', events)
   const book = (item) => {
 
     firestore().collection('bookings').doc(item.EventId).set({
@@ -103,7 +109,7 @@ const bookservices = (props) => {
             data={events}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => {
-              console.log('itemmmm', item.status)
+              console.log('itemmmm', item)
               // console.log('id',item.EventId)
               return (
 
@@ -143,13 +149,14 @@ const bookservices = (props) => {
 };
 const mapStateToProps = (store) => {
 
-  console.log("store", store.bookingState.bookings)
+  console.log("store-->", store)
   console.log("storeEvents", store.eventState.events)
 
   return {
     currentUser: store.userState.currentUser,
     events: store.eventState.events,
-    bookings: store.bookingState.bookings
+    bookings: store.bookingState.bookings,
+ 
 
   }
 }

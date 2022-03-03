@@ -19,12 +19,12 @@ const fetchServices = (props)=>{
           console.log('snapshot',snapshot)
           if(!snapshot.empty){
             let arr=[]
-            let services=snapshot.docs.map(doc=>{
+           snapshot.docs.map(doc=>{
               let data=doc.data()
               console.log('data',data.services)
               console.log('uid',data.userUid)
             
-              let combineServices=data.services.map(Allservices=>{
+             data.services.map(Allservices=>{
                 let obj={}
                 console.log('Allservices',Allservices.type)
                 obj.serviceType=Allservices.type,
