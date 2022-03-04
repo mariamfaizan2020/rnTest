@@ -22,18 +22,19 @@ const bookservices = (props) => {
 
   useEffect(() => {
     const array = []
+    let obj = {}
 
     props.events.map((x) => {
       console.log('x---',x)
-      let obj = {}
+     
       obj = x
    
-      props.bookings.map(y => {
-       console.log('y===',y)
+     props.bookings.map(y => {
+       console.log('y===',y.eventId)
        console.log('hello')
       
         if (y.eventId === x.EventId) {
-          console.log("booking found",y.status)
+          console.log("booking found",y)
             obj=x
             obj.status = y.status
   
@@ -46,7 +47,7 @@ const bookservices = (props) => {
       })
       console.log('arr->',array)
       array.push(obj)
-
+     
 
       setEvents(array)
     })
@@ -55,6 +56,7 @@ const bookservices = (props) => {
 
   }, [])
   console.log('array->', events)
+  console.log('ppp---',props.bookings)
   const book = (item) => {
 
     firestore().collection('bookings').doc(item.EventId).set({
@@ -117,7 +119,7 @@ const bookservices = (props) => {
 
                   <Text style={{ fontSize: 16 }}>
                     {moment(item.DateOFEvent).format('MMM Do')} -{item.nameOfEvent} |</Text>
-                  {item.status==='requested'?<Text>Requested</Text>:  
+                  {item.status?<Text>Requested</Text>:  
                   <TouchableOpacity onPress={() => book(item)}>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={{ fontSize: 16 }}>Book</Text>

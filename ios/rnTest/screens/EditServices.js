@@ -42,10 +42,7 @@ const EditServices = (props) => {
       
       
       let filter;
-    //  let found=obj.find(x=>x.type===type)
-    //  if(found){
-    //    console.log('found',found.type)
-    
+   
         filter=obj.filter(found=>found.type!==type)
        console.log('filter',filter)
       //  setArr(filter)

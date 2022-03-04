@@ -8,10 +8,12 @@ import { bookings } from './bookings'
 
 
 
+
 const Reducers = combineReducers({
     userState:user,
     eventState:events,
-    bookingState:bookings
+    bookingState:bookings,
+
     
   
 

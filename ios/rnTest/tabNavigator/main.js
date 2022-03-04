@@ -9,7 +9,7 @@ import {connect,useDispatch} from 'react-redux';
 
 import firestore from '@react-native-firebase/firestore';
 
-const main = ({currentUser, navigation, events}) => {
+const main = ({currentUser, navigation,bookings}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
@@ -17,7 +17,8 @@ const main = ({currentUser, navigation, events}) => {
     const dispatch=useDispatch()
    
   
-    
+   
+  
  
 
     const setEventF=()=>{
@@ -96,11 +97,12 @@ const main = ({currentUser, navigation, events}) => {
 }
 const mapStateToProps=(store)=>{
     
-
+console.log('bks---',store.bookingState.bookings)
    
 
     return {
         currentUser:store.userState.currentUser,
+        bookings:store.bookingState.bookings
      
     }
 }

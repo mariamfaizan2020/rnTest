@@ -11,7 +11,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons';
 const editEvents = (props) => {
 
   const dispatch=useDispatch()
-    console.log('props::',props)
+    console.log('props::',props.bookings)
   
  
     const screenProps=props.navigation.state.params
@@ -35,9 +35,10 @@ const editEvents = (props) => {
 
 
 
- 
+ console.log('nnn----',EventId)
  useEffect(()=>{
-  FetchEvents();
+   getBksOfEve()
+  // FetchEvents();
 //   const array=[]
 
 //   props.events.map(doc=>{
@@ -64,78 +65,15 @@ const editEvents = (props) => {
 //    setId(array)
 //  })
   
- },[])
+ },[props.bookings])
+const getBksOfEve=()=>{
+  let temp=[...props.bookings]
+   temp=temp.filter(x=>x.eventId==EventId)
+  setBookservices(temp)
+
+}
 
 
-const FetchEvents=()=>{
-
-  let array=[]
-  let arr=[]
-  let abc=[]
-  console.log('user',auth().currentUser?.uid)
-     firestore().collection('Events').where('uid','==',auth().currentUser?.uid)
-    .onSnapshot((snapshot)=>{
-
-     
-      console.log('snapshot123',snapshot)
-       const data=snapshot.docs.map((doc)=>{
-         const event=doc.data()
-          console.log('data',event)
-          console.log('name',event.nameOfEvent)
-      
-           console.log('event--->',event)
-           array.push(event)
-          
-          
-
-          firestore().collection('bookings').doc(event.EventId)
-           .collection('etts')
-         
-           .onSnapshot((snapshot)=>{
-            console.log('bookings fetching----->',snapshot)
-            if(!snapshot.empty){
-             
-              let x=snapshot.docs.map(doc=>{
-                const data=doc.data()
-                console.log('data',data)
-            
-                let obj={
-                  EventName:event.nameOfEvent,
-                  artistId:data.docId,
-                  eventId:event.EventId,
-                  service:data.type,
-                  price:data.price,
-                  status:data.status,
-                  Artistname:data.name
-
-                }
-               
-                console.log('arr booking fetch',obj)
-                abc.push(obj.eventId)
-                arr.push(obj)
-                console.log('abc-->',obj.eventId)
-                console.log('arr-->',arr)
-                console.log('vvv--->',obj)
-               
-                console.log('aaa',abc)
-              setEventId(abc)
-              }
-              )
-             
-              console.log('eventId-->',eventId)
-              setBookservices(arr)
-            }
-           
-           })
-          
-         })
-   
-       
-         setFetchedEvents(array)
-        
-      })
-     
-    }
 
    
 const ModalView= (selectedItem) => {
@@ -165,17 +103,17 @@ const ModalView= (selectedItem) => {
 };
 const cancelService=(selectedItem)=>{
   console.log('ITEm',selectedItem)
-    firestore().collection('bookings').doc(selectedItem.eventId).delete()
-     .then(()=>{
+    // firestore().collection('bookings').doc(selectedItem.eventId).delete()
+    //  .then(()=>{
         firestore().collection('bookings').doc(selectedItem.eventId).collection('etts')
         .doc(selectedItem.artistId)
         .delete()
-        const found=bookservices.filter(x=>x.eventId!==selectedItem.eventId)
-       console.log( 'newArr--->',found)
-       dispatch({type:'USER_BOOKINGS_DATA',bookings:found})
+      //   const found=props.bookings.filter(x=>x.eventId!==selectedItem.eventId)
+      //  console.log( 'newArr--->',found)
+      //  dispatch({type:'USER_BOOKINGS_DATA',bookings:found})
        
 
-      })
+      // })
       setModalVisible(!modalVisible)
 }
    
@@ -218,7 +156,9 @@ const deleteEvent=()=>{
          <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281'}}>Entertainment:</Text>
             
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate('Browse')}
+        onPress={()=>props.navigation.navigate('Browse',{
+    
+        })}
         > 
            
             <View style={{flexDirection:'row',margin:10}}>
@@ -236,7 +176,7 @@ const deleteEvent=()=>{
       
       <FlatList
 
-      data={props.bookings}
+      data={bookservices}
       keyExtractor={(item,index)=>index.toString()}
       renderItem={({item})=>{
         
@@ -250,7 +190,7 @@ const deleteEvent=()=>{
             
          
              <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-              <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.EventName}|</Text>
+              <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.service}|</Text>
                <TouchableOpacity onPress={()=>{setModalVisible(true);setSelectedItem(item)}}>
 
               <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
