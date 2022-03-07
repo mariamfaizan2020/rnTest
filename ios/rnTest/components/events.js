@@ -15,6 +15,8 @@ const events = (props, { currentUser }) => {
 
   const [fetchedEvents, setFetchedEvents] = useState()
   const [bookservices, setBookservices] = useState()
+  const [pastEvents,setPastEvents]=useState()
+  const [upcomingEvents,setUpcomingEvents]=useState()
 
 
 
@@ -25,26 +27,49 @@ const events = (props, { currentUser }) => {
 
   const FetchEvents = async () => {
     let array = []
+    let pE=[]
+    let upE=[]
     await firestore().collection('Events').where('uid', '==', auth().currentUser?.uid)
    .onSnapshot((snapshot) => {
-      console.log('my eve', snapshot.docs)
+      console.log('my eve', snapshot)
+      if(!snapshot.empty){
+
+    
      
         const data = snapshot.docs.map(async (doc) => {
           const event = doc.data()
 
-          console.log('eID--', event.EventId)
-
+          console.log('eID--', event.DateOFEvent.toDate()<new Date())
+        
+            
+              console.log('doc-->',doc)
+             if(event.DateOFEvent.toDate()<new Date()===true){
+            
+             
+               console.log('events--',event)
+               pE.push(event)  
+               setPastEvents(pE)
+              
+              
+               console.log('pE---->',pE)
+             
+             }else {
+               upE.push(event)
+               setUpcomingEvents(upE)
+             }
+           
+           
+       
           array.push(event)
           dispatch({ type: 'USER_EVENTS_DATA', events: array })
 
-
+         
 
       
 
         }
         )
-
-
+      }
         console.log('xxxxx----->', array)
         setFetchedEvents(array)
 
@@ -101,8 +126,11 @@ const events = (props, { currentUser }) => {
             
             console.log("ar------------------>", arr)
             dispatch({ type: 'USER_BOOKINGS_DATA', bookings: arr })
+           
+
           })
-  
+      
+         
   
           // })
   
@@ -114,15 +142,19 @@ const events = (props, { currentUser }) => {
     })
   
   }
-
+  
+  console.log('pastEvents-->',pastEvents)
+  console.log('upcomingEvents',upcomingEvents)
   console.log('bookings', bookservices)
   console.log('evenst', fetchedEvents)
 
 
 
   return (
+    
     <View>
       <View style={{}}>
+  
 
       </View>
 
@@ -146,20 +178,20 @@ const events = (props, { currentUser }) => {
                 justifyContent: 'center',
                 alignSelf: 'center',
                 padding: 10,
-                marginTop: 10
+                marginTop: 5
               }}>
-            Events</Text>
+            Past Events</Text>
           <FlatList style={{ alignSelf: 'center', }}
 
             horizontal={false}
-            data={fetchedEvents}
+            data={pastEvents}
             keyExtractor={(item, index) => index.toString()}
 
             renderItem={({ item }) => {
 
-              // console.log('',item)
+              console.log('',item)
 
-              // const date=item.DateOFEvent.toDate()
+              const date=item.DateOFEvent.toDate()
               return (
 
                 <View>
@@ -177,7 +209,7 @@ const events = (props, { currentUser }) => {
 
                   })}>
                     <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#a16281', justifyContent: 'center', alignSelf: 'center' }}>
-                      {moment(item.DateOFEvent.toDate()).format("YYYY-MM-DD")}
+                      {moment(date).format("YYYY-MM-DD")}
                       -{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
                   </TouchableOpacity>
                 </View>
@@ -186,6 +218,55 @@ const events = (props, { currentUser }) => {
 
             }}
           />
+           <Text
+            style={
+              {
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#a16281',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                padding: 10,
+                marginTop: 5
+              }}>
+           upcoming Events</Text>
+           <FlatList style={{ alignSelf: 'center', }}
+
+horizontal={false}
+data={upcomingEvents}
+keyExtractor={(item, index) => index.toString()}
+
+renderItem={({ item }) => {
+
+  console.log('',item)
+
+  const date=item.DateOFEvent.toDate()
+  return (
+
+    <View>
+
+      <TouchableOpacity style={styles.Input} onPress={() => props?.navigation.navigate('editEvents', {
+        nameOfEvent: item.nameOfEvent,
+        DateOFEvent: item.DateOFEvent.toDate(),
+        StartingTImeOFEvent: item.StartingTImeOFEvent.toDate(),
+        EndTimeOFEvent: item.EndTimeOFEvent.toDate(),
+        TypeOFEvent: item.TypeOFEvent,
+        IsPublic: item.IsPublic.toString(),
+        uid: item.uid,
+        EventId: item.EventId,
+
+
+      })}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#a16281', justifyContent: 'center', alignSelf: 'center' }}>
+          {moment(date).format("YYYY-MM-DD")}
+          -{item.nameOfEvent}-{item.TypeOFEvent}  </Text>
+      </TouchableOpacity>
+    </View>
+
+  )
+
+}}
+/>
         </View>
 
 

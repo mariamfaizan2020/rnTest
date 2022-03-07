@@ -6,7 +6,16 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const fetchServices = (props)=>{
-      console.log("helo",props)
+      console.log("helo",props.props.navigation.state.params.DateOFEvent)
+  const scProps=  props.props.navigation.state.params  
+  const nameOfEvent=scProps.nameOfEvent
+  const DateOFEvent=scProps.DateOFEvent
+  const StartingTImeOFEvent=scProps.StartingTImeOFEvent
+  const EndTimeOFEvent=scProps.EndTimeOFEvent
+  const TypeOFEvent=scProps.TypeOFEvent
+  const EventId=scProps.EventId
+  const eventOwner=scProps.eventOwner
+
  const [services,setServices]=useState()
 
    useEffect(()=>{
@@ -66,12 +75,19 @@ const fetchServices = (props)=>{
               console.log('item0000',item)
               return(
                 <View style={{flex:1,}} >
-               <TouchableOpacity onPress={()=>props?.navigation.navigate('bookservices',{
+               <TouchableOpacity onPress={()=>props?.props?.navigation.navigate('bookservices',{
                   serviceName:item.serviceType,
                   userName:item.name,
                   priceOfService:item.price,
                   profileImage:item.image,
-                  serviceId:item.id
+                  serviceId:item.id,
+                  nameOfEvent:nameOfEvent,
+                  EventId:EventId,
+                  DateOFEvent:DateOFEvent,
+                  StartingTImeOFEvent:StartingTImeOFEvent,
+                  EndTimeOFEvent:EndTimeOFEvent,
+                  TypeOFEvent:TypeOFEvent,
+                  eventOwner:eventOwner
                })}
                style={{borderBottomWidth:2,padding:5,margin:5}}>
                  

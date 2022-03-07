@@ -1,19 +1,19 @@
-import { StyleSheet, Text, View ,TouchableOpacity,FlatList, Pressable,Modal} from 'react-native';
+import { StyleSheet, Text, View ,TouchableOpacity,FlatList, Pressable,Modal,Alert} from 'react-native';
 import React,{useEffect,useState} from 'react';
 import moment from 'moment';
 import Icon from '../icons/icon'
 import {connect} from 'react-redux'
 import auth from '@react-native-firebase/auth';
 import { useDispatch } from 'react-redux';
-import firestore, { firebase } from '@react-native-firebase/firestore';
-import { createIconSetFromFontello } from 'react-native-vector-icons';
+import firestore from '@react-native-firebase/firestore';
+
 
 const editEvents = (props) => {
 
   const dispatch=useDispatch()
-    console.log('props::',props.bookings)
+    console.log('props::',props.navigation.state.params.uid)
   
- 
+    
     const screenProps=props.navigation.state.params
     const name=screenProps.nameOfEvent
     const date=screenProps.DateOFEvent
@@ -21,6 +21,7 @@ const editEvents = (props) => {
     const endtime=screenProps.EndTimeOFEvent
     const TypeOFEvent=screenProps.TypeOFEvent
      const EventId=screenProps.EventId
+     const eventOwner=screenProps.uid
     const serviceId=props.navigation.getParam('serviceId')
     const [id,setId]=useState() 
     const [modalVisible, setModalVisible] = useState(false);
@@ -28,14 +29,12 @@ const editEvents = (props) => {
     const [eventId,setEventId]=useState()
     const [fetchedEvents,setFetchedEvents]=useState()
     const [bookservices,setBookservices]=useState(null)
-
+   
    
 
-   
 
 
-
- console.log('nnn----',EventId)
+ console.log('nnn----',date<new Date())
  useEffect(()=>{
    getBksOfEve()
   // FetchEvents();
@@ -101,19 +100,26 @@ const ModalView= (selectedItem) => {
     </View>
   );
 };
+const past=()=>{
+  
+      Alert.alert('You Cannot Select Entertainment for your past Events')
+  
+  
+ 
+   
+
+}
 const cancelService=(selectedItem)=>{
   console.log('ITEm',selectedItem)
-    // firestore().collection('bookings').doc(selectedItem.eventId).delete()
-    //  .then(()=>{
+    
         firestore().collection('bookings').doc(selectedItem.eventId).collection('etts')
         .doc(selectedItem.artistId)
         .delete()
-      //   const found=props.bookings.filter(x=>x.eventId!==selectedItem.eventId)
-      //  console.log( 'newArr--->',found)
-      //  dispatch({type:'USER_BOOKINGS_DATA',bookings:found})
-       
-
-      // })
+        .then(()=>{
+          firestore().collection('bookings').doc(selectedItem.eventId)
+          .delete()
+        })
+      
       setModalVisible(!modalVisible)
 }
    
@@ -154,25 +160,44 @@ const deleteEvent=()=>{
 
          <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,padding:5,margin:15,justifyContent:'center',alignItems:'center'}}>
          <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281'}}>Entertainment:</Text>
-            
+        {date<new Date()?  
         <TouchableOpacity 
-        onPress={()=>props.navigation.navigate('Browse',{
-    
-        })}
+        onPress={()=>past()}
         > 
-           
-            <View style={{flexDirection:'row',margin:10}}>
+         <View style={{flexDirection:'row',margin:10}}>
          
             <Text>Find Entertainment</Text>
-           
-        
-          
             <Icon.AntDesign name='search1' size={20}/>
-           
-            </View>
-          
+        </View>
         </TouchableOpacity>
+   :       <TouchableOpacity 
+            onPress={()=>props.navigation.navigate('Browse',{
+              nameOfEvent:name,
+              DateOFEvent: date,
+              StartingTImeOFEvent:  starttime,
+              EndTimeOFEvent:  endtime,
+              TypeOFEvent:  TypeOFEvent,
+              EventId:   EventId,
+              eventOwner:eventOwner
+      
+   })}
+   > 
+      
+       <View style={{flexDirection:'row',margin:10}}>
+    
+       <Text>Find Entertainment</Text>
+      
    
+     
+       <Icon.AntDesign name='search1' size={20}/>
+      
+       </View>
+     
+   </TouchableOpacity>
+
+        
+        }    
+        
       
       <FlatList
 

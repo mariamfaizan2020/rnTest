@@ -4,10 +4,11 @@ import React, { useEffect ,useState} from 'react';
 import FetchServices from '../components/fetchServices';
 
 
-const Browse = ({navigation}) => {
-
+const Browse = (props) => {
+ 
+  console.log('ppp',props)
 const [Serv,setServ]=useState(false)
-   
+ 
   return (
     <View style={{flex:1}}>
       <View style={{flexDirection:"row",}}>
@@ -31,7 +32,9 @@ const [Serv,setServ]=useState(false)
         <View style={{flex:1}}>
         <FetchServices
        services={Serv}
-       navigation={navigation}
+      //  navigation={navigation}
+       props={props}
+
   
        />    
         </View>
