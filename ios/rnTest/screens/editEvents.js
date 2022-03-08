@@ -78,17 +78,23 @@ console.log('serv--->',serviceId)
 // }
 
 const fetchUserbookings=()=>{
-  props.events.map(doc=>{
-    let arr=[]
-        console.log('doc--->',doc)
-        let object={}
-      object.EventName=doc.nameOfEvent,
-      object.EventId=doc.EventId
-     
+  // props.events.map(doc=>{
+  //   let arr=[]
+  //       console.log('doc--->',doc)
+  //       let object={}
+  //     object.EventName=doc.nameOfEvent,
+  //     object.EventId=doc.EventId
+   
+  let object={}
+  let arr=[] 
   firestore().collection('bookings').doc(EventId).collection('etts').doc(auth().currentUser.uid)
   .get()
   .then((snapshot)=>{
+  
+  
     if(snapshot.exists){
+    
+     
       console.log('snapshot--->',snapshot)
       let booking=snapshot.data()
       object.artistId=booking.docId,
@@ -97,19 +103,32 @@ const fetchUserbookings=()=>{
       object.serviceprice=booking.price,
       object.artistName=booking.name
       console.log('data--->',booking)
-      arr.push(object)
+      
       console.log('arr----->',arr)
    
     }
+    firestore().collection('Events').doc(EventId).get()
+    .then((snapshot)=>{
+      console.log('sss--->',snapshot)
+      if (snapshot.exists){
+        let event=snapshot.data()
+        console.log('ddd---',event.EventId)
+        object.eventId=event.EventId,
+        object.EventName=event.nameOfEvent
+        console.log('obj--',object)
+        arr.push(object)
+      }
+
+    })
     setBooking(arr)
   })
-  })
+  // })
  
   
   // console.log('bookings-->',booking)
 }
 
-console.log('bookings-->',booking)
+
 const ModalView= (selectedItem) => {
  
   return (
@@ -145,7 +164,7 @@ const past=()=>{
 
 }
 const cancelService=(selectedItem)=>{
-  console.log('ITEm',selectedItem)
+  console.log('ITEm',selectedItem.EventId)
     
         firestore().collection('bookings').doc(selectedItem.EventId).collection('etts')
         .doc(selectedItem.artistId)
@@ -177,8 +196,7 @@ const deleteEvent=()=>{
       }
      
   
-
-
+      console.log('bookings-->',booking)
       console.log('eeee',fetchedEvents)
   return (
 
@@ -242,7 +260,7 @@ const deleteEvent=()=>{
         
         }    
         
-      
+ 
       <FlatList
 
       data={booking}
