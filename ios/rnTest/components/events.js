@@ -90,7 +90,7 @@ const events = (props, { currentUser }) => {
       
       console.log("efce--->",event)
 
-       firestore().collection('bookings')
+    firestore().collection('bookings')
       .doc(event.EventId)
       .collection('etts')
       

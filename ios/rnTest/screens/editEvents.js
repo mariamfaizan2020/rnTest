@@ -9,9 +9,9 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const editEvents = (props) => {
-
+console.log('helllo')
   const dispatch=useDispatch()
-    console.log('props::',props.navigation.state.params.uid)
+    console.log('props::',props.bookings)
   
     
     const screenProps=props.navigation.state.params
@@ -28,20 +28,25 @@ const editEvents = (props) => {
     const [selectedItem,setSelectedItem]=useState()
     const [eventId,setEventId]=useState()
     const [fetchedEvents,setFetchedEvents]=useState()
-    const [bookservices,setBookservices]=useState(null)
+    const [booking,setBooking]=useState()
    
    
 
 
-
+console.log('Eve--->',EventId)
+console.log('serv--->',serviceId)
  console.log('nnn----',date<new Date())
  useEffect(()=>{
-   getBksOfEve()
+   fetchUserbookings()
+
+ },[])
+//  useEffect(()=>{
+//    getBksOfEve()
   // FetchEvents();
 //   const array=[]
 
 //   props.events.map(doc=>{
-//     console.log('doc',doc)
+//     console.log('doc--->',doc)
 //     let object={}
 //   object.EventName=doc.nameOfEvent,
 //   object.EventId=doc.EventId
@@ -64,17 +69,47 @@ const editEvents = (props) => {
 //    setId(array)
 //  })
   
- },[props.bookings])
-const getBksOfEve=()=>{
-  let temp=[...props.bookings]
-   temp=temp.filter(x=>x.eventId==EventId)
-  setBookservices(temp)
+//  },[props.bookings])
+// const getBksOfEve=()=>{
+//   let temp=[...props.bookings]
+//    temp=temp.filter(x=>x.eventId==EventId)
+//   setBookservices(temp)
 
+// }
+
+const fetchUserbookings=()=>{
+  props.events.map(doc=>{
+    let arr=[]
+        console.log('doc--->',doc)
+        let object={}
+      object.EventName=doc.nameOfEvent,
+      object.EventId=doc.EventId
+     
+  firestore().collection('bookings').doc(EventId).collection('etts').doc(auth().currentUser.uid)
+  .get()
+  .then((snapshot)=>{
+    if(snapshot.exists){
+      console.log('snapshot--->',snapshot)
+      let booking=snapshot.data()
+      object.artistId=booking.docId,
+      object.status=booking.status,
+      object.servicename=booking.type,
+      object.serviceprice=booking.price,
+      object.artistName=booking.name
+      console.log('data--->',booking)
+      arr.push(object)
+      console.log('arr----->',arr)
+   
+    }
+    setBooking(arr)
+  })
+  })
+ 
+  
+  // console.log('bookings-->',booking)
 }
 
-
-
-   
+console.log('bookings-->',booking)
 const ModalView= (selectedItem) => {
  
   return (
@@ -112,13 +147,22 @@ const past=()=>{
 const cancelService=(selectedItem)=>{
   console.log('ITEm',selectedItem)
     
-        firestore().collection('bookings').doc(selectedItem.eventId).collection('etts')
+        firestore().collection('bookings').doc(selectedItem.EventId).collection('etts')
         .doc(selectedItem.artistId)
         .delete()
         .then(()=>{
-          firestore().collection('bookings').doc(selectedItem.eventId)
+          firestore().collection('bookings').doc(selectedItem.EventId)
           .delete()
         })
+        firestore().collection('services').doc(selectedItem.artistId).collection('etts')
+        .doc(selectedItem.EventId)
+        .delete()
+      //   let filter=[];
+   
+      //   filter=props.bookings.filter(found=>found.eventId!==selectedItem.eventId)
+      //  console.log('filter-->',filter)
+      //  dispatch({ type: 'USER_BOOKINGS_DATA', bookings: filter})
+     
       
       setModalVisible(!modalVisible)
 }
@@ -134,7 +178,7 @@ const deleteEvent=()=>{
      
   
 
-      console.log('mmmm',bookservices)
+
       console.log('eeee',fetchedEvents)
   return (
 
@@ -201,7 +245,7 @@ const deleteEvent=()=>{
       
       <FlatList
 
-      data={bookservices}
+      data={booking}
       keyExtractor={(item,index)=>index.toString()}
       renderItem={({item})=>{
         
@@ -215,7 +259,7 @@ const deleteEvent=()=>{
             
          
              <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-              <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.service}|</Text>
+              <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.servicename}|</Text>
                <TouchableOpacity onPress={()=>{setModalVisible(true);setSelectedItem(item)}}>
 
               <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
@@ -268,7 +312,7 @@ const deleteEvent=()=>{
 };
 const mapStateToProps=(store)=>{
  
-  console.log("store",store.bookingState.bookings)
+  console.log("store",store)
 
   return{
     currentUser:store.userState.currentUser,
