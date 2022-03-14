@@ -96,7 +96,9 @@ const bookservices = (props) => {
           owner: eventOwner,
           price: price,
           type: nameOfService,
-          status: 'requested'
+          status: 'requested',
+          EventId:EventId,
+          serviceId:serviceID
         })
       })
 

@@ -47,9 +47,9 @@ const fetchUserbookings=()=>{
    
   let object={}
   let arr=[] 
-  firestore().collection('bookings').doc(EventId).collection('etts').doc(auth().currentUser.uid)
-  .get()
-  .then((snapshot)=>{
+  firestore().collection('bookings').doc(EventId).collection('etts').doc(serviceId)
+  
+  .onSnapshot((snapshot)=>{
   
   
     if(snapshot.exists){
@@ -67,8 +67,8 @@ const fetchUserbookings=()=>{
       console.log('arr----->',arr)
    
     }
-    firestore().collection('Events').doc(EventId).get()
-    .then((snapshot)=>{
+    firestore().collection('Events').doc(EventId)
+    .onSnapshot((snapshot)=>{
       console.log('sss--->',snapshot)
       if (snapshot.exists){
         let event=snapshot.data()

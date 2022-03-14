@@ -42,13 +42,14 @@ const main = ({currentUser, navigation,bookings}) => {
     const fetchingRequestedServices=()=>{
        
         firestore().collection('services').doc(currentUser?.uid).collection('etts')
-        .get()
-        .then((snapshot)=>{
+     
+        .onSnapshot((snapshot)=>{
             let arr=[]
             console.log('snappp-->',snapshot)
             if(!snapshot.empty){
                let requestedServices=snapshot.docs.map(doc=>{
                   const  data=doc.data()
+                  console.log('datttta',data)
                     console.log('data-->',moment(data.date).format('YYYY-MM-DD'))
                     arr.push(data)
                     console.log('arr',arr)

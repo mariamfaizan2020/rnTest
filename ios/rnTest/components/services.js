@@ -24,6 +24,12 @@ const services = (props) => {
     })
     
  }
+ const accept=()=>{
+     firestore().collection('services').doc(auth().currentUser.uid)
+     .collection('etts').get().then((snapshot)=>{
+         console.log('snapshot',snapshot)
+     })
+ }
  console.log('serviceId',serviceId)
  console.log('serv',fetchedServices)  
     return (
