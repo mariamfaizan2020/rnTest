@@ -6,7 +6,7 @@ import Events from '../components/events'
 import Services from '../components/services';
 import Venue from '../components/venue';
 import {connect,useDispatch} from 'react-redux';
-
+import moment from 'moment'
 import firestore from '@react-native-firebase/firestore';
 
 const main = ({currentUser, navigation,bookings}) => {
@@ -14,10 +14,13 @@ const main = ({currentUser, navigation,bookings}) => {
     const [event, setEvent] = useState(true)
     const [services, setServices] = useState(false)
     const [venue, setVenue] = useState(false)
+    const [requestedServices,setRequestedServices]=useState()
     const dispatch=useDispatch()
    
   
-   
+   useEffect(()=>{
+    if(currentUser?.type==='artists'){fetchingRequestedServices()}
+   },[])
   
  
 
@@ -36,9 +39,34 @@ const main = ({currentUser, navigation,bookings}) => {
         setVenue(!venue)
         setServices(false)
     }
+    const fetchingRequestedServices=()=>{
+       
+        firestore().collection('services').doc(currentUser?.uid).collection('etts')
+        .get()
+        .then((snapshot)=>{
+            let arr=[]
+            console.log('snappp-->',snapshot)
+            if(!snapshot.empty){
+               let requestedServices=snapshot.docs.map(doc=>{
+                  const  data=doc.data()
+                    console.log('data-->',moment(data.date).format('YYYY-MM-DD'))
+                    arr.push(data)
+                    console.log('arr',arr)
+                }
+               
+                )
+                
+            }
+            setRequestedServices(arr)  
+        })
+    }
+    console.log('requestedServices',requestedServices)
    console.log('abcd',currentUser)
+   if(currentUser?.type==='artists'){console.log('type',currentUser?.type)}
     return (
+        
         <View style={{flex:1}}>
+           
          <View style={{flexDirection:'row',justifyContent:'center'}}>
              <TouchableOpacity 
                onPress={()=>{setEventF()}}
@@ -79,6 +107,7 @@ const main = ({currentUser, navigation,bookings}) => {
               navigation={navigation}/>
              <Services 
               services={services}
+              requestedServices={requestedServices}
               setServicesFunction={()=>setServicesF()}
               navigation={navigation}/>
               <Venue 
