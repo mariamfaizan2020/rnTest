@@ -24,46 +24,99 @@ const bookservices = (props) => {
   const eventOwner=props.navigation.getParam('eventOwner')
   const TypeOFEvent=props.navigation.getParam('TypeOFEvent')
   console.log('SERVICEID',serviceID)
-  const [events, setEvents] = useState()
+  const [status, setStatus] = useState()
+  const [booking,setBooking]=useState()
 
 
-  useEffect(() => {
-    const array = []
-    let obj = {}
-
-    // props.events.map((x) => {
-    //   if(x.EventId===EventId){
-    //     console.log('x---',x)
-     
-        // obj = x
-        console.log('obj',EventId)
-        props.bookings.map(y => {
-          console.log('y===',y.eventId)
-          
-          console.log('hello')
-         
-           if (y.eventId === EventId) {
-             console.log("booking found",y)
-               obj=y
-              
-               console.log('object',obj)
-              
-               array.push(obj)
+  const fetchUserbookings=()=>{
+  
+   
+    let object={}
+    let arr=[] 
+    firestore().collection('bookings').doc(EventId).collection('etts')
+    
+    .onSnapshot((snapshot)=>{
+      console.log('snapshot--->',snapshot)
+    
+      if(!snapshot.empty){
+      
+        console.log('snapshot',snapshot)
+    
+             snapshot.docs.map(doc=>{
+           let booking=doc.data()
+               console.log('doc',booking)
+               object.artistId=booking.docId,
+               object.status=booking.status,
+               object.servicename=booking.type,
+               object.serviceprice=booking.price,
+               object.artistName=booking.name
+               console.log('data--->',object)
+               setStatus(object.status)
+        })
+        
+        firestore().collection('Events').doc(EventId)
+        .onSnapshot((snapshot)=>{
+          console.log('sss--->',snapshot)
+          if (snapshot.exists){
+            let event=snapshot.data()
+            console.log('ddd---',event.EventId)
+            object.eventId=event.EventId,
+            object.EventName=event.nameOfEvent
+            console.log('obj--',object)
+            arr.push(object)
           }
+          console.log('arr----->',arr)
+          setBooking(arr)
+        })
+        
+       
+     
+      }
+     
+      
+    })
+  
+  }
+  console.log('bookings',booking)
+  useEffect(() => {
+    fetchUserbookings()
+
+    // const array = []
+    // let obj = {}
+
+    // // props.events.map((x) => {
+    // //   if(x.EventId===EventId){
+    // //     console.log('x---',x)
+     
+    //     // obj = x
+    //     console.log('obj',EventId)
+    //     props.bookings.map(y => {
+    //       console.log('y===',y.eventId)
+          
+    //       console.log('hello')
+         
+    //        if (y.eventId === EventId) {
+    //          console.log("booking found",y)
+    //            obj=y
+              
+    //            console.log('object',obj)
+              
+    //            array.push(obj)
+    //       }
     
       
    
-         })
+    //      })
        
-      // }
+    //   // }
     
    
    
-      console.log('arr->',array)
+    //   console.log('arr->',array)
     
      
 
-      setEvents(array)
+    //   setEvents(array)
     // })
 
 
@@ -139,8 +192,15 @@ const bookservices = (props) => {
 
          <Text style={{ fontSize: 16 }}>
        {moment(DateOFEvent).format('MMM Do')} -{nameOfEvent} |</Text>
-       {props.bookings.find(x=>x.eventId===EventId)?<Text>Requested</Text>:
+       {booking!==undefined?booking.find(x=>x.eventId===EventId)?<Text>{status}</Text>:
        <TouchableOpacity onPress={() => book()}>
+         <View style={{ flexDirection: 'row' }}>
+          <Text style={{ fontSize: 16 }}>Book</Text>
+
+        <Icon.AntDesign name='pluscircleo' size={15} /> 
+
+       </View>
+       </TouchableOpacity>:<TouchableOpacity onPress={() => book()}>
          <View style={{ flexDirection: 'row' }}>
           <Text style={{ fontSize: 16 }}>Book</Text>
 
