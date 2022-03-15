@@ -6,9 +6,10 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
 const services = (props) => {
-    console.log('props....',props?.requestedServices)
+    console.log('props....',props?.requestedServices?.EventId)
     const [fetchedServices,setFetchedServices]=useState()
     const [serviceId,setServiceId]=useState()
+    
     useEffect(()=>{
         fetchServices()
     },[])
@@ -24,11 +25,30 @@ const services = (props) => {
     })
     
  }
- const accept=()=>{
-     firestore().collection('services').doc(auth().currentUser.uid)
-     .collection('etts').get().then((snapshot)=>{
-         console.log('snapshot',snapshot)
+ const accept=(item)=>{
+   
+     console.log('ITEM',item)
+     firestore().collection('services').doc(item.serviceId)
+     .collection('etts').doc(item.EventId).update({
+        status:'accepted'
      })
+     firestore().collection('bookings').doc(item.EventId)
+     .collection('etts').doc(item.serviceId).update({
+        status:'accepted'
+     })
+ }
+ const reject=(item)=>{
+    
+    console.log('ITEM',item)
+    firestore().collection('services').doc(item.serviceId)
+    .collection('etts').doc(item.EventId).update({
+       status:'rejected'
+    })
+    firestore().collection('bookings').doc(item.EventId)
+    .collection('etts').doc(item.serviceId).update({
+       status:'rejected'
+    })
+
  }
  console.log('serviceId',serviceId)
  console.log('serv',fetchedServices)  
@@ -78,11 +98,14 @@ const services = (props) => {
                                     </View>
                                 </TouchableOpacity >
                                 <View style={{flexDirection:'row',justifyContent:'center'}}>
-                                <TouchableOpacity style={styles.Button}>
-                                    <Text>Accept</Text>
+                                <TouchableOpacity 
+                                style={[styles.Button,{backgroundColor:item.status!=='accepted'?'#a16281':'#541629'},{borderColor:item.status!=='accepted'?'#a16281':'#541629'}]} 
+                                onPress={()=>{accept(item)}}>
+                                    <Text style={{color:'white'}}>Accept</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity  style={styles.Button}>
-                                    <Text>Reject</Text>
+                                <TouchableOpacity  style={[styles.Button,{backgroundColor:item.status!=='rejected'?'#a16281':'#541629'},{borderColor:item.status!=='rejected'?'#a16281':'#541629'}]}
+                                 onPress={()=>{reject(item)}}>
+                                    <Text style={{color:'white'}}>Reject</Text>
                                 </TouchableOpacity>
                                 </View>
                                 </View>
@@ -146,7 +169,7 @@ const styles = StyleSheet.create({
   
     },
     Button:{
-        backgroundColor:'#a16281',
+        
         borderColor:'#a16281',
         borderWidth:7,
         alignSelf:'center',
