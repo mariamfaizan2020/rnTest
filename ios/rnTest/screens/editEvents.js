@@ -47,39 +47,45 @@ const fetchUserbookings=()=>{
    
   let object={}
   let arr=[] 
-  firestore().collection('bookings').doc(EventId).collection('etts').doc(serviceId)
+  firestore().collection('bookings').doc(EventId).collection('etts')
   
   .onSnapshot((snapshot)=>{
+    console.log('snapshot--->',snapshot)
   
-  
-    if(snapshot.exists){
+    if(!snapshot.empty){
     
-     
-      console.log('snapshot--->',snapshot)
-      let booking=snapshot.data()
-      object.artistId=booking.docId,
-      object.status=booking.status,
-      object.servicename=booking.type,
-      object.serviceprice=booking.price,
-      object.artistName=booking.name
-      console.log('data--->',booking)
+      console.log('snapshot',snapshot)
+  
+           snapshot.docs.map(doc=>{
+         let booking=doc.data()
+             console.log('doc',booking)
+             object.artistId=booking.docId,
+             object.status=booking.status,
+             object.servicename=booking.type,
+             object.serviceprice=booking.price,
+             object.artistName=booking.name
+             console.log('data--->',object)
+      })
       
-      console.log('arr----->',arr)
+      firestore().collection('Events').doc(EventId)
+      .onSnapshot((snapshot)=>{
+        console.log('sss--->',snapshot)
+        if (snapshot.exists){
+          let event=snapshot.data()
+          console.log('ddd---',event.EventId)
+          object.eventId=event.EventId,
+          object.EventName=event.nameOfEvent
+          console.log('obj--',object)
+          arr.push(object)
+        }
+        console.log('arr----->',arr)
+        setBooking(arr)
+      })
+      
+      
    
     }
-    firestore().collection('Events').doc(EventId)
-    .onSnapshot((snapshot)=>{
-      console.log('sss--->',snapshot)
-      if (snapshot.exists){
-        let event=snapshot.data()
-        console.log('ddd---',event.EventId)
-        object.eventId=event.EventId,
-        object.EventName=event.nameOfEvent
-        console.log('obj--',object)
-        arr.push(object)
-      }
-      setBooking(arr)
-    })
+   
     
   })
 
