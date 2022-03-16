@@ -4,7 +4,7 @@ import React,{useState} from 'react';
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import services from '../components/services';
+import services from '../componentsScreen/services';
 
 
 const EditServices = (props) => {

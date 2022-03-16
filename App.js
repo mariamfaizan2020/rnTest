@@ -1,14 +1,5 @@
-// /**
-//  * Sample React Native App
-//  * https://github.com/facebook/react-native
-//  *
-//  * @format
-//  * @flow strict-local
-//  */
-
 import React from 'react';
 import {Text,View} from 'react-native'
-
 import { createAppContainer ,createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import registerScreen from './ios/rnTest/screens/registerScreen';
@@ -30,7 +21,7 @@ import BrowseScreen from './ios/rnTest/screens/Browse';
 import bookservicesScreen from './ios/rnTest/screens/bookservices'
 import testingScreen from './ios/rnTest/screens/testing';
 import reqservdetailsScreen from './ios/rnTest/screens/reqservdetails'
-// import ModalScreen from './ios/rnTest/screens/Modal'
+import CardFormScreen from './ios/rnTest/scenes/CardFormScreen';
 
 const persistConfig={
   key:'root',
@@ -62,9 +53,10 @@ const AppStack=createStackNavigator({
     bookservices:bookservicesScreen,
     testing:testingScreen,
     reqServdetails:reqservdetailsScreen,
+    CardForm:CardFormScreen
 },
 {
-  initialRouteName:'tabs'
+  initialRouteName:'CardForm'
 })
 
 let AppNavigator=createAppContainer(

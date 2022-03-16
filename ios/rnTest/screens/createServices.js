@@ -13,7 +13,7 @@ const createServices = (props) => {
     const [price,setPrice]=useState(null)
     const [type,setType]=useState(false)
   console.log('ppp',props.navigation.getParam('service'))
-  
+
 const ppp=props.navigation.state.params
     const arr=[
         {Type:'DJ'},

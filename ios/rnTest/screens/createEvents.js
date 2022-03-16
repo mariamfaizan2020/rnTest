@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View ,TouchableOpacity, TextInput,Button, Alert,FlatList} from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment'
-import Flatlist from '../components/flatlist'
+import Flatlist from '../componentsScreen/flatlist'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 

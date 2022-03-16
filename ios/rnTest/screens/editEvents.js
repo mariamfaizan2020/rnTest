@@ -26,7 +26,7 @@ console.log('helllo')
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem,setSelectedItem]=useState()
-
+    const [modal,setModal]=useState()
     const [fetchedEvents,setFetchedEvents]=useState()
     const [booking,setBooking]=useState()
    
@@ -90,7 +90,40 @@ const fetchUserbookings=()=>{
   })
 
 }
+const Modal2=()=>{
+  return (
+    <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text>Are you sure u want to delete</Text>
+       <Pressable
+              style={[styles.button, styles.buttonClose]}
+              // onPress={() => cancelService()}
+              onPress={() =>cancelService() }
+            >
+              <Text style={styles.textStyle}>Yes</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              // onPress={() => cancelService()}
+              onPress={() => {setModalVisible(!modalVisible);setModal(!modal2)}}
+            >
+              <Text style={styles.textStyle}>NO</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+   
+    </View>
+  );
 
+}
 
 const ModalView= () => {
  
@@ -106,7 +139,8 @@ const ModalView= () => {
           <View style={styles.modalView}>
        <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => cancelService()}
+              // onPress={() => cancelService()}
+              onPress={() =>setModal(true) }
             >
               <Text style={styles.textStyle}>Delete</Text>
             </Pressable>
@@ -163,6 +197,7 @@ const deleteEvent=()=>{
 
     <View style={{flex:1,alignItems:'center'}} >
         {modalVisible?ModalView(selectedItem):null}
+        {modal?Modal2():null}
          
        <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,}}>
        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,marginTop:15}}>

@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native'
 import auth from '@react-native-firebase/auth';
-import Events from '../components/events'
-import Services from '../components/services';
-import Venue from '../components/venue';
+import Events from '../componentsScreen/events'
+import Services from '../componentsScreen/services';
+import Venue from '../componentsScreen/venue';
 import {connect,useDispatch} from 'react-redux';
 import moment from 'moment'
 import firestore from '@react-native-firebase/firestore';

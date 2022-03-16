@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
 import React, { useEffect ,useState} from 'react';
 
-import FetchServices from '../components/fetchServices';
+import FetchServices from '../componentsScreen/fetchServices';
 
 
 const Browse = (props) => {

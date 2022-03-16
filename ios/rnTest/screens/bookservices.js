@@ -8,7 +8,7 @@ import moment from 'moment'
 
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import events from '../components/events';
+import events from '../componentsScreen/events';
 
 const bookservices = (props) => {
   const nameOfService = props.navigation.getParam('serviceName')
