@@ -76,9 +76,13 @@ const services = (props) => {
                        <Icon.Entypo name='plus' size={20} color="black" />
                        </View>
                    </TouchableOpacity>
+
+                
+                   
                    <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginTop:5}}>Requested Services</Text>
                  <View style={{}}> 
-                   {props?.requestedServices!==undefined?
+                 {props?.requestedServices!==undefined?
+                   
                    
                    <FlatList
                     horizontal={false}
@@ -112,7 +116,9 @@ const services = (props) => {
                             </View>
                         )
                     }}
+                    
                    />:null}
+                   
                   <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginTop:20}}>Active Servies</Text>
                   <FlatList
                   horizontal={false}

@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
+
+import Icon from 'react-native-vector-icons/Entypo'
 import stripe from 'tipsi-stripe'
 import Button from '../components/Button'
 
@@ -11,6 +13,7 @@ stripe.setOptions({
 
 
 export default class CardFormScreen extends PureComponent {
+
   static title = 'Card Form'
 
   state = {
@@ -38,19 +41,30 @@ export default class CardFormScreen extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Card Form Example</Text>
-        <Text style={styles.instruction}>Click button to show Card Form dialog.</Text>
+        <Text style={styles.header}>Click button to proceed</Text>
+        <Text style={styles.instruction}>Once paid cannot be return.</Text>
+        <View style={{flexDirection:'row'}}>
+
+      
         <Button
-          text="Enter you card and pay"
+          text="Continue...."
           loading={loading}
           onPress={this.handleCardPayPress}
        
         />
+       
+        </View>
         <View style={styles.paymentMethod} >
           {paymentMethod && (
             <Text style={styles.instruction}>TOKEN: {JSON.stringify(paymentMethod.tokenId)}</Text>
           )}
         </View>
+        <TouchableOpacity 
+        style={{margin:10,justifyContent:'flex-end',alignItems:'flex-end'}}
+        onPress={()=>this.props.navigation.navigate('editEvents')}>
+        {/* <Text>back</Text> */}
+        <Icon name='arrow-long-left' size={50}/>
+        </TouchableOpacity>
       </View>
     )
   }

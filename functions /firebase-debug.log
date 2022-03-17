@@ -1,0 +1,389 @@
+[debug] [2022-03-17T07:00:38.226Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T07:00:38.228Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T07:00:38.228Z] CLI Version:   10.3.1
+[debug] [2022-03-17T07:00:38.228Z] Platform:      darwin
+[debug] [2022-03-17T07:00:38.228Z] Node Version:  v12.16.1
+[debug] [2022-03-17T07:00:38.229Z] Time:          Thu Mar 17 2022 12:00:38 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T07:00:38.229Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T07:00:38.302Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T07:00:38.302Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T07:00:38.302Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T07:00:38.305Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T07:00:38.305Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:00:39.951Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T07:00:39.952Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:00:39.952Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T07:00:39.952Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T07:00:41.530Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T07:00:41.531Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T07:00:42.092Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T07:01:49.219Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T07:01:49.221Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T07:01:49.222Z] CLI Version:   10.3.1
+[debug] [2022-03-17T07:01:49.222Z] Platform:      darwin
+[debug] [2022-03-17T07:01:49.222Z] Node Version:  v12.16.1
+[debug] [2022-03-17T07:01:49.223Z] Time:          Thu Mar 17 2022 12:01:49 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T07:01:49.223Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T07:01:49.296Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T07:01:49.296Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T07:01:49.296Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T07:01:49.299Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T07:01:49.299Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:01:50.950Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T07:01:50.950Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:01:50.951Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T07:01:50.951Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T07:01:52.534Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T07:01:52.534Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T07:01:53.099Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T07:17:52.130Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T07:17:52.133Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T07:17:52.133Z] CLI Version:   10.3.1
+[debug] [2022-03-17T07:17:52.133Z] Platform:      darwin
+[debug] [2022-03-17T07:17:52.133Z] Node Version:  v12.16.1
+[debug] [2022-03-17T07:17:52.134Z] Time:          Thu Mar 17 2022 12:17:52 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T07:17:52.134Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T07:17:52.209Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T07:17:52.210Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T07:17:52.210Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T07:17:52.211Z] > refreshing access token with scopes: []
+[debug] [2022-03-17T07:17:52.212Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-17T07:17:52.814Z] <<< HTTP RESPONSE 200 {"date":"Thu, 17 Mar 2022 09:17:19 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-17T07:17:52.832Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T07:17:52.832Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:17:53.623Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T07:17:53.623Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T07:17:53.624Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T07:17:53.624Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T07:17:55.369Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T07:17:55.369Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T07:17:55.927Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T08:04:41.249Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T08:04:41.252Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T08:04:41.252Z] CLI Version:   10.3.1
+[debug] [2022-03-17T08:04:41.252Z] Platform:      darwin
+[debug] [2022-03-17T08:04:41.252Z] Node Version:  v12.16.1
+[debug] [2022-03-17T08:04:41.263Z] Time:          Thu Mar 17 2022 13:04:41 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T08:04:41.263Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T08:04:41.344Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T08:04:41.345Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T08:04:41.345Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T08:04:41.348Z] > refreshing access token with scopes: []
+[debug] [2022-03-17T08:04:41.348Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-17T08:04:41.990Z] <<< HTTP RESPONSE 200 {"date":"Thu, 17 Mar 2022 10:04:08 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-17T08:04:42.001Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T08:04:42.002Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T08:04:43.685Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T08:04:43.685Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T08:04:43.686Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T08:04:43.686Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T08:04:45.888Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T08:04:45.888Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T08:04:46.456Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T08:13:48.515Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T08:13:48.518Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T08:13:48.518Z] CLI Version:   10.3.1
+[debug] [2022-03-17T08:13:48.518Z] Platform:      darwin
+[debug] [2022-03-17T08:13:48.519Z] Node Version:  v12.16.1
+[debug] [2022-03-17T08:13:48.519Z] Time:          Thu Mar 17 2022 13:13:48 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T08:13:48.520Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T08:13:48.594Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T08:13:48.594Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T08:13:48.595Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T08:13:48.597Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T08:13:48.597Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T08:13:50.305Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T08:13:50.306Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T08:13:50.306Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T08:13:50.306Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T08:13:52.026Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T08:13:52.026Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T08:13:54.110Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T09:13:21.522Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:13:21.525Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase emulators:start --only functions
+[debug] [2022-03-17T09:13:21.525Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:13:21.525Z] Platform:      darwin
+[debug] [2022-03-17T09:13:21.525Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:13:21.526Z] Time:          Thu Mar 17 2022 14:13:21 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:13:21.526Z] ----------------------------------------------------------------------
+[debug] 
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[debug] [2022-03-17T09:13:21.606Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:13:21.607Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2022-03-17T09:13:21.641Z] [hub] writing locator at /var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/hub-rntest-4f44d.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[info] i  ui: downloading ui-v1.6.5.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.6.5.zip..."}}
+[debug] [2022-03-17T09:13:21.923Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.5.zip 
+[debug] [2022-03-17T09:13:22.727Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.5.zip 200
+[debug] [2022-03-17T09:13:22.727Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.6.5.zip [stream]
+[debug] [2022-03-17T09:13:32.429Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-03-17T09:13:32.429Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-03-17T09:13:32.429Z] Starting Emulator UI with command {"binary":"node","args":["/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-03-17T09:13:32.562Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬──────────────────────────────────┬─────────────────────┐
+│ Emulator  │ Host:Port                        │ View in Emulator UI │
+├───────────┼──────────────────────────────────┼─────────────────────┤
+│ Functions │ Failed to initialize (see above) │                     │
+└───────────┴──────────────────────────────────┴─────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-03-17T09:23:12.691Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:23:12.694Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase emulators:start
+[debug] [2022-03-17T09:23:12.694Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:23:12.694Z] Platform:      darwin
+[debug] [2022-03-17T09:23:12.694Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:23:12.695Z] Time:          Thu Mar 17 2022 14:23:12 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:23:12.695Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T09:23:12.770Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:23:12.771Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[warn] ⚠  hub: emulator hub unable to start on port 4400, starting on 4401 instead. {"metadata":{"emulator":{"name":"hub"},"message":"emulator hub unable to start on port 4400, starting on 4401 instead."}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project rntest-4f44d. This may result in unexpected behavior. 
+[debug] [2022-03-17T09:23:12.818Z] [hub] writing locator at /var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/hub-rntest-4f44d.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[warn] ⚠  logging: Logging Emulator unable to start on port 4500, starting on 4501 instead. {"metadata":{"emulator":{"name":"logging"},"message":"Logging Emulator unable to start on port 4500, starting on 4501 instead."}}
+[warn] ⚠  ui: Emulator UI unable to start on port 4000, starting on 4001 instead. {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI unable to start on port 4000, starting on 4001 instead."}}
+[debug] [2022-03-17T09:23:12.850Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-03-17T09:23:12.851Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-03-17T09:23:12.851Z] Starting Emulator UI with command {"binary":"node","args":["/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-03-17T09:23:12.990Z] Web / API server started at localhost:4001
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4001\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4001                │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬──────────────────────────────────┬─────────────────────┐
+│ Emulator  │ Host:Port                        │ View in Emulator UI │
+├───────────┼──────────────────────────────────┼─────────────────────┤
+│ Functions │ Failed to initialize (see above) │                     │
+└───────────┴──────────────────────────────────┴─────────────────────┘
+  Emulator Hub running at localhost:4401
+  Other reserved ports: 4501
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-03-17T09:26:36.650Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:26:36.653Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase emulators:start
+[debug] [2022-03-17T09:26:36.653Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:26:36.653Z] Platform:      darwin
+[debug] [2022-03-17T09:26:36.653Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:26:36.654Z] Time:          Thu Mar 17 2022 14:26:36 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:26:36.654Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T09:26:36.729Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:26:36.729Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[warn] ⚠  hub: emulator hub unable to start on port 4400, starting on 4402 instead. {"metadata":{"emulator":{"name":"hub"},"message":"emulator hub unable to start on port 4400, starting on 4402 instead."}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project rntest-4f44d. This may result in unexpected behavior. 
+[debug] [2022-03-17T09:26:36.776Z] [hub] writing locator at /var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/hub-rntest-4f44d.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[warn] ⚠  logging: Logging Emulator unable to start on port 4500, starting on 4502 instead. {"metadata":{"emulator":{"name":"logging"},"message":"Logging Emulator unable to start on port 4500, starting on 4502 instead."}}
+[warn] ⚠  ui: Emulator UI unable to start on port 4000, starting on 4002 instead. {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI unable to start on port 4000, starting on 4002 instead."}}
+[debug] [2022-03-17T09:26:37.057Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-03-17T09:26:37.057Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-03-17T09:26:37.057Z] Starting Emulator UI with command {"binary":"node","args":["/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-03-17T09:26:37.199Z] Web / API server started at localhost:4002
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4002\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4002                │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬──────────────────────────────────┬─────────────────────┐
+│ Emulator  │ Host:Port                        │ View in Emulator UI │
+├───────────┼──────────────────────────────────┼─────────────────────┤
+│ Functions │ Failed to initialize (see above) │                     │
+└───────────┴──────────────────────────────────┴─────────────────────┘
+  Emulator Hub running at localhost:4402
+  Other reserved ports: 4502
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-03-17T09:31:58.304Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:31:58.306Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase emulators:exec ./my-test.sh
+[debug] [2022-03-17T09:31:58.307Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:31:58.307Z] Platform:      darwin
+[debug] [2022-03-17T09:31:58.307Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:31:58.308Z] Time:          Thu Mar 17 2022 14:31:58 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:31:58.308Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T09:31:58.383Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:31:58.384Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[warn] ⚠  hub: emulator hub unable to start on port 4400, starting on 4403 instead. {"metadata":{"emulator":{"name":"hub"},"message":"emulator hub unable to start on port 4400, starting on 4403 instead."}}
+[warn] ⚠  emulators: It seems that you are running multiple instances of the emulator suite for project rntest-4f44d. This may result in unexpected behavior. 
+[debug] [2022-03-17T09:31:58.434Z] [hub] writing locator at /var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/hub-rntest-4f44d.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[info] i  Running script: ./my-test.sh 
+[debug] [2022-03-17T09:31:58.454Z] Running ./my-test.sh with environment {"USER":"zenkoders","__CFBundleIdentifier":"com.microsoft.VSCode","COMMAND_MODE":"unix2003","LOGNAME":"zenkoders","PATH":"/Users/zenkoders/.nvm/versions/node/v12.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin","SSH_AUTH_SOCK":"/private/tmp/com.apple.launchd.jGxSzzlc1O/Listeners","SHELL":"/bin/zsh","HOME":"/Users/zenkoders","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x2","TMPDIR":"/var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/","XPC_SERVICE_NAME":"0","XPC_FLAGS":"0x0","ORIGINAL_XDG_CURRENT_DESKTOP":"undefined","TERM_PROGRAM":"vscode","TERM_PROGRAM_VERSION":"1.62.3","LANG":"en_GB.UTF-8","COLORTERM":"truecolor","VSCODE_GIT_IPC_HANDLE":"/var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/vscode-git-d988558dae.sock","GIT_ASKPASS":"/private/var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/AppTranslocation/D3C81C8F-B6A0-4EBD-860E-97936BC7021A/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh","VSCODE_GIT_ASKPASS_NODE":"/private/var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/AppTranslocation/D3C81C8F-B6A0-4EBD-860E-97936BC7021A/d/Visual Studio Code.app/Contents/Frameworks/Code Helper (Renderer).app/Contents/MacOS/Code Helper (Renderer)","VSCODE_GIT_ASKPASS_EXTRA_ARGS":"--ms-enable-electron-run-as-node","VSCODE_GIT_ASKPASS_MAIN":"/private/var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/AppTranslocation/D3C81C8F-B6A0-4EBD-860E-97936BC7021A/d/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js","PWD":"/Users/zenkoders/Desktop/zenkoders/react-native/rnTest/functions ","TERM":"xterm-256color","SHLVL":"1","OLDPWD":"/Users/zenkoders/Desktop/zenkoders/react-native/rnTest","NVM_DIR":"/Users/zenkoders/.nvm","NVM_CD_FLAGS":"-q","NVM_BIN":"/Users/zenkoders/.nvm/versions/node/v12.16.1/bin","_":"/Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase","IS_FIREBASE_CLI":"true","GCLOUD_PROJECT":"rntest-4f44d","FIREBASE_EMULATOR_HUB":"localhost:4403"}
+[warn] ⚠  Script exited unsuccessfully (code 127) 
+[info] i  emulators: Shutting down emulators. {"metadata":{"emulator":{"name":"hub"},"message":"Shutting down emulators."}}
+[info] i  hub: Stopping emulator hub {"metadata":{"emulator":{"name":"hub"},"message":"Stopping emulator hub"}}
+[error] 
+[error] Error: Script "./my-test.sh" exited with code 127
+[debug] [2022-03-17T09:45:44.994Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:45:44.997Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase deploy --only functions
+[debug] [2022-03-17T09:45:44.997Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:45:44.997Z] Platform:      darwin
+[debug] [2022-03-17T09:45:44.997Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:45:44.998Z] Time:          Thu Mar 17 2022 14:45:44 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:45:44.998Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-17T09:45:45.075Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:45:45.075Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[debug] [2022-03-17T09:45:45.075Z] [iam] checking project rntest-4f44d for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-03-17T09:45:45.077Z] > refreshing access token with scopes: []
+[debug] [2022-03-17T09:45:45.077Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-17T09:45:45.690Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","date":"Thu, 17 Mar 2022 11:45:12 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-03-17T09:45:45.708Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions [none]
+[debug] [2022-03-17T09:45:45.708Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T09:45:47.360Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions 200
+[debug] [2022-03-17T09:45:47.360Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/rntest-4f44d:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-03-17T09:45:47.361Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-03-17T09:45:47.361Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-03-17T09:45:49.089Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-03-17T09:45:49.090Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/rntest-4f44d/serviceAccounts/rntest-4f44d@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'rntest-4f44d'...
+[info] 
+[info] i  deploying functions 
+[debug] [2022-03-17T09:45:49.648Z] TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:117:11)
+    at Object.join (path.js:1039:7)
+    at Config.path (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/config.js:115:45)
+    at getChildEnvironment (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:50:49)
+    at runTargetCommands (/Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:71:14)
+    at /Users/zenkoders/.nvm/versions/node/v12.16.1/lib/node_modules/firebase-tools/lib/deploy/lifecycleHooks.js:122:24
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-03-17T09:51:00.622Z] ----------------------------------------------------------------------
+[debug] [2022-03-17T09:51:00.633Z] Command:       /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/node /Users/zenkoders/.nvm/versions/node/v12.16.1/bin/firebase emulators:start --only functions
+[debug] [2022-03-17T09:51:00.633Z] CLI Version:   10.3.1
+[debug] [2022-03-17T09:51:00.634Z] Platform:      darwin
+[debug] [2022-03-17T09:51:00.634Z] Node Version:  v12.16.1
+[debug] [2022-03-17T09:51:00.635Z] Time:          Thu Mar 17 2022 14:51:00 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-03-17T09:51:00.635Z] ----------------------------------------------------------------------
+[debug] 
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[debug] [2022-03-17T09:51:00.777Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-17T09:51:00.777Z] > authorizing via signed-in user (mariamfaizan2020@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[warn] ⚠  hub: emulator hub unable to start on port 4400, starting on 4403 instead. {"metadata":{"emulator":{"name":"hub"},"message":"emulator hub unable to start on port 4400, starting on 4403 instead."}}
+[debug] [2022-03-17T09:51:00.954Z] [hub] writing locator at /var/folders/0c/knh_714s7m1ck56lqcslt8qw0000gn/T/hub-rntest-4f44d.json
+[warn] ⚠  functions: The functions emulator is configured but there is no functions source directory. Have you run firebase init functions? {"metadata":{"emulator":{"name":"functions"},"message":"The functions emulator is configured but there is no functions source directory. Have you run \u001b[1mfirebase init functions\u001b[22m?"}}
+[warn] ⚠  logging: Logging Emulator unable to start on port 4500, starting on 4503 instead. {"metadata":{"emulator":{"name":"logging"},"message":"Logging Emulator unable to start on port 4500, starting on 4503 instead."}}
+[warn] ⚠  ui: Emulator UI unable to start on port 4000, starting on 4003 instead. {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI unable to start on port 4000, starting on 4003 instead."}}
+[debug] [2022-03-17T09:51:01.017Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-03-17T09:51:01.018Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-03-17T09:51:01.018Z] Starting Emulator UI with command {"binary":"node","args":["/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/zenkoders/.cache/firebase/emulators/ui-v1.6.5/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-03-17T09:51:01.183Z] Web / API server started at localhost:4003
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4003\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4003                │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬──────────────────────────────────┬─────────────────────┐
+│ Emulator  │ Host:Port                        │ View in Emulator UI │
+├───────────┼──────────────────────────────────┼─────────────────────┤
+│ Functions │ Failed to initialize (see above) │                     │
+└───────────┴──────────────────────────────────┴─────────────────────┘
+  Emulator Hub running at localhost:4403
+  Other reserved ports: 4503
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

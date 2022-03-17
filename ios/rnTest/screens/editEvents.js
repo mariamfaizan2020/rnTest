@@ -26,7 +26,7 @@ console.log('helllo')
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem,setSelectedItem]=useState()
-    const [modal,setModal]=useState()
+
     const [fetchedEvents,setFetchedEvents]=useState()
     const [booking,setBooking]=useState()
    
@@ -90,40 +90,7 @@ const fetchUserbookings=()=>{
   })
 
 }
-const Modal2=()=>{
-  return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text>Are you sure u want to delete</Text>
-       <Pressable
-              style={[styles.button, styles.buttonClose]}
-              // onPress={() => cancelService()}
-              onPress={() =>cancelService() }
-            >
-              <Text style={styles.textStyle}>Yes</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              // onPress={() => cancelService()}
-              onPress={() => {setModalVisible(!modalVisible);setModal(!modal2)}}
-            >
-              <Text style={styles.textStyle}>NO</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-   
-    </View>
-  );
 
-}
 
 const ModalView= () => {
  
@@ -137,13 +104,24 @@ const ModalView= () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <Text>Are you sure you want delete this service</Text>
+            <View style={{flexDirection:'row',padding:5,margin:5}}>
        <Pressable
               style={[styles.button, styles.buttonClose]}
               // onPress={() => cancelService()}
-              onPress={() =>setModal(true) }
+              onPress={() =>cancelService() }
             >
-              <Text style={styles.textStyle}>Delete</Text>
+              <Text style={styles.textStyle}>yes</Text>
             </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              // onPress={() => cancelService()}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>No</Text>
+            </Pressable>
+            </View>
+
           </View>
         </View>
       </Modal>
@@ -197,7 +175,7 @@ const deleteEvent=()=>{
 
     <View style={{flex:1,alignItems:'center'}} >
         {modalVisible?ModalView(selectedItem):null}
-        {modal?Modal2():null}
+     
          
        <View style={{borderBottomColor:'#a16281',width:'100%',borderBottomWidth:3,}}>
        <Text style={{fontSize:16,fontWeight:'bold',color:'#a16281',justifyContent:'center',alignSelf:'center',marginBottom:10,marginTop:15}}>
@@ -268,22 +246,32 @@ const deleteEvent=()=>{
         return(
      
      
-          <View>
+          <View style={{flexDirection:'row',}}>
            {item?item.status? 
             
-         
-             <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-              <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.servicename}|</Text>
-               <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
-
-              <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
-              </TouchableOpacity>
-              
-              </View> 
-             
-             :null:null}
           
-           
+             <View style={{flexDirection:'row'}}>
+               <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.servicename}|</Text>
+              <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
+
+             <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
+             </TouchableOpacity>
+          
+              </View> 
+               
+             
+        
+             
+           :null:null  }
+        
+      {item?item.status==='accepted'?
+                <View>
+                  <TouchableOpacity 
+                  onPress={()=>props.navigation.navigate('CardForm')}
+                  style={styles.paytab}>
+                    <Text>pay</Text>
+                  </TouchableOpacity>
+                  </View>:null:null} 
           </View>
          )
                  
@@ -367,13 +355,14 @@ modalView: {
 button: {
   borderRadius: 20,
   padding: 10,
+  margin:20,
   elevation: 2
 },
-buttonOpen: {
-  backgroundColor: "#F194FF",
-},
+// buttonOpen: {
+//   backgroundColor: 'white',
+// },
 buttonClose: {
-  backgroundColor: "#2196F3",
+  backgroundColor: "#a16281",
 },
 textStyle: {
   color: "white",
@@ -383,6 +372,15 @@ textStyle: {
 modalText: {
   marginBottom: 15,
   textAlign: "center"
+},
+paytab:{
+  backgroundColor:'#a16281',
+  borderColor:'#a16281',
+  borderWidth:2,
+  paddingHorizontal:10,
+  borderRadius:10,
+  paddingVertical:2,
+  marginHorizontal:2
 }
 
 });

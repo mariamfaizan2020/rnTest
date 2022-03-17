@@ -56,7 +56,7 @@ const AppStack=createStackNavigator({
     CardForm:CardFormScreen
 },
 {
-  initialRouteName:'CardForm'
+  initialRouteName:'tabs'
 })
 
 let AppNavigator=createAppContainer(
