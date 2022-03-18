@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
-
+import { View, Text, StyleSheet,TouchableOpacity, Alert } from 'react-native'
+import firestore from '@react-native-firebase/firestore';
 import Icon from 'react-native-vector-icons/Entypo'
 import stripe from 'tipsi-stripe'
 import Button from '../components/Button'
-
+import axios from 'axios'
 import { demoCardFormParameters } from './demodata/demodata'
 
 stripe.setOptions({
@@ -13,19 +13,33 @@ stripe.setOptions({
 
 
 export default class CardFormScreen extends PureComponent {
-
   static title = 'Card Form'
 
+ constructor() {
+    super();
+    this.state = {
+     
+       eventId:this.props?.navigation?.state?.params.eventId,
+       eventName:this.props?.navigation?.state?.params.eventName,
+       artistName:this.props?.navigation?.state?.params.artistName,
+       artistId:this.props?.navigation?.state?.params.artistId,
+       eventOwner:this.props?.navigation?.state?.params.eventOwner,
+       servicePrice:this.props?.navigation?.state?.params.servicePrice,
+       serviceName:this.props?.navigation?.state?.params.serviceName,  
+       status:this.props?.navigation?.state?.params.status
+    };
+ 
+  }
   state = {
     loading: false,
     paymentMethod: null,
   }
-
+ 
   handleCardPayPress = async () => {
     console.log("handle card")
     try {
       this.setState({ loading: true, paymentMethod: null })
-
+    
       const paymentMethod = await stripe.paymentRequestWithCardForm(demoCardFormParameters)
       console.log('paymentMethod',paymentMethod.tokenId)
 
@@ -36,9 +50,42 @@ export default class CardFormScreen extends PureComponent {
     }
   }
 
+  makePayment=()=>{
+   this.setState({laoding:true})
+   console.log(this.loading)
+   axios({
+     method:'POST',
+     url:'https://us-central1-rntest-4f44d.cloudfunctions.net/completePaymentWithStripe',
+     data:{
+       amount:500,
+       currency:'usd',
+       token:this.state.paymentMethod
+     },
+   }).then(response=>{
+     console.log(response.data.status)
+     console.log('payment done')
+     if(response.data.status===true){
+       Alert.alert('paid successfully')
+           this.props.navigation.navigate('tabs')
+      firestore().collection('bookings').doc(this.eventId).collection('etts').doc(this.artistId).
+      onSnapshot((snapshot)=>{
+        console.log('snap--->',snapshot)
+      })
+     }
+
+     this.setState({loading:false})
+   })
+  }
+  
   render() {
     const { loading, paymentMethod } = this.state
+    console.log('hello',this.props?.navigation?.state?.params.eventId)
+console.log('eventID',eventId)
 
+    
+
+
+    
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Click button to proceed</Text>
@@ -56,15 +103,22 @@ export default class CardFormScreen extends PureComponent {
         </View>
         <View style={styles.paymentMethod} >
           {paymentMethod && (
+            <>
             <Text style={styles.instruction}>TOKEN: {JSON.stringify(paymentMethod.tokenId)}</Text>
+            <Button text='Make Payment' loading={loading}
+          onPress={this.makePayment}/>
+              </>
           )}
+          
+       
+          
         </View>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
         style={{margin:10,justifyContent:'flex-end',alignItems:'flex-end'}}
         onPress={()=>this.props.navigation.navigate('editEvents')}>
-        {/* <Text>back</Text> */}
+      
         <Icon name='arrow-long-left' size={50}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     )
   }

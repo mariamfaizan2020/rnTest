@@ -74,7 +74,9 @@ const fetchUserbookings=()=>{
           let event=snapshot.data()
           console.log('ddd---',event.EventId)
           object.eventId=event.EventId,
-          object.EventName=event.nameOfEvent
+          object.EventName=event.nameOfEvent,
+        
+
           console.log('obj--',object)
           arr.push(object)
         }
@@ -267,7 +269,18 @@ const deleteEvent=()=>{
       {item?item.status==='accepted'?
                 <View>
                   <TouchableOpacity 
-                  onPress={()=>props.navigation.navigate('CardForm')}
+                  onPress={()=>props.navigation.navigate('CardForm',{
+                   eventId:item.eventId,
+                   eventName:item.EventName,
+                   artistName:item.artistName,
+                   artistId:item.artistId,
+                   serviceName:item.servicename,
+                   servicePrice:item.serviceprice,
+                   status:item.status,
+                   eventOwner:eventOwner
+
+
+                  })}
                   style={styles.paytab}>
                     <Text>pay</Text>
                   </TouchableOpacity>
