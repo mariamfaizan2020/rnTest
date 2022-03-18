@@ -14,19 +14,18 @@ stripe.setOptions({
 
 export default class CardFormScreen extends PureComponent {
   static title = 'Card Form'
-
+  
  constructor() {
     super();
     this.state = {
-     
-       eventId:this.props?.navigation?.state?.params.eventId,
-       eventName:this.props?.navigation?.state?.params.eventName,
-       artistName:this.props?.navigation?.state?.params.artistName,
-       artistId:this.props?.navigation?.state?.params.artistId,
-       eventOwner:this.props?.navigation?.state?.params.eventOwner,
-       servicePrice:this.props?.navigation?.state?.params.servicePrice,
-       serviceName:this.props?.navigation?.state?.params.serviceName,  
-       status:this.props?.navigation?.state?.params.status
+   eventId:this.props?.navigation?.state?.params.eventId,
+  eventName:this.props?.navigation?.state?.params.eventName,
+  artistName:this.props?.navigation?.state?.params.artistName,
+  artistId:this.props?.navigation?.state?.params.artistId,
+  eventOwner:this.props?.navigation?.state?.params.eventOwner,
+  servicePrice:this.props?.navigation?.state?.params.servicePrice,
+  serviceName:this.props?.navigation?.state?.params.serviceName,  
+  status:this.props?.navigation?.state?.params.status
     };
  
   }
@@ -67,9 +66,13 @@ export default class CardFormScreen extends PureComponent {
      if(response.data.status===true){
        Alert.alert('paid successfully')
            this.props.navigation.navigate('tabs')
-      firestore().collection('bookings').doc(this.eventId).collection('etts').doc(this.artistId).
-      onSnapshot((snapshot)=>{
-        console.log('snap--->',snapshot)
+      firestore().collection('bookings').doc(this.props?.navigation?.state?.params.eventId).collection('etts').doc(this.props?.navigation?.state?.params.artistId)
+      .update({
+        status:'paid'
+      })
+      firestore().collection('services').doc(this.props?.navigation?.state?.params.artistId).collection('etts').doc(this.props?.navigation?.state?.params.eventId)
+      .update({
+        status:'paid'
       })
      }
 
@@ -80,7 +83,7 @@ export default class CardFormScreen extends PureComponent {
   render() {
     const { loading, paymentMethod } = this.state
     console.log('hello',this.props?.navigation?.state?.params.eventId)
-console.log('eventID',eventId)
+ 
 
     
 
