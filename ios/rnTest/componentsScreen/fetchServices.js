@@ -6,7 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 
 
 const fetchServices = (props)=>{
-      console.log("helo",props.props.navigation.state.params.DateOFEvent)
+      console.log("helo22",props.props.navigation.state.params)
+      console.log("etts",props.etts)
   const scProps=  props.props.navigation.state.params  
   const nameOfEvent=scProps.nameOfEvent
   const DateOFEvent=scProps.DateOFEvent
@@ -87,7 +88,8 @@ const fetchServices = (props)=>{
                   StartingTImeOFEvent:StartingTImeOFEvent,
                   EndTimeOFEvent:EndTimeOFEvent,
                   TypeOFEvent:TypeOFEvent,
-                  eventOwner:eventOwner
+                  eventOwner:eventOwner,
+                  etts:props.etts
                })}
                style={{borderBottomWidth:2,padding:5,margin:5}}>
                  

@@ -8,6 +8,7 @@ const Browse = (props) => {
  
   console.log('ppp',props)
 const [Serv,setServ]=useState(false)
+const [etts,setEtts]=useState()
  
   return (
     <View style={{flex:1}}>
@@ -19,7 +20,7 @@ const [Serv,setServ]=useState(false)
          </View>
          <View style={styles.Button}>
          <TouchableOpacity 
-        onPress={()=>setServ(!Serv)}>
+        onPress={()=>{setServ(!Serv);setEtts('service')}}>
            <Text style={{fontSize:20,fontWeight:'bold',color:'#a16281',color:'white'}}>Service</Text>
            
          </TouchableOpacity> 
@@ -34,6 +35,7 @@ const [Serv,setServ]=useState(false)
        services={Serv}
       //  navigation={navigation}
        props={props}
+       etts={etts}
 
   
        />    

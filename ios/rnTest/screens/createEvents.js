@@ -11,12 +11,12 @@ import auth from '@react-native-firebase/auth';
 const createEvents = (props,{navigation}) => {
   console.log('props12345',props.navigation.getParam('name'))
     const [name,setName]=useState(props.navigation.getParam('name') ? props.navigation.getParam('name')  :null)
-    const [date, setDate] = useState(props.navigation.getParam('date')?props.navigation.getParam('date').toDate():new Date());
+    const [date, setDate] = useState(props.navigation.getParam('date')?(props.navigation.getParam('date')):new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [starttime,setStartTime]= useState(props.navigation.getParam('starttime')?props.navigation.getParam('starttime').toDate():new Date())
+    const [starttime,setStartTime]= useState(props.navigation.getParam('starttime')?(props.navigation.getParam('starttime')):new Date())
     const [sTime,setSTime]=useState(false)
-    const [endtime,setEndTime]= useState(props.navigation.getParam('endtime')?props.navigation.getParam('endtime').toDate():new Date())
+    const [endtime,setEndTime]= useState(props.navigation.getParam('endtime')?(props.navigation.getParam('endtime')):new Date())
     const [eTime,setETime]=useState(false)
     const [type,setType]=useState(props.navigation.getParam('type')?props.navigation.getParam('type'):null)
     const [ispublic,setIsPublic]=useState(props.navigation.getParam('ispublic')?props.navigation.getParam('ispublic'):true)

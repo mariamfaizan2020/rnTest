@@ -10,6 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const editEvents = (props) => {
 console.log('helllo')
+console.log('props',props.navigation.state.params.etts)
   
     console.log('props::',props.bookings)
   
@@ -26,7 +27,7 @@ console.log('helllo')
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedItem,setSelectedItem]=useState()
-
+    const [etts,setEtts]=useState()
     const [fetchedEvents,setFetchedEvents]=useState()
     const [booking,setBooking]=useState()
    
@@ -269,7 +270,7 @@ const deleteEvent=()=>{
       {item?item.status==='accepted'?
                 <View>
                   <TouchableOpacity 
-                  onPress={()=>props.navigation.navigate('CardForm',{
+                  onPress={()=>{setEtts('service');props.navigation.navigate('CardForm',{
                    eventId:item.eventId,
                    eventName:item.EventName,
                    artistName:item.artistName,
@@ -277,10 +278,12 @@ const deleteEvent=()=>{
                    serviceName:item.servicename,
                    servicePrice:item.serviceprice,
                    status:item.status,
-                   eventOwner:eventOwner
+                   eventOwner:eventOwner,
+                   etts:etts
+                   
 
 
-                  })}
+                  })}}
                   style={styles.paytab}>
                     <Text>pay</Text>
                   </TouchableOpacity>

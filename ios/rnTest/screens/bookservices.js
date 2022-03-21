@@ -11,6 +11,9 @@ import auth from '@react-native-firebase/auth';
 import events from '../componentsScreen/events';
 
 const bookservices = (props) => {
+  // console.log('props',props.navigation.state.params.etts)
+  // console.log(props.navigation.getParam('etts'))
+  const etts=props.navigation.getParam('etts')
   const nameOfService = props.navigation.getParam('serviceName')
   const price = props.navigation.getParam('priceOfService')
   const userName = props.navigation.getParam('userName')
@@ -158,7 +161,8 @@ const bookservices = (props) => {
     })
     props.navigation.navigate('editEvents',{
       serviceId:serviceID,
-      EventId:EventId
+      EventId:EventId,
+      etts:etts
 
     }
 
