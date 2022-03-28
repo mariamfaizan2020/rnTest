@@ -49,7 +49,7 @@ console.log('arrr',arr)
 console.log('price',price)
 console.log('servicetype',serviceType)
   return (
-      <View style={{marginTop:20}}>
+      <View style={{marginTop:30}}>
   
             
           <FlatList

@@ -156,7 +156,7 @@ const createEvents = (props,{navigation}) => {
      
 
     return (
-        <View>
+        <View style={{marginTop:30}}>
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
             <TouchableOpacity style={[styles.Button,{borderColor:!ispublic ? '#a16281' : 'black'}]} onPress={()=>setIsPublic(false)}>
             <Text>Private</Text>

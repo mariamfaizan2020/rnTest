@@ -23,6 +23,7 @@ import testingScreen from './ios/rnTest/screens/testing';
 import reqservdetailsScreen from './ios/rnTest/screens/reqservdetails'
 import CardFormScreen from './ios/rnTest/scenes/CardFormScreen';
 import ArtistbksScreen from './ios/rnTest/screens/artistbks'
+import Header from './ios/rnTest/componentsScreen/header'
 
 const persistConfig={
   key:'root',
@@ -38,25 +39,60 @@ const persistor=persistStore(store)
 
 const AuthStack = createStackNavigator({
 
-    register: registerScreen,
-    login:loginScreen},
+    register: {
+      screen:registerScreen,
+      navigationOptions:{
+        headerMode:"none",
+        headerShown:false,
+
+      }
+
+    },
+    login:{
+      screen:loginScreen,
+    navigationOptions:{
+      headerMode:'none',
+      headerShown:false
+    }}},
     {
       initialRouteName:'login',
      
-        // headerMode: 'none',
-        // navigationOptions: {
-        //     headerVisible: false,
-        // }
-  
-   
+       
       }
     )
 const AppStack=createStackNavigator({
-    tabs:tabsScreen,
-    createEvents:createEventsScreen,
+    tabs:{
+      screen:tabsScreen,
+    navigationOptions:{
+      headerMode:'none',
+      headerShown:false
+    }},
+    createEvents:{
+      screen:createEventsScreen,
+      navigationOptions:{
+        headerMode:'none',
+        headerShown:false
+      }
+    },
+  
     editEvents:editEvents,
-    createServices:createServices,
-    EditServices:EditServicesScreen,
+    createServices:{
+    screen:createServices,
+    navigationOptions:{
+      headerMode:'none',
+      headerShown:false
+    }},
+
+    EditServices:{
+      screen:EditServicesScreen,
+    navigationOptions:{
+      headerTitle : ()=><Header/>,
+      headerTruncatedBackTitle:'BAck',
+      headerBackTitleVisible:false
+   
+    }
+  },
+
     Browse:BrowseScreen,
     bookservices:bookservicesScreen,
     testing:testingScreen,
