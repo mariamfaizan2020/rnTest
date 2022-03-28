@@ -243,19 +243,19 @@ const deleteEvent=()=>{
       data={booking}
       keyExtractor={(item,index)=>index.toString()}
       renderItem={({item})=>{
-        setSelectedItem(item)
+       
         console.log('list',item)
       
         return(
      
-     
+       
           <View style={{flexDirection:'row',}}>
            {item?item.status? 
             
           
              <View style={{flexDirection:'row'}}>
                <Text style={{fontWeight:'bold',padding:1,margin:1}}>{item.servicename}|</Text>
-              <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
+              <TouchableOpacity onPress={()=>{setModalVisible(true);setSelectedItem(item)}}>
 
              <Text style={{color:'red',padding:1,margin:1}}>{item.status}</Text>
              </TouchableOpacity>
@@ -270,7 +270,7 @@ const deleteEvent=()=>{
       {item?item.status==='accepted'?
                 <View>
                   <TouchableOpacity 
-                  onPress={()=>{setEtts('service');props.navigation.navigate('CardForm',{
+                  onPress={()=>{props.navigation.navigate('CardForm',{
                    eventId:item.eventId,
                    eventName:item.EventName,
                    artistName:item.artistName,
@@ -279,7 +279,7 @@ const deleteEvent=()=>{
                    servicePrice:item.serviceprice,
                    status:item.status,
                    eventOwner:eventOwner,
-                   etts:etts
+                
                    
 
 

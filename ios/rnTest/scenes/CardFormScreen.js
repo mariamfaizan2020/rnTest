@@ -43,11 +43,14 @@ stripe.setOptions({
     const servicePrice=props.navigation.state.params.servicePrice
     let x=(parseInt(servicePrice)*(10/100))
     let y=x+parseInt(servicePrice)
-    console.log('x-->',y);
+    let z=Math.round(y*qty)
+    let price=parseInt(servicePrice)*qty
+console.log('serviceName',serviceName)
+    console.log('x-->',z);
   console.log('eevent',eventId)
   
   useEffect(()=>{
-    setAmount(y)
+    setAmount(z)
  
     EventOwnerDetais()
     props.events.map((doc)=>{
@@ -72,7 +75,8 @@ stripe.setOptions({
  
     )
    },[])
-
+   console.log('qty',qty)
+console.log('thusevent',thisEvent)
    const EventOwnerDetais=()=>{
     firestore().collection('users').doc(thisEvent.uid)
     .onSnapshot((snapshot)=>{
@@ -118,21 +122,23 @@ console.log('amoutn',amount)
    }).then(response=>{
      console.log("response==",response)
      console.log('payment done')
+
      if(response.data.status===true){
        Alert.alert('paid successfully')
           //  this.props.navigation.navigate('tabs')
            props.navigation.navigate('tabs')
-      firestore().collection('bookings').doc(this.props?.navigation?.state?.params.eventId).collection('etts').doc(this.props?.navigation?.state?.params.artistId)
+           console.log()
+      firestore().collection('bookings').doc(props?.navigation?.state?.params.eventId).collection('etts').doc(props?.navigation?.state?.params.artistId)
       .update({
         status:'paid'
       })
-      firestore().collection('services').doc(this.props?.navigation?.state?.params.artistId).collection('etts').doc(this.props?.navigation?.state?.params.eventId)
+      firestore().collection('services').doc(props?.navigation?.state?.params.artistId).collection('etts').doc(props?.navigation?.state?.params.eventId)
       .update({
         status:'paid'
       })
       firestore().collection('transection').add({
         F:"service",
-        amount:amount*qty,
+        amount:amount,
         event:{
           date:thisEvent.DateOFEvent,
           name:thisEvent.nameOfEvent,
@@ -141,12 +147,12 @@ console.log('amoutn',amount)
           type:thisEvent.TypeOFEvent
         },
         eventID:eventId,
-        for:"service"-serviceName,
+        for:`service-${serviceName}`,
         from:{
          id:thisEvent.uid,
          name:NOEO
         },
-        price:servicePrice*qty,
+        price:price,
         qty:qty,
         paidAt:new Date(),
         to:{

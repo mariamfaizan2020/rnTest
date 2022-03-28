@@ -19,8 +19,10 @@ const TabNavigator = createBottomTabNavigator({
    
  
   },
+  
   {
     defaultNavigationOptions: ({ navigation }) => ({
+
       tabBarIcon: ({black}) => {
         const { routeName } = navigation.state;
  

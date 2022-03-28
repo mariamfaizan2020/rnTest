@@ -22,6 +22,7 @@ import bookservicesScreen from './ios/rnTest/screens/bookservices'
 import testingScreen from './ios/rnTest/screens/testing';
 import reqservdetailsScreen from './ios/rnTest/screens/reqservdetails'
 import CardFormScreen from './ios/rnTest/scenes/CardFormScreen';
+import ArtistbksScreen from './ios/rnTest/screens/artistbks'
 
 const persistConfig={
   key:'root',
@@ -36,11 +37,18 @@ const store = createStore(persistedReducer, {},composeWithDevTools(
 const persistor=persistStore(store)
 
 const AuthStack = createStackNavigator({
- 
+
     register: registerScreen,
     login:loginScreen},
     {
-      initialRouteName:'login'
+      initialRouteName:'login',
+     
+        // headerMode: 'none',
+        // navigationOptions: {
+        //     headerVisible: false,
+        // }
+  
+   
       }
     )
 const AppStack=createStackNavigator({
@@ -53,10 +61,12 @@ const AppStack=createStackNavigator({
     bookservices:bookservicesScreen,
     testing:testingScreen,
     reqServdetails:reqservdetailsScreen,
-    CardForm:CardFormScreen
+    CardForm:CardFormScreen,
+    artistbks:ArtistbksScreen
 },
 {
-  initialRouteName:'tabs'
+  initialRouteName:'tabs',
+  
 })
 
 let AppNavigator=createAppContainer(

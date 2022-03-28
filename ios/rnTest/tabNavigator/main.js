@@ -47,11 +47,13 @@ const main = ({currentUser, navigation,bookings}) => {
             let arr=[]
             console.log('snappp-->',snapshot)
             if(!snapshot.empty){
+                console.log(snapshot,'snapppp')
                let requestedServices=snapshot.docs.map(doc=>{
                   const  data=doc.data()
-                  console.log('datttta',data)
+                  console.log('datttta',data.status)
                     console.log('data-->',moment(data.date).format('YYYY-MM-DD'))
-                    arr.push(data)
+                    if(data.status==='requested'){
+                    arr.push(data)}
                     console.log('arr',arr)
                 }
                
@@ -66,7 +68,7 @@ const main = ({currentUser, navigation,bookings}) => {
    if(currentUser?.type==='artists'){console.log('type',currentUser?.type)}
     return (
         
-        <View style={{flex:1}}>
+        <View style={{flex:1,marginTop:30}}>
            
          <View style={{flexDirection:'row',justifyContent:'center'}}>
              <TouchableOpacity 

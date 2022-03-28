@@ -40,7 +40,7 @@ const login = ({navigation,currentUser}) => {
     }
     
     return (
-        <View style={{backgroundColor:'black',flex:1,justifyContent :'center',alighnItems:'center'}}>
+        <View style={{backgroundColor:'#a16281',flex:1,justifyContent :'center',alighnItems:'center'}}>
     
           <View style={{justifyContent:'center',alignItems:'center',marginTop:5}}>
              <Text style={{color:'white'}}>EMAIL:</Text>

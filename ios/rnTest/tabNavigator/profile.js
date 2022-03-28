@@ -84,7 +84,9 @@ const LogOut=()=>{
 }
 
   return (
+   
     <View>
+      
  <View style={{justifyContent:'flex-end',alignItems:'flex-end',marginTop:15,marginRight:10}}>
       <TouchableOpacity onPress={()=>LogOut()}>
         <Icon.AntDesign name='logout' size={25}/>
@@ -147,7 +149,13 @@ const LogOut=()=>{
          <Icon.FontAwesome name="user" size={22} color='grey' />
      </View>
     </TouchableOpacity>
-    
+    {userType==='artists'?
+       <View style={{marginTop:20}}> 
+       <TouchableOpacity onPress={()=>navigation.navigate('artistbks')}>
+        <Text style={{fontSize:20,fontWeight:'bold'}}>YOUR BOOKINGS</Text>
+       </TouchableOpacity>
+       </View>:null}
+   
      </View>
 
    
