@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import Icon from '../icons/icon'
 import moment from 'moment'
-
+import Header from '../componentsScreen/header'
 
 
 import firestore from '@react-native-firebase/firestore';
@@ -84,44 +84,7 @@ const bookservices = (props) => {
   useEffect(() => {
     fetchUserbookings()
 
-    // const array = []
-    // let obj = {}
-
-    // // props.events.map((x) => {
-    // //   if(x.EventId===EventId){
-    // //     console.log('x---',x)
-     
-    //     // obj = x
-    //     console.log('obj',EventId)
-    //     props.bookings.map(y => {
-    //       console.log('y===',y.eventId)
-          
-    //       console.log('hello')
-         
-    //        if (y.eventId === EventId) {
-    //          console.log("booking found",y)
-    //            obj=y
-              
-    //            console.log('object',obj)
-              
-    //            array.push(obj)
-    //       }
     
-      
-   
-    //      })
-       
-    //   // }
-    
-   
-   
-    //   console.log('arr->',array)
-    
-     
-
-    //   setEvents(array)
-    // })
-
 
 
   }, [])
@@ -172,7 +135,8 @@ const bookservices = (props) => {
   console.log('bookedService', props.bookings)
 
   return (
-    <View>
+    <View style={{flex:1,marginTop:40}}>
+      <Header nav={props.navigation}/>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 20 }}>
         <Image source={{ uri: image }} style={styles.image} />
 

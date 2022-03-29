@@ -2,6 +2,7 @@ import { StyleSheet, Text, View ,TouchableOpacity,TextInput,FlatList, Alert} fro
 import React,{useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Header from '../componentsScreen/header'
 
 
 
@@ -49,7 +50,12 @@ console.log('arrr',arr)
 console.log('price',price)
 console.log('servicetype',serviceType)
   return (
-      <View style={{marginTop:30}}>
+    <View style={{flex:1,marginTop:40}}>
+       <Header nav={props.navigation}/>
+      <View style={{}}>
+     
+   
+         
   
             
           <FlatList
@@ -70,7 +76,7 @@ console.log('servicetype',serviceType)
             //     }else{
                     return(
                 
-                        <View style={{  }}>
+                        <View style={{}}>
                          {ppp.service!==undefined?ppp.service.find(x=>x.type==item.Type)? null:
                        
             
@@ -95,6 +101,7 @@ console.log('servicetype',serviceType)
 
               
     }/>
+       </View>
   {type===true?      <View>
                       <TextInput   style={{borderRadius:2,borderColor:'#969590',borderWidth:5,backgroundColor:'#969590',}}             
                         placeholder='price:$'

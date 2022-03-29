@@ -3,10 +3,10 @@ import React,{useEffect,useState} from 'react'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import moment from 'moment'
-import { arrayExpression } from '@babel/types';
+import Header from '../componentsScreen/header'
 
 
-const artistbks = () => {
+const artistbks = (props) => {
     const [artistbookings,setArtistbookings]=useState()
     console.log('currentUser',auth().currentUser.uid)
 useEffect(()=>{
@@ -70,7 +70,8 @@ const fetchArtistbookings= ()=>{
 
 console.log('ArtistBKS',artistbookings)
   return (
-    <View>
+    <View style={{flex:1,marginTop:40}}>
+      <Header nav={props.navigation}/>
       <FlatList
       data={artistbookings}
       keyExtractor={(item,index)=>index.toString()}

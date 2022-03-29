@@ -5,6 +5,7 @@ import moment from 'moment'
 import Flatlist from '../componentsScreen/flatlist'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import Header from '../componentsScreen/header'
 
 
 
@@ -156,7 +157,8 @@ const createEvents = (props,{navigation}) => {
      
 
     return (
-        <View style={{marginTop:30}}>
+        <View style={{marginTop:40}}>
+           <Header nav={props.navigation}/>
         <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
             <TouchableOpacity style={[styles.Button,{borderColor:!ispublic ? '#a16281' : 'black'}]} onPress={()=>setIsPublic(false)}>
             <Text>Private</Text>
@@ -231,13 +233,13 @@ const createEvents = (props,{navigation}) => {
         <TouchableOpacity 
         onPress={()=>editEvent()}
         style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,alignSelf:'center',width:'60%'}}>
-          <Text style={{alignSelf:'center',fontSize:18}}>Save Cahnges</Text>
+          <Text style={{alignSelf:'center',fontSize:18,color:'white'}}>Save Cahnges</Text>
 
         </TouchableOpacity>: <View>
           <TouchableOpacity 
           style={{backgroundColor:'#a16281',borderColor:'#a16281',borderWidth:12,alignSelf:'center',width:'60%'}}
           onPress={()=>Validation()}>
-            <Text style={{alignSelf:'center',fontSize:18}}>Create Event</Text>
+            <Text style={{alignSelf:'center',fontSize:18,color:'white'}}>Create Event</Text>
           </TouchableOpacity>
         </View> }
         </View>

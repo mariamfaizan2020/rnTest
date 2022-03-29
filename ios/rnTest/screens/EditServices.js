@@ -5,6 +5,7 @@ import React,{useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import services from '../componentsScreen/services';
+import Header from '../componentsScreen/header'
 
 
 const EditServices = (props) => {
@@ -69,10 +70,10 @@ const EditServices = (props) => {
     
   return (
     <View 
-    style={{margin:10,padding:10,  justifyContent:'center',
-    alignItems:'center'}}
+    style={{flex:1,
+    alignItems:'center',marginTop:40}}
     >
-      
+        <Header nav={props.navigation}/>
       <TextInput  
       style={styles.Button} 
   

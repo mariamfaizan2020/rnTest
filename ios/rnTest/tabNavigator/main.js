@@ -9,6 +9,7 @@ import {connect,useDispatch} from 'react-redux';
 import moment from 'moment'
 import firestore from '@react-native-firebase/firestore';
 
+
 const main = ({currentUser, navigation,bookings}) => {
     const [userType, setUserType] = useState('')
     const [event, setEvent] = useState(true)
@@ -69,6 +70,7 @@ const main = ({currentUser, navigation,bookings}) => {
     return (
         
         <View style={{flex:1,marginTop:30}}>
+           
            
          <View style={{flexDirection:'row',justifyContent:'center'}}>
              <TouchableOpacity 

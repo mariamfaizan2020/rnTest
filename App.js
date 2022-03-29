@@ -41,8 +41,9 @@ const AuthStack = createStackNavigator({
 
     register: {
       screen:registerScreen,
+      headerMode:"none",
       navigationOptions:{
-        headerMode:"none",
+     
         headerShown:false,
 
       }
@@ -50,8 +51,9 @@ const AuthStack = createStackNavigator({
     },
     login:{
       screen:loginScreen,
-    navigationOptions:{
       headerMode:'none',
+    navigationOptions:{
+      
       headerShown:false
     }}},
     {
@@ -61,48 +63,27 @@ const AuthStack = createStackNavigator({
       }
     )
 const AppStack=createStackNavigator({
-    tabs:{
-      screen:tabsScreen,
-    navigationOptions:{
-      headerMode:'none',
-      headerShown:false
-    }},
-    createEvents:{
-      screen:createEventsScreen,
-      navigationOptions:{
-        headerMode:'none',
-        headerShown:false
-      }
-    },
-  
+    tabs:tabsScreen,
+    createEvents:createEventsScreen,
     editEvents:editEvents,
-    createServices:{
-    screen:createServices,
-    navigationOptions:{
-      headerMode:'none',
-      headerShown:false
-    }},
-
-    EditServices:{
-      screen:EditServicesScreen,
-    navigationOptions:{
-      headerTitle : ()=><Header/>,
-      headerTruncatedBackTitle:'BAck',
-      headerBackTitleVisible:false
-   
-    }
-  },
-
+    createServices:createServices,
+    EditServices:EditServicesScreen,
     Browse:BrowseScreen,
     bookservices:bookservicesScreen,
     testing:testingScreen,
     reqServdetails:reqservdetailsScreen,
     CardForm:CardFormScreen,
-    artistbks:ArtistbksScreen
+    artistbks:ArtistbksScreen,
+  
 },
 {
   initialRouteName:'tabs',
-  
+  headerMode:'none',
+  navigationOptions:{
+    headerShown :false,
+   
+  }
+ 
 })
 
 let AppNavigator=createAppContainer(

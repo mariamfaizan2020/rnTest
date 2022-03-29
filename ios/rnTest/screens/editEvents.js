@@ -4,7 +4,7 @@ import moment from 'moment';
 import Icon from '../icons/icon'
 import {connect} from 'react-redux'
 import auth from '@react-native-firebase/auth';
-
+import Header from '../componentsScreen/header';
 import firestore from '@react-native-firebase/firestore';
 
 
@@ -99,6 +99,7 @@ const ModalView= () => {
  
   return (
     <View style={styles.centeredView}>
+    
       <Modal
         animationType="slide"
         transparent={true}
@@ -176,7 +177,8 @@ const deleteEvent=()=>{
       console.log('eeee',fetchedEvents)
   return (
 
-    <View style={{flex:1,alignItems:'center'}} >
+    <View style={{flex:1,alignItems:'center',marginTop:40}} >
+        <Header nav={props.navigation}/>
         {modalVisible?ModalView(selectedItem):null}
      
          
