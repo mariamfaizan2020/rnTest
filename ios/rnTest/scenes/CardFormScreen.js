@@ -42,8 +42,11 @@ stripe.setOptions({
     const [NOEO,setNOEO]=useState()
     const servicePrice=props.navigation.state.params.servicePrice
     let x=(parseInt(servicePrice)*(10/100))
+    console.log(x,'xxx')
     let y=x+parseInt(servicePrice)
+    console.log(y,'yy')
     let z=Math.round(y*qty)
+    console.log(z,'zzz')
     let price=parseInt(servicePrice)*qty
 console.log('serviceName',serviceName)
     console.log('x-->',z);
@@ -138,9 +141,10 @@ console.log('amoutn',amount)
       .update({
         status:'paid'
       })
+      console.log('hello',amount)
       firestore().collection('transection').add({
         F:"service",
-        // amount:amount,
+        amount:amount,
         event:{
           date:thisEvent.DateOFEvent,
           name:thisEvent.nameOfEvent,
@@ -170,13 +174,18 @@ console.log('amoutn',amount)
 
       
       }).then((res)=>{
+        console.log('hey')
         console.log('res',res.id)
         
         firestore().collection('transection').doc(res.id).update({
            transectionID:res.id
         })
 
-      })
+      }).catch((err)=>{
+        console.log('error',err)
+      }
+
+      )
      }
 
     //  this.setState({loading:false})
