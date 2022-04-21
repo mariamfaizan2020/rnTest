@@ -39,15 +39,15 @@ const events = (props, { currentUser }) => {
         const data = snapshot.docs.map(async (doc) => {
           const event = doc.data()
 
-          console.log('eID--', event.DateOFEvent.toDate()<new Date())
+          // console.log('eID--', event.DateOFEvent.toDate()<new Date())
         
             
-              console.log('doc-->',doc)
+          //     console.log('doc-->',doc)
              if(event.DateOFEvent.toDate()<new Date()===true){
             
              
                console.log('events--',event)
-               pE.push(event)  
+               pE.push(event) 
                setPastEvents(pE)
               
               

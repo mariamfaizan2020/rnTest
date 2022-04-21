@@ -122,8 +122,10 @@ console.log('amoutn',amount)
    }).then(response=>{
      console.log("response==",response)
      console.log('payment done')
+     console.log('response.data.status',response.data.status)
 
      if(response.data.status===true){
+
        Alert.alert('paid successfully')
           //  this.props.navigation.navigate('tabs')
            props.navigation.navigate('tabs')
@@ -138,7 +140,7 @@ console.log('amoutn',amount)
       })
       firestore().collection('transection').add({
         F:"service",
-        amount:amount,
+        // amount:amount,
         event:{
           date:thisEvent.DateOFEvent,
           name:thisEvent.nameOfEvent,
